@@ -1,5 +1,16 @@
 <script>
 
+
+export default{
+
+   
+
+
+
+}
+
+
+
 </script>
 
 
