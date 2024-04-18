@@ -44,7 +44,7 @@ export default{
       <div class="toggle-icon ms-auto"><i class="bx bx-arrow-back"></i></div>
     </div>
     <!--navigation-->
-    <ul :class="{ 'metismenu': true, 'mm-show': visible }" id="menu" @click="handleClick">
+    <ul :class="{ 'metismenu': true, 'mm-show': visible }" id="menu" >
 
         <li>
         <router-link to="/dashboard" >
@@ -54,7 +54,7 @@ export default{
         
       </li>
 
-      <li :class="{ 'mm-active': visible }">
+      <li :class="{ 'mm-active': visible }"  @click="handleClick">
         <a href="javascript:;" class="has-arrow">
           <div class="parent-icon"><i class="bx bx-home-alt"></i></div>
           <div class="menu-title">Dashboard demo</div>
