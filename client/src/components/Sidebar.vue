@@ -42,44 +42,27 @@ export default {
         </router-link>
       </li>
 
-      <li :class="{ 'mm-active': visible }" @click="handleClick">
-       
-        <ul :class="{ 'mm-collapse': true, 'mm-show': visible }">
-          <li>
-            <a href="index.html"><i class="bx bx-radio-circle"></i>Default</a>
-          </li>
-          <li>
-            <a href="index2.html"
-              ><i class="bx bx-radio-circle"></i>Alternate</a
-            >
-          </li>
-          <li>
-            <a href="index3.html"
-              ><i class="bx bx-radio-circle"></i>Digital Marketing</a
-            >
-          </li>
-          <li>
-            <a href="index4.html"
-              ><i class="bx bx-radio-circle"></i>Human Resources</a
-            >
-          </li>
-        </ul>
-      </li>
+     
 
       <li class="menu-label">Inventory</li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/all-product">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
-          <div class="menu-title">All Product</div>
-        </a>
+          <div class="menu-title">
+           
+             All Product
+          
+           
+          </div>
+        </router-link>
       </li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/add-product">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Create Product</div>
-        </a>
+        </router-link>
       </li>
 
       <li>

@@ -4,6 +4,8 @@ import About from '../pages/About.vue';
 import Dashboard from '../pages/Dashboard.vue';
 import Profile from '../pages/Profile.vue'
 import Login from '../pages/Login.vue'
+import AllProduct from '../pages/AllProduct.vue';
+import AddProduct from '../pages/AddProduct.vue'
 
 const routes = [
 
@@ -22,8 +24,17 @@ const routes = [
 
   {
     path: '/dashboard',
-    
     component: Dashboard
+  },
+
+  {
+    path: '/all-product',
+    component: AllProduct
+  },
+
+  {
+    path: '/add-product',
+    component: AddProduct
   },
  
 
