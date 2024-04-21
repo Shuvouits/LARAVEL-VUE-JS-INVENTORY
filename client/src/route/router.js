@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import About from '../pages/About.vue';
 import Dashboard from '../pages/Dashboard.vue';
 import Profile from '../pages/Profile.vue'
-import Layout from '../pages/Layout.vue'
+import Login from '../pages/Login.vue'
 
 const routes = [
 
@@ -17,8 +17,7 @@ const routes = [
 
   {
     path: '/',
-   
-    component: Dashboard
+    component: Login
   },
 
   {
