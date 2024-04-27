@@ -51,7 +51,7 @@ export default {
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">
            
-             All Product
+             Products
           
            
           </div>
@@ -66,31 +66,31 @@ export default {
       </li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/expired-product">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Expired Product</div>
-        </a>
+        </router-link>
       </li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/low-stock">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Low Stocks</div>
-        </a>
+        </router-link>
       </li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/category-list">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Category</div>
-        </a>
+        </router-link>
       </li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/brand-list">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Brands</div>
-        </a>
+        </router-link>
       </li>
 
       <li class="menu-label">Sales</li>

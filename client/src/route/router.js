@@ -6,6 +6,12 @@ import Profile from '../pages/Profile.vue'
 import Login from '../pages/Login.vue'
 import AllProduct from '../pages/AllProduct.vue';
 import AddProduct from '../pages/AddProduct.vue'
+import ExpiredProduct from '../pages/ExpiredProduct.vue'
+import LowStock from '../pages/LowStock.vue';
+import Category from '../pages/Category.vue';
+import AddCategory from '../pages/AddCategory.vue';
+import Brand from '../pages/Brand.vue';
+import AddBrand from '../pages/AddBrand.vue'
 
 const routes = [
 
@@ -36,7 +42,39 @@ const routes = [
     path: '/add-product',
     component: AddProduct
   },
+
+
+  {
+    path: '/expired-product',
+    component: ExpiredProduct
+  },
  
+
+  {
+    path: '/low-stock',
+    component: LowStock
+  },
+
+  {
+    path: '/category-list',
+    component: Category
+  },
+
+  {
+    path: '/add-category',
+    component: AddCategory
+  },
+
+  {
+    path: '/brand-list',
+    component: Brand
+  },
+
+  {
+    path: '/add-brand',
+    component: AddBrand
+  },
+
 
 
 

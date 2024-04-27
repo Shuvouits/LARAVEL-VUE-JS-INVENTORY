@@ -76,12 +76,12 @@ export default {
                           <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>Product Image</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Brand</th>
+                                        <th>date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
