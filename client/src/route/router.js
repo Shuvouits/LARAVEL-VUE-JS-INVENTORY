@@ -12,6 +12,12 @@ import Category from '../pages/Category.vue';
 import AddCategory from '../pages/AddCategory.vue';
 import Brand from '../pages/Brand.vue';
 import AddBrand from '../pages/AddBrand.vue'
+import Sales from '../pages/Sales.vue'
+import SalesReturn from '../pages/SalesReturn.vue'
+import AddSales from '../pages/sale/AddSales.vue'
+import AddSalesReturn from '../pages/sale/AddSalesReturn.vue'
+
+
 
 const routes = [
 
@@ -73,7 +79,29 @@ const routes = [
   {
     path: '/add-brand',
     component: AddBrand
+  },  
+
+  {
+    path: '/sales',
+    component: Sales
   },
+
+  {
+    path: '/sales-return',
+    component: SalesReturn
+  },
+
+  {
+    path: '/add-sales',
+    component: AddSales
+  },
+
+  {
+    path: '/add-sales-return',
+    component: AddSalesReturn
+  },
+
+
 
 
 

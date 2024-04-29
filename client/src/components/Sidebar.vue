@@ -96,27 +96,22 @@ export default {
       <li class="menu-label">Sales</li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/sales">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Sales</div>
-        </a>
+        </router-link>
       </li>
 
        <li>
-        <a href="widgets.html">
+        <router-link to="sales-return">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Sales Return</div>
-        </a>
+        </router-link>
       </li>
 
 
       
-       <li>
-        <a href="widgets.html">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
-          <div class="menu-title">POS</div>
-        </a>
-      </li>
+       
 
 
        <li class="menu-label">Purchase</li>
