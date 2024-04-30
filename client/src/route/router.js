@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import About from '../pages/About.vue';
 import Dashboard from '../pages/Dashboard.vue';
-import Profile from '../pages/Profile.vue'
+import Profile from '../pages/profile/Profile.vue'
 import Login from '../pages/Login.vue'
 import AllProduct from '../pages/AllProduct.vue';
 import AddProduct from '../pages/AddProduct.vue'
@@ -25,6 +25,7 @@ import Expense from '../pages/expense/Expense.vue'
 import AddExpense from '../pages/expense/AddExpense.vue'
 import ExpenseCategory from '../pages/expense/ExpenseCategory.vue'
 import AddCategoryExpense from '../pages/expense/AddCategoryExpense.vue'
+import Setting from '../pages/profile/Setting.vue'
 
 
 
@@ -157,6 +158,14 @@ const routes = [
     component: AddCategoryExpense
   },
 
+  {
+    path: '/setting',
+    component: Setting
+  },
+
+ 
+
+ 
 
 
 
