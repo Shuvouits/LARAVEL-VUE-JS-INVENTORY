@@ -117,26 +117,26 @@ export default {
        <li class="menu-label">Purchase</li>
 
       <li>
-        <a href="widgets.html">
+        <router-link to="/purchase">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Purchase</div>
-        </a>
+        </router-link>
       </li>
 
        <li>
-        <a href="widgets.html">
+        <router-link to="/order-purchased">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Purchase Order</div>
-        </a>
+        </router-link>
       </li>
 
 
       
        <li>
-        <a href="widgets.html">
+        <router-link to="/return-purchased">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Purchase Return</div>
-        </a>
+        </router-link>
       </li>
 
         <li class="menu-label">Finance & Accounts</li>

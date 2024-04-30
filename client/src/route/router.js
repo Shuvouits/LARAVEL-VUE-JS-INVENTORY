@@ -16,6 +16,11 @@ import Sales from '../pages/Sales.vue'
 import SalesReturn from '../pages/SalesReturn.vue'
 import AddSales from '../pages/sale/AddSales.vue'
 import AddSalesReturn from '../pages/sale/AddSalesReturn.vue'
+import Purchase from '../pages/purchase/Purchase.vue'
+import AddPurchase from '../pages/purchase/AddPurchase.vue'
+import PurchasedOrder from '../pages/purchase/PurchasedOrder.vue'
+import PurchaseReturn from '../pages/purchase/PurchaseReturn.vue'
+import AddPurchasedReturn from '../pages/purchase/AddPurchasedReturn.vue'
 
 
 
@@ -99,6 +104,33 @@ const routes = [
   {
     path: '/add-sales-return',
     component: AddSalesReturn
+  },
+
+  {
+    path: '/purchase',
+    component: Purchase
+  },  
+
+
+  
+  {
+    path: '/add-purchased',
+    component: AddPurchase
+  },
+
+  {
+    path: '/order-purchased',
+    component: PurchasedOrder
+  },
+
+  {
+    path: '/return-purchased',
+    component: PurchaseReturn
+  },
+
+  {
+    path: '/add-purchased-return',
+    component: AddPurchasedReturn
   },
 
 
