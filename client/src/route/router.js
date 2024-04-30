@@ -21,6 +21,10 @@ import AddPurchase from '../pages/purchase/AddPurchase.vue'
 import PurchasedOrder from '../pages/purchase/PurchasedOrder.vue'
 import PurchaseReturn from '../pages/purchase/PurchaseReturn.vue'
 import AddPurchasedReturn from '../pages/purchase/AddPurchasedReturn.vue'
+import Expense from '../pages/expense/Expense.vue'
+import AddExpense from '../pages/expense/AddExpense.vue'
+import ExpenseCategory from '../pages/expense/ExpenseCategory.vue'
+import AddCategoryExpense from '../pages/expense/AddCategoryExpense.vue'
 
 
 
@@ -131,6 +135,26 @@ const routes = [
   {
     path: '/add-purchased-return',
     component: AddPurchasedReturn
+  },
+
+  {
+    path: '/expense',
+    component: Expense
+  },
+
+  {
+    path: '/add-expense',
+    component: AddExpense
+  },
+
+  {
+    path: '/category-expense',
+    component: ExpenseCategory
+  },
+
+  {
+    path: '/add-category-expense',
+    component: AddCategoryExpense
   },
 
 

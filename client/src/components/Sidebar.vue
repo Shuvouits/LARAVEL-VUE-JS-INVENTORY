@@ -149,11 +149,11 @@ export default {
         </a>
         <ul :class="{ 'mm-collapse': true, 'mm-show': visible }">
           <li>
-            <a href="index.html"><i class="bx bx-radio-circle"></i>Expenses</a>
+            <router-link to="/expense"><i class="bx bx-radio-circle"></i>Expenses</router-link>
           </li>
           <li>
-            <a href="index2.html"
-              ><i class="bx bx-radio-circle"></i>Expense Category</a
+            <router-link to="/category-expense"
+              ><i class="bx bx-radio-circle"></i>Expense Category</router-link
             >
           </li>
         
