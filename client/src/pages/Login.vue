@@ -1,4 +1,36 @@
 <script>
+import axios from 'axios';
+
+
+export default {
+
+  data() {
+    return {
+      phone: '',
+      password: ''
+    };
+  },
+
+  
+  methods: {
+    sendData() {
+      const data = {
+        // Your data to send to the API
+        phone: this.phone,
+        password: this.password,
+      };
+
+      axios
+        .post("http://localhost:8000/api/login", data)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
+};
 </script>
 
 <template>
@@ -38,20 +70,21 @@
                     />
                   </div>
                   <div class="text-center mb-4">
-                    <h5 class="">Rukada Admin</h5>
+                    <h5 class="">BikeBuzz || Inventory</h5>
                     <p class="mb-0">Please log in to your account</p>
                   </div>
                   <div class="form-body">
-                    <form class="row g-3">
+                    <form class="row g-3"  @submit.prevent="sendData">
                       <div class="col-12">
                         <label for="inputEmailAddress" class="form-label"
-                          >Email</label
+                          >Phone</label
                         >
                         <input
-                          type="email"
+                          type="number"
                           class="form-control"
                           id="inputEmailAddress"
-                          placeholder="jhon@example.com"
+                          placeholder="Enter Your Phone Number"
+                          v-model="phone"
                         />
                       </div>
                       <div class="col-12">
@@ -63,8 +96,8 @@
                             type="password"
                             class="form-control border-end-0"
                             id="inputChoosePassword"
-                            value="12345678"
-                            placeholder="Enter Password"
+                            placeholder="Enter Your Password"
+                            v-model="password"
                           />
                           <a
                             href="javascript:;"
@@ -87,53 +120,15 @@
                           >
                         </div>
                       </div>
-                      <div class="col-md-6 text-end">
-                        <a href="auth-cover-forgot-password.html"
-                          >Forgot Password ?</a
-                        >
-                      </div>
+
                       <div class="col-12">
                         <div class="d-grid">
-                          <button type="submit" class="btn btn-primary">
+                          <button type="submit"  class="btn btn-primary">
                             Sign in
                           </button>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="text-center">
-                          <p class="mb-0">
-                            Don't have an account yet?
-                            <a href="auth-cover-signup.html">Sign up here</a>
-                          </p>
-                        </div>
-                      </div>
                     </form>
-                  </div>
-                  <div class="login-separater text-center mb-5">
-                    <span>OR SIGN IN WITH</span>
-                    <hr />
-                  </div>
-                  <div class="list-inline contacts-social text-center">
-                    <a
-                      href="javascript:;"
-                      class="list-inline-item bg-facebook text-white border-0 rounded-3"
-                      ><i class="bx bxl-facebook"></i
-                    ></a>
-                    <a
-                      href="javascript:;"
-                      class="list-inline-item bg-twitter text-white border-0 rounded-3"
-                      ><i class="bx bxl-twitter"></i
-                    ></a>
-                    <a
-                      href="javascript:;"
-                      class="list-inline-item bg-google text-white border-0 rounded-3"
-                      ><i class="bx bxl-google"></i
-                    ></a>
-                    <a
-                      href="javascript:;"
-                      class="list-inline-item bg-linkedin text-white border-0 rounded-3"
-                      ><i class="bx bxl-linkedin"></i
-                    ></a>
                   </div>
                 </div>
               </div>

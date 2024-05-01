@@ -27,9 +27,6 @@ class AuthController extends Controller
 
         if($user && Hash::check($password, $user->password)){
            
-            $payload = [
-                'phone' => $phone,
-            ];
 
             $token = JWTAuth::attempt(['phone' => $phone, 'password' => $password]);
 
@@ -46,6 +43,6 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid phone number or password'], 401);
         }
 
-        return response()->json($data, 200);
+        
     }
 }
