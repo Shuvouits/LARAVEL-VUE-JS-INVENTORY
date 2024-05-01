@@ -28,7 +28,7 @@ export default {
           const { token, phone } = response.data;
           this.$store.dispatch("storeUserData", { token, phone });
 
-          console.log("User data stored in Vuex:", this.$store.state);
+          this.$router.push('/dashboard');
         
         })
         .catch((error) => {
@@ -77,7 +77,7 @@ export default {
                   </div>
                   <div class="text-center mb-4">
                     <h5 class="">BikeBuzz || Inventory</h5>
-                    <h3>{{ this.$store.state }}</h3>
+                  
                     <p class="mb-0">Please log in to your account</p>
                   </div>
                   <div class="form-body">

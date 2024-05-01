@@ -1,5 +1,19 @@
 <script>
 
+export default {
+  methods: {
+    logout() {
+      // Remove token from local storage
+      localStorage.removeItem('token');
+	  localStorage.removeItem('phone')
+      // Optionally, you can also clear the token from Vuex store if you're using it
+      this.$store.commit('CLEAR_TOKEN'); // Assuming you have a mutation named 'CLEAR_TOKEN'
+      // Redirect the user to the login page or any other appropriate route
+      this.$router.push('/');
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -619,7 +633,7 @@
 							<li>
 								<div class="dropdown-divider mb-0"></div>
 							</li>
-							<li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
+							<li><a class="dropdown-item d-flex align-items-center" href="#" @click="logout"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
 							</li>
 						</ul>
 					</div>
