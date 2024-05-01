@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '../store';
 
 import About from '../pages/About.vue';
 import Dashboard from '../pages/Dashboard.vue';
@@ -29,6 +30,7 @@ import Setting from '../pages/profile/Setting.vue'
 
 
 
+
 const routes = [
 
   
@@ -46,7 +48,8 @@ const routes = [
 
   {
     path: '/dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: { requiresAuth: true }
   },
 
   {
@@ -163,13 +166,6 @@ const routes = [
     component: Setting
   },
 
- 
-
- 
-
-
-
-
 
 
 ];
@@ -178,5 +174,27 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 });
+
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    // Check if token is present in Vuex store
+    if (store.state.token) {
+      next(); // Proceed to the route
+    } else {
+      // Redirect to login page
+      next('/');
+    }
+  } else {
+    next(); // Allow access to public routes
+  }
+});
+
+
+
+
+
+
+
 
 export default router;
