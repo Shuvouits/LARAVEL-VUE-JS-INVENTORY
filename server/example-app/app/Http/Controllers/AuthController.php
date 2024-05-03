@@ -48,7 +48,35 @@ class AuthController extends Controller
 
     public function Setting(Request $request){
 
-        $user = $request->user;
-        return response()->json($user);
+        $user_phone = $request->user->phone;
+        $user = User::where('phone', $user_phone)->first();
+
+        if(!$user){
+            return response()->json(['message' => 'User Not Found'], 401);
+
+        }
+
+        $current_password = $request->input('current_password');
+        $new_password = $request->input('new_password');
+        $confirmed_password = $request->input('confirmed_password');
+
+        if($user && Hash::check($current_password, $user->password)){
+
+            if($new_password == $confirmed_password){
+
+                User::findOrFail($user->id)->update([
+                    'password' => bcrypt($new_password),
+                     
+                ]); 
+                
+                return response()->json(['message' => 'Your password updated'], 201);
+
+            }else{
+                return response()->json(['message' => 'Yor confirmed password not matched'], 400);
+            }
+
+        }
+
+        
     }
 }
