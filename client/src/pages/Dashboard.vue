@@ -35,7 +35,7 @@ export default {
 								<div class="d-flex align-items-center">
 									<div>
 										<p class="mb-0 text-secondary">Total Purchase Due</p>
-                    <h1>Your phone: {{ this.$store.state.phone }}</h1>
+                   <!----<h1>Your phone: {{ this.$store.state.phone }}</h1>  -->
 										<h4 class="my-1">$4805</h4>
 										<p class="mb-0 font-13 text-success"><i class="bx bxs-up-arrow align-middle"></i>$34 from last week</p>
 									</div>

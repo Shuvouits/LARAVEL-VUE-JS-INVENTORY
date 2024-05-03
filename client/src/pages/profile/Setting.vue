@@ -9,6 +9,17 @@ export default {
     Layout,
   },
 
+  data() {
+
+    return {
+      current_password: "",
+      new_password: "",
+      confirmed_password: "",
+      errorMessage: "",
+    };
+
+  },
+
   methods: {
     sendData() {
       const data = {
@@ -16,6 +27,8 @@ export default {
         current_password: this.current_password,
         new_password: this.new_password,
         confirmed_password: this.confirmed_password,
+
+        
       };
 
       const token = this.$store.state.token;
@@ -30,22 +43,29 @@ export default {
 
         .then((response) => {
           console.log(response.data);
+          this.errorMessage = "",
+          this.current_password = "",
+          this.new_password = "",
+          this.confirmed_password = "",
 
           Swal.fire({
             toast: true,
-                    position: 'top-right',
-                    animation: true,
-                    text: `Password updated successfully`,
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
+            position: "top-right",
+            animation: true,
+            text: `Password updated successfully`,
+            icon: "success",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
           });
 
-          this.$router.push("/dashboard");
+         
+
         })
 
         .catch((error) => {
+          this.errorMessage = error.response.data.message;
+          console.log(this.errorMessage)
           console.error(error);
         });
     },
@@ -170,8 +190,30 @@ export default {
                 <div class="col-lg-8">
                   <div class="card">
                     <form @submit.prevent="sendData">
+
+
+                      <div
+                          v-if="errorMessage"
+                          class="alert alert-danger alert-dismissible fade show"
+                          role="alert"
+                        >
+                          <strong>Hey Hello!</strong> {{ errorMessage }}.
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+
+
+
                       <div class="card-body">
                         <div class="row mb-3">
+
+                         
+
+                          
                           <div class="col-sm-3">
                             <h6 class="mb-0">Current Password</h6>
                           </div>
