@@ -28,4 +28,6 @@ Route::post('/login', [AuthController::class, 'Login']);
 Route::middleware('credential')->group(function () {
     
     Route::post('/setting', [AuthController::class, 'Setting']);
+    Route::post('/profile-update', [AuthController::class, 'ProfileUpdate']);
+    Route::post('/profile-setting', [AuthController::class, 'ProfileSetting']);
 });

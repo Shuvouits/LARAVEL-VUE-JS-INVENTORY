@@ -50,7 +50,7 @@ export default {
       //console.log(this.formData.get('name'));
 
       axios
-        .post("http://localhost:8000/api/profile-setting", this.formData, {
+        .post("http://localhost:8000/api/test-setting", this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,

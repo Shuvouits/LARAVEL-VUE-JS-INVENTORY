@@ -27,6 +27,7 @@ import AddExpense from '../pages/expense/AddExpense.vue'
 import ExpenseCategory from '../pages/expense/ExpenseCategory.vue'
 import AddCategoryExpense from '../pages/expense/AddCategoryExpense.vue'
 import Setting from '../pages/profile/Setting.vue'
+import Test from '../pages/profile/Test.vue'
 
 
 
@@ -164,6 +165,11 @@ const routes = [
   {
     path: '/setting',
     component: Setting
+  },
+
+  {
+    path: '/test',
+    component: Test
   },
 
 

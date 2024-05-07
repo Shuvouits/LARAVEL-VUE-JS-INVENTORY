@@ -35,10 +35,10 @@ export default {
 
           this.loading = false;
 
-          const { token, phone } = response.data;
-          this.$store.dispatch("storeUserData", { token, phone });
+          const { token, phone, name, email, address, avatar } = response.data;
+          this.$store.dispatch("storeUserData", { token, phone, name, email, address, avatar });
 
-          this.$router.push("/dashboard");
+         this.$router.push("/dashboard");
         })
         .catch((error) => {
           this.loading = false;
@@ -96,7 +96,6 @@ export default {
                     </div>
                     <div class="text-center mb-4">
                       <h5 class="">BikeBuzz || Inventory</h5>
-
                       <p class="mb-0">Please log in to your account</p>
                     </div>
                     <div class="form-body">

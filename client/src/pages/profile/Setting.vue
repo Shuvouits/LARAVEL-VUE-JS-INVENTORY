@@ -3,6 +3,7 @@ import Layout from "../../pages/Layout.vue";
 
 import axios from "axios";
 import Swal from "sweetalert2";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -19,6 +20,8 @@ export default {
     };
 
   },
+
+  ...mapActions(["storeUserData"]),
 
   methods: {
     sendData() {
@@ -43,10 +46,18 @@ export default {
 
         .then((response) => {
           console.log(response.data);
+
+           //store Data
+           const { token, phone, name, email, address } = response.data;
+          this.$store.dispatch("storeUserData", { token, phone, name, email, address });
+
+          
           this.errorMessage = "",
           this.current_password = "",
           this.new_password = "",
-          this.confirmed_password = "",
+          this.confirmed_password = "",  
+
+          
 
           Swal.fire({
             toast: true,

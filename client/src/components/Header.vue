@@ -5,7 +5,14 @@ export default {
     logout() {
       // Remove token from local storage
       localStorage.removeItem('token');
-	  localStorage.removeItem('phone')
+	  localStorage.removeItem('phone');
+	  localStorage.removeItem('email');
+
+	  localStorage.removeItem('address');
+	  localStorage.removeItem('avatar');
+	  localStorage.removeItem('name');
+	  
+
       // Optionally, you can also clear the token from Vuex store if you're using it
       this.$store.commit('CLEAR_TOKEN'); // Assuming you have a mutation named 'CLEAR_TOKEN'
       // Redirect the user to the login page or any other appropriate route
@@ -607,7 +614,13 @@ export default {
 					</div>
 					<div class="user-box dropdown px-3">
 						<a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="../../assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+							
+							<img v-if="$store.state.avatar" :src="'http://localhost:8000/images/' + $store.state.avatar" :alt="AltText"  class="rounded-circle p-1 bg-primary"
+                          width="60" height="60" />
+                      <img v-else :src="require('../../../assets/images/avatars/avatar-2.png')" :alt="AltText"  class="rounded-circle p-1 bg-primary"
+                          width="60" height="60" />
+
+
 							<div class="user-info">
 								<p class="user-name mb-0">Pauline Seitz</p>
 								<p class="designattion mb-0">Web Designer</p>
@@ -629,6 +642,13 @@ export default {
 									<span>Settings</span>
 								</router-link>
 							</li>
+
+							<!--- <li>
+								<router-link class="dropdown-item d-flex align-items-center" to="/test">
+									<i class="bx bx-cog fs-5"></i>
+									<span>Test</span>
+								</router-link>
+							</li>  -->
 							
 							<li>
 								<div class="dropdown-divider mb-0"></div>
