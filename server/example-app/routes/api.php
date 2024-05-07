@@ -37,5 +37,6 @@ Route::middleware('credential')->group(function () {
     Route::get('/category/edit/{id}', [CategoryController::class, 'EditCategory']);
     Route::post('/update-category/{id}', [CategoryController::class, 'UpdateCategory']);
     Route::get('/delete-category/{id}', [CategoryController::class, 'DeleteCategory']);
+    Route::get('/update-status/{id}', [CategoryController::class, 'UpdateStatus']);
    
 });

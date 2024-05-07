@@ -4,8 +4,6 @@ import axios from "axios";
 import Loader from "../../loader/Loader.vue";
 import Swal from "sweetalert2";
 
-
-
 export default {
   components: {
     Layout,
@@ -17,7 +15,6 @@ export default {
       dataTable: null,
       category: [],
       loading: true,
-    
     };
   },
 
@@ -35,55 +32,116 @@ export default {
     next();
   },
   methods: {
-    
-    
+
+    formatDate(dateString) {
+    // Create a new Date object from the dateString
+    const date = new Date(dateString);
+
+    // Define options for formatting
+    const options = {
+      day: 'numeric',
+      month: 'long', // Use long month name
+      year: 'numeric'
+    };
+
+    // Format the date using options
+    const formattedDate = date.toLocaleDateString('en-GB', options);
+  
+    return formattedDate;
+  },
+
     getCategories() {
-
-        
       const token = this.$store.state.token;
-      axios.get("http://localhost:8000/api/all-category",{
-
-        headers: {
+      axios
+        .get("http://localhost:8000/api/all-category", {
+          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+        })
+        .then((response) => {
+          //console.log(response.data);
+          this.loading = false;
+          this.category = response.data;
 
+          // After setting the data, initialize DataTables
+          this.initDataTable();
+        });
+    },
 
-      }).then((response) => {
-        //console.log(response.data);
-        this.loading = false;
-        this.category = response.data;
+    categoryDelete(categoryId) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const token = this.$store.state.token;
 
-        // After setting the data, initialize DataTables
-        this.initDataTable();
+          axios
+            .get(`http://localhost:8000/api/delete-category/${categoryId}`, {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            .then((response) => {
+              // Handle success response
+              console.log(response.data);
+
+              Swal.fire({
+                toast: true,
+                position: "top-right",
+                animation: true,
+                text: response.data.message,
+                icon: "success",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+              });
+
+              // Refresh the category list or update the UI accordingly
+              this.getCategories();
+            })
+            .catch((error) => {
+              // Handle error response
+              console.error(error);
+
+              Swal.fire({
+                toast: true,
+                position: "top-right",
+                animation: true,
+                text: error.response.data.message,
+                icon: "error",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+              });
+            });
+        }
       });
     },
 
-    categoryDelete(categoryId){
+    statusUpdate(categoryId){
+        
+        const token = this.$store.state.token;
 
+      
+        axios.get(`http://localhost:8000/api/update-status/${categoryId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.getCategories();
 
-        Swal.fire({
-        title: 'Are you sure?',
-        text: 'You won\'t be able to revert this!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const token = this.$store.state.token;
-
-            axios.get(`http://localhost:8000/api/delete-category/${categoryId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            }).then((response) => {
-                // Handle success response
-                console.log(response.data);
-                
-                Swal.fire({
+          Swal.fire({
             toast: true,
             position: "top-right",
             animation: true,
@@ -94,13 +152,11 @@ export default {
             timerProgressBar: true,
           });
 
-                // Refresh the category list or update the UI accordingly
-                this.getCategories();
-            }).catch((error) => {
-                // Handle error response
-                console.error(error);
-               
-                Swal.fire({
+    
+        })
+        .catch((error) => {
+          console.error(error);
+          Swal.fire({
             toast: true,
             position: "top-right",
             animation: true,
@@ -110,11 +166,7 @@ export default {
             timer: 3000,
             timerProgressBar: true,
           });
-
-            });
-        }
-    });
-
+        });
 
 
     },
@@ -200,7 +252,7 @@ export default {
                 >
                   <thead>
                     <tr>
-                        <th>Sl.</th>
+                      <th>Sl.</th>
                       <th>Category</th>
                       <th>Category Slug</th>
                       <th>Created On</th>
@@ -211,18 +263,20 @@ export default {
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in this.category" :key="index">
-                        <td>{{ index+1 }}</td>
+                      <td>{{ index + 1 }}</td>
                       <td>{{ item.name }}</td>
                       <td>{{ item.slug }}</td>
-                      <td>{{ item.created_at }}</td>
+                      <td>{{ formatDate(item.created_at) }}</td>
 
                       <td>
-    <button type="button" class="btn btn-dark">
-        <i v-if="item.status === 'Active'" class="bx bx-like me-0"></i>
-        <i v-else class="bx bx-dislike me-0"></i>
-    </button>
-</td>
-
+                        <button type="button" class="btn btn-dark" @click="statusUpdate(item.id)">
+                          <i
+                            v-if="item.status === 'Active'"
+                            class="bx bx-like me-0"
+                          ></i>
+                          <i v-else class="bx bx-dislike me-0"></i>
+                        </button>
+                      </td>
 
                       <td
                         style="
@@ -233,7 +287,7 @@ export default {
                         "
                       >
                         <router-link
-                          :to=" '/category/edit/'+ item.id "
+                          :to="'/category/edit/' + item.id"
                           type="button"
                           class="btn btn-primary px-5"
                         >

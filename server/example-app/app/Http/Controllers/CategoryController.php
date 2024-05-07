@@ -131,4 +131,39 @@ class CategoryController extends Controller
     }
 
 
+    public function UpdateStatus(Request $request , $id){
+        try{
+
+            $data = Category::where('id',$id)->first();
+
+            if(!$data){
+
+                return response()->json([
+                    'message' => 'No category data found'
+    
+                ],404);
+
+            }
+
+            if($data->status == 'Active'){
+                $data->status = "Inactive";
+                $data->save();
+            }else{
+                $data->status = 'Active';
+                $data->save();
+            }
+
+
+            return response()->json([
+                'message' => 'Update your category status'
+
+            ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
+
 }

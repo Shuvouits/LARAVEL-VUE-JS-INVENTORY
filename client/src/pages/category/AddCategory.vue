@@ -4,51 +4,45 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
-
-    data() {
+  data() {
     return {
-      name: '',
-      slug: '',
-      status: 'Active'
+      name: "",
+      slug: "",
+      status: "Active",
     };
   },
 
   computed: {
     categorySlugAuto() {
       // Convert category name to a slug
-      return this.name.toLowerCase().replace(/\s+/g, '-');
-    }
+      return this.name.toLowerCase().replace(/\s+/g, "-");
+    },
   },
 
   watch: {
     name(newValue) {
       // Update category slug whenever category name changes
       this.slug = this.categorySlugAuto;
-    }
+    },
   },
 
-  
-
-  methods : {
-
+  methods: {
     sendData() {
       const data = {
         // Your data to send to the API
         name: this.name,
         slug: this.slug,
-        status : this.status
+        status: this.status,
       };
 
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/add-category", data,{
-
-            headers: {
+        .post("http://localhost:8000/api/add-category", data, {
+          headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-
         })
         .then((response) => {
           console.log(response.data);
@@ -78,11 +72,9 @@ export default {
             timer: 3000,
             timerProgressBar: true,
           });
-
         });
     },
   },
-
 
   components: {
     Layout,
@@ -93,7 +85,6 @@ export default {
 <template>
   <div>
     <Layout />
-   
 
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -147,7 +138,7 @@ export default {
                 </div>
               </div>
               <div class="col-md-6">
-                <label for="slug"  class="form-label">Slug</label>
+                <label for="slug" class="form-label">Slug</label>
                 <div class="position-relative input-icon">
                   <input
                     type="text"
@@ -161,20 +152,14 @@ export default {
                   ></span>
                 </div>
               </div>
-             
 
               <div class="col-md-6">
                 <label for="status" class="form-label">Status</label>
                 <select id="status" v-model="status" class="form-select">
-                
-                  <option value="Active" >Active</option>
+                  <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
                 </select>
               </div>
-
-             
-
-             
 
               <div class="col-md-12">
                 <div class="d-md-flex d-grid align-items-center gap-3">
