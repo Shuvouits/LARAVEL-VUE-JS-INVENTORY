@@ -11,6 +11,39 @@ export default {
     };
   },
 
+  computed: {
+    categorySlugAuto() {
+      // Convert category name to a slug
+      return this.name.toLowerCase().replace(/\s+/g, '-');
+    }
+  },
+
+  watch: {
+    name(newValue) {
+      // Update category slug whenever category name changes
+      this.slug = this.categorySlugAuto;
+    }
+  },
+
+  methods : {
+    sendData() {
+      const data = {
+        // Your data to send to the API
+        name: this.name,
+        slug: this.slug,
+        status : this.status
+      };
+      axios
+        .post("http://localhost:8000/api/login", data)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  },
+
 
   components: {
     Layout,
