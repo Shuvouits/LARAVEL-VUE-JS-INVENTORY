@@ -35,5 +35,6 @@ Route::middleware('credential')->group(function () {
     Route::post('/add-category', [CategoryController::class, 'AddCategory']);
     Route::get('/all-category', [CategoryController::class, 'AllCategory']);
     Route::get('/category/edit/{id}', [CategoryController::class, 'EditCategory']);
+    Route::post('/update-category/{id}', [CategoryController::class, 'UpdateCategory']);
    
 });

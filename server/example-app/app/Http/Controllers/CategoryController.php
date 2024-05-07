@@ -66,4 +66,41 @@ class CategoryController extends Controller
 
         }
     }
+
+
+    public function UpdateCategory(Request $request , $id){
+        try{
+
+            $name = $request->input('name');
+            $slug = $request->input('slug');
+            $status = $request->input('status');
+
+            $category_data = Category::where('id', $id)->first();
+
+            if(!$category_data){
+
+                return response()->json([
+                    'message' => 'No category data found'
+    
+                ],404);
+
+            }
+
+            $category_data->name = $name;
+            $category_data->slug = $slug;
+            $category_data->status = $status;
+            $category_data->save();
+
+            return response()->json([
+                'message' => 'Data updated successfully'
+
+            ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
+
 }
