@@ -9,7 +9,7 @@ export default {
     return {
       name: '',
       slug: '',
-      status: ''
+      status: 'Active'
     };
   },
 
@@ -166,8 +166,8 @@ export default {
               <div class="col-md-6">
                 <label for="status" class="form-label">Status</label>
                 <select id="status" v-model="status" class="form-select">
-                  <option selected="" disabled>Choose...</option>
-                  <option value="Active">Active</option>
+                
+                  <option value="Active" >Active</option>
                   <option value="Inactive">Inactive</option>
                 </select>
               </div>

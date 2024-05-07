@@ -102,5 +102,33 @@ class CategoryController extends Controller
         }
     }
 
+    public function DeleteCategory(Request $request , $id){
+        try{
+
+            $data = Category::where('id',$id)->first();
+
+            if(!$data){
+
+                return response()->json([
+                    'message' => 'No category data found'
+    
+                ],404);
+
+            }
+
+            Category::where('id',$id)->delete();
+
+
+            return response()->json([
+                'message' => 'Data deleted successfully'
+
+            ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
 
 }

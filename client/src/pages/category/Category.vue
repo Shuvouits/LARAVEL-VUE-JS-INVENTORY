@@ -2,6 +2,9 @@
 import Layout from "../Layout.vue";
 import axios from "axios";
 import Loader from "../../loader/Loader.vue";
+import Swal from "sweetalert2";
+
+
 
 export default {
   components: {
@@ -14,6 +17,7 @@ export default {
       dataTable: null,
       category: [],
       loading: true,
+    
     };
   },
 
@@ -32,7 +36,10 @@ export default {
   },
   methods: {
     
+    
     getCategories() {
+
+        
       const token = this.$store.state.token;
       axios.get("http://localhost:8000/api/all-category",{
 
@@ -40,16 +47,76 @@ export default {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          
+
 
       }).then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         this.loading = false;
         this.category = response.data;
 
         // After setting the data, initialize DataTables
         this.initDataTable();
       });
+    },
+
+    categoryDelete(categoryId){
+
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const token = this.$store.state.token;
+
+            axios.get(`http://localhost:8000/api/delete-category/${categoryId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then((response) => {
+                // Handle success response
+                console.log(response.data);
+                
+                Swal.fire({
+            toast: true,
+            position: "top-right",
+            animation: true,
+            text: response.data.message,
+            icon: "success",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+
+                // Refresh the category list or update the UI accordingly
+                this.getCategories();
+            }).catch((error) => {
+                // Handle error response
+                console.error(error);
+               
+                Swal.fire({
+            toast: true,
+            position: "top-right",
+            animation: true,
+            text: error.response.data.message,
+            icon: "error",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+
+            });
+        }
+    });
+
+
+
     },
 
     initDataTable() {
@@ -175,6 +242,7 @@ export default {
                         <button
                           type="button"
                           class="btn btn-danger px-5"
+                          @click="categoryDelete(item.id)"
                         >
                           <i class="bx bx-trash mr-1"></i>trash
                         </button>
