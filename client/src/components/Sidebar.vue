@@ -28,7 +28,7 @@ export default {
       </div>
       <div>
         <router-link to="/">
-          <h4 class="logo-text">Rukada</h4>
+          <h4 class="logo-text">Bike-Buzz</h4>
         </router-link>
       </div>
       <div class="toggle-icon ms-auto"><i class="bx bx-arrow-back"></i></div>
@@ -81,7 +81,7 @@ export default {
 
       <li  :class="{ 'mm-active': $route.path === '/category-list' || $route.path === '/add-category' }">
         <router-link to="/category-list">
-          <div class="parent-icon "><i class="bx bx-cookie"></i></div>
+          <div class="parent-icon "><i class="bx bx-repeat"></i></div>
           <div class="menu-title">Category</div>
         </router-link>
       </li>

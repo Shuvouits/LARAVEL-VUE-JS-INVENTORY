@@ -93,6 +93,7 @@ export default {
 <template>
   <div>
     <Layout />
+   
 
     <!--start page wrapper -->
     <div class="page-wrapper">
