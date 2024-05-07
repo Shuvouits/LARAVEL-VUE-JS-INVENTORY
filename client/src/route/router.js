@@ -27,6 +27,7 @@ import AddExpense from '../pages/expense/AddExpense.vue'
 import ExpenseCategory from '../pages/expense/ExpenseCategory.vue'
 import AddCategoryExpense from '../pages/expense/AddCategoryExpense.vue'
 import Setting from '../pages/profile/Setting.vue'
+import EditCategory from '../pages/category/EditCategory.vue'
 import Testing from '../pages/category/Testing.vue';
 
 
@@ -83,6 +84,11 @@ const routes = [
   {
     path: '/add-category',
     component: AddCategory
+  },
+
+  {
+    path: '/category/edit/:id',
+    component: EditCategory
   },
 
   {

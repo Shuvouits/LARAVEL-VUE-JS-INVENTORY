@@ -25,7 +25,7 @@ Route::post('/login', [AuthController::class, 'Login']);
 //Route::post('/setting', [AuthController::class, 'Setting']);
 
 
-Route::get('/all-category', [CategoryController::class, 'AllCategory']);
+
 
 Route::middleware('credential')->group(function () {
     
@@ -33,5 +33,7 @@ Route::middleware('credential')->group(function () {
     Route::post('/profile-update', [AuthController::class, 'ProfileUpdate']);
     Route::post('/profile-setting', [AuthController::class, 'ProfileSetting']);
     Route::post('/add-category', [CategoryController::class, 'AddCategory']);
+    Route::get('/all-category', [CategoryController::class, 'AllCategory']);
+    Route::get('/category/edit/{id}', [CategoryController::class, 'EditCategory']);
    
 });

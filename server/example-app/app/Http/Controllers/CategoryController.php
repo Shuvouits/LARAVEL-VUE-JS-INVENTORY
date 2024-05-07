@@ -50,4 +50,20 @@ class CategoryController extends Controller
        
 
     }
+
+    public function EditCategory(Request $request , $id){
+        try{
+            $data = Category::where('id', $id)->first();
+            return response()->json([
+                'name' => $data->name,
+                'slug' => $data->slug,
+                'status' => $data->status
+
+            ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
 }

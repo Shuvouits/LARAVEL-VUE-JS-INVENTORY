@@ -1,12 +1,12 @@
 <script>
 import Layout from "../Layout.vue";
 import axios from "axios";
-import Loader from '../../loader/Loader.vue'
+import Loader from "../../loader/Loader.vue";
 
 export default {
   components: {
     Layout,
-    Loader
+    Loader,
   },
 
   data() {
@@ -31,8 +31,18 @@ export default {
     next();
   },
   methods: {
+    
     getCategories() {
-      axios.get("http://localhost:8000/api/all-category").then((response) => {
+      const token = this.$store.state.token;
+      axios.get("http://localhost:8000/api/all-category",{
+
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          
+
+      }).then((response) => {
         console.log(response.data);
         this.loading = false;
         this.category = response.data;
@@ -67,7 +77,6 @@ export default {
 
 <template>
   <div>
-    
     <div
       v-if="loading"
       style="position: fixed; top: 50%; left: 50%; z-index: 1000"
@@ -111,7 +120,7 @@ export default {
             </div>
           </div>
           <!--end breadcrumb-->
-          <h6 class="mb-0 text-uppercase">Manage Your Category</h6>
+          <h6 class="mb-0 text-uppercase">Managed Your Category</h6>
 
           <hr />
           <div class="card">
@@ -124,6 +133,7 @@ export default {
                 >
                   <thead>
                     <tr>
+                        <th>Sl.</th>
                       <th>Category</th>
                       <th>Category Slug</th>
                       <th>Created On</th>
@@ -134,11 +144,19 @@ export default {
                   </thead>
                   <tbody>
                     <tr v-for="(item, index) in this.category" :key="index">
+                        <td>{{ index+1 }}</td>
                       <td>{{ item.name }}</td>
                       <td>{{ item.slug }}</td>
                       <td>{{ item.created_at }}</td>
 
-                      <td>{{ item.status }}</td>
+                      <td>
+    <button type="button" class="btn btn-dark">
+        <i v-if="item.status === 'Active'" class="bx bx-like me-0"></i>
+        <i v-else class="bx bx-dislike me-0"></i>
+    </button>
+</td>
+
+
                       <td
                         style="
                           display: flex;
@@ -147,15 +165,16 @@ export default {
                           gap: 10px;
                         "
                       >
-                        <button
+                        <router-link
+                          :to=" '/category/edit/'+ item.id "
                           type="button"
-                          class="btn btn-outline-primary px-5"
+                          class="btn btn-primary px-5"
                         >
                           <i class="bx bx-pencil mr-1"></i>Edit
-                        </button>
+                        </router-link>
                         <button
                           type="button"
-                          class="btn btn-outline-danger px-5"
+                          class="btn btn-danger px-5"
                         >
                           <i class="bx bx-trash mr-1"></i>trash
                         </button>
