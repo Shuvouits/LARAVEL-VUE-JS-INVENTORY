@@ -1,5 +1,7 @@
 <script>
 import Layout from "../Layout.vue";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
 
@@ -25,7 +27,10 @@ export default {
     }
   },
 
+  
+
   methods : {
+
     sendData() {
       const data = {
         // Your data to send to the API
@@ -33,13 +38,47 @@ export default {
         slug: this.slug,
         status : this.status
       };
+
+      const token = this.$store.state.token;
+
       axios
-        .post("http://localhost:8000/api/login", data)
+        .post("http://localhost:8000/api/add-category", data,{
+
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+
+        })
         .then((response) => {
           console.log(response.data);
+
+          Swal.fire({
+            toast: true,
+            position: "top-right",
+            animation: true,
+            text: response.data.message,
+            icon: "success",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+
+          this.$router.push("/category-list");
         })
         .catch((error) => {
           console.error(error);
+          Swal.fire({
+            toast: true,
+            position: "top-right",
+            animation: true,
+            text: error.response.data.message,
+            icon: "error",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+          });
+
         });
     },
   },
@@ -90,7 +129,7 @@ export default {
         <div class="card">
           <div class="card-body p-4">
             <h5 class="mb-4">Create Category</h5>
-            <form class="row g-3">
+            <form class="row g-3" @submit.prevent="sendData">
               <div class="col-md-6">
                 <label for="cname" class="form-label">Category Name</label>
                 <div class="position-relative input-icon">
@@ -138,7 +177,7 @@ export default {
 
               <div class="col-md-12">
                 <div class="d-md-flex d-grid align-items-center gap-3">
-                  <button type="button" class="btn btn-primary px-4">
+                  <button type="submit" class="btn btn-primary px-4">
                     Submit
                   </button>
                 </div>

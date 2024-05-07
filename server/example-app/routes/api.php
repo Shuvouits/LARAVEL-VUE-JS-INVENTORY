@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +25,13 @@ Route::post('/login', [AuthController::class, 'Login']);
 //Route::post('/setting', [AuthController::class, 'Setting']);
 
 
+Route::get('/all-category', [CategoryController::class, 'AllCategory']);
 
 Route::middleware('credential')->group(function () {
     
     Route::post('/setting', [AuthController::class, 'Setting']);
     Route::post('/profile-update', [AuthController::class, 'ProfileUpdate']);
     Route::post('/profile-setting', [AuthController::class, 'ProfileSetting']);
+    Route::post('/add-category', [CategoryController::class, 'AddCategory']);
+   
 });

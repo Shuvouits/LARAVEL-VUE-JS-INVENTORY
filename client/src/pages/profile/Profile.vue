@@ -75,6 +75,8 @@ export default {
             timer: 3000,
             timerProgressBar: true,
           });
+
+          
         })
 
         .catch((error) => {
