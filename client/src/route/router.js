@@ -9,8 +9,8 @@ import AllProduct from '../pages/AllProduct.vue';
 import AddProduct from '../pages/AddProduct.vue'
 import ExpiredProduct from '../pages/ExpiredProduct.vue'
 import LowStock from '../pages/LowStock.vue';
-import Category from '../pages/Category.vue';
-import AddCategory from '../pages/AddCategory.vue';
+import Category from '../pages/category/Category.vue';
+import AddCategory from '../pages/category/AddCategory.vue';
 import Brand from '../pages/Brand.vue';
 import AddBrand from '../pages/AddBrand.vue'
 import Sales from '../pages/Sales.vue'

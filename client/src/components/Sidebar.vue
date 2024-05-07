@@ -79,9 +79,9 @@ export default {
         </router-link>
       </li>
 
-      <li>
+      <li  :class="{ 'mm-active': $route.path === '/category-list' || $route.path === '/add-category' }">
         <router-link to="/category-list">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+          <div class="parent-icon "><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Category</div>
         </router-link>
       </li>

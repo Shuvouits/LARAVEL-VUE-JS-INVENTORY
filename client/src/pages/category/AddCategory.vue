@@ -1,7 +1,17 @@
 <script>
-import Layout from "./Layout.vue";
+import Layout from "../Layout.vue";
 
 export default {
+
+    data() {
+    return {
+      name: '',
+      slug: '',
+      status: ''
+    };
+  },
+
+
   components: {
     Layout,
   },
@@ -49,42 +59,43 @@ export default {
             <h5 class="mb-4">Create Category</h5>
             <form class="row g-3">
               <div class="col-md-6">
-                <label for="input13" class="form-label">Category Name</label>
+                <label for="cname" class="form-label">Category Name</label>
                 <div class="position-relative input-icon">
                   <input
                     type="text"
                     class="form-control"
-                    id="input13"
+                    id="cname"
+                    v-model="name"
                     placeholder="First Name"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
+                    ><i class="bx bx-intersect"></i
                   ></span>
                 </div>
               </div>
               <div class="col-md-6">
-                <label for="input14" class="form-label">Slug</label>
+                <label for="slug"  class="form-label">Slug</label>
                 <div class="position-relative input-icon">
                   <input
                     type="text"
                     class="form-control"
-                    id="input14"
+                    id="slug"
+                    v-model="slug"
                     placeholder="Last Name"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
+                    ><i class="bx bx-grid-small"></i
                   ></span>
                 </div>
               </div>
              
 
               <div class="col-md-6">
-                <label for="input21" class="form-label">Status</label>
-                <select id="input21" class="form-select">
-                  <option selected="">Choose...</option>
-                  <option>One</option>
-                  <option>Two</option>
-                  <option>Three</option>
+                <label for="status" class="form-label">Status</label>
+                <select id="status" v-model="status" class="form-select">
+                  <option selected="" disabled>Choose...</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
                 </select>
               </div>
 
