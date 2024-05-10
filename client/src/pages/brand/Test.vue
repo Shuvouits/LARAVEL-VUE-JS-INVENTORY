@@ -4,16 +4,23 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
+  components: {
+    Layout,
+  },
+
   data() {
     return {
+      imageUrl: null,
       name: "",
       slug: "",
       status: "Active",
+      formData: new FormData(),
+      
     };
   },
 
   computed: {
-    categorySlugAuto() {
+    brandSlugAuto() {
       // Convert category name to a slug
       return this.name.toLowerCase().replace(/\s+/g, "-");
     },
@@ -22,12 +29,25 @@ export default {
   watch: {
     name(newValue) {
       // Update category slug whenever category name changes
-      this.slug = this.categorySlugAuto;
+      this.slug = this.brandSlugAuto;
     },
   },
 
+
   methods: {
+
+    uploadImage(event) {
+      const file = event.target.files[0];
+      this.imageUrl = URL.createObjectURL(file);
+
+      console.log(this.imageUrl);
+
+      this.formData.append("image", file);
+    },
+
+
     sendData() {
+
       const data = {
         // Your data to send to the API
         name: this.name,
@@ -38,11 +58,12 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/add-category", data, {
+        .post("http://localhost:8000/api/add-brand", this.formData, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          params: data,
         })
         .then((response) => {
           console.log(response.data);
@@ -58,10 +79,10 @@ export default {
             timerProgressBar: true,
           });
 
-          this.$router.push("/category-list");
+          this.$router.push("/brand-list");
         })
         .catch((error) => {
-          console.error(error);
+          console.log(error);
           Swal.fire({
             toast: true,
             position: "top-right",
@@ -76,9 +97,8 @@ export default {
     },
   },
 
-  components: {
-    Layout,
-  },
+
+
 };
 </script>
 
@@ -99,67 +119,109 @@ export default {
                   <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Category
+                  Brand
                 </li>
               </ol>
             </nav>
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/category-list">
+              <router-link to="/brand-list">
                 <button type="button" class="btn btn-primary">
-                  Category List
+                  Brand List
                 </button>
               </router-link>
             </div>
           </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">Manage Category</h6>
+        <h6 class="mb-0 text-uppercase">Manage Brand</h6>
 
         <hr />
         <div class="card">
           <div class="card-body p-4">
-            <h5 class="mb-4">Create Category</h5>
-            <form class="row g-3" @submit.prevent="sendData">
+            <h5 class="mb-4">Create Brand</h5>
+            <form class="row g-3" @submit.prevent="sendData" enctype="multipart/form-data" >
+
+              
+
               <div class="col-md-6">
-                <label for="cname" class="form-label">Category Name</label>
+                <label for="input13" class="form-label">Brand Name</label>
                 <div class="position-relative input-icon">
                   <input
                     type="text"
                     class="form-control"
-                    id="cname"
+                    id="input13"
                     v-model="name"
-                    placeholder="Enter Category Name"
+                    placeholder="Enter brand name"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-intersect"></i
-                  ></span>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label for="slug" class="form-label">Slug</label>
-                <div class="position-relative input-icon">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="slug"
-                    v-model="slug"
-                    placeholder="Enter Slug"
-                  />
-                  <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-grid-small"></i
+                    ><i class="bx bx-shuffle"></i
                   ></span>
                 </div>
               </div>
 
               <div class="col-md-6">
+                <label for="input13" class="form-label">Slug</label>
+                <div class="position-relative input-icon">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input13"
+                    v-model="slug"
+                    placeholder="Enter Slug"
+                  />
+                  <span class="position-absolute top-50 translate-middle-y"
+                    ><i class="bx bx-credit-card-front"></i
+                  ></span>
+                </div>
+              </div>
+
+              
+             
+
+              <div class="col-md-6">
                 <label for="status" class="form-label">Status</label>
                 <select id="status" v-model="status" class="form-select">
-                  <option value="Active">Active</option>
+        
+                  <option value="Active" >Active</option>
                   <option value="Inactive">Inactive</option>
+                  
                 </select>
               </div>
+
+              <div class="col-md-6">
+                <label for="input13" class="form-label">Image</label>
+                <div class="position-relative input-icon">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="input13"
+                    @change="uploadImage"
+                  />
+                  <span class="position-absolute top-50 translate-middle-y"
+                    ><i class="bx bx-cloud-upload"></i
+                  ></span>
+
+                  <img
+                              v-if="imageUrl"
+                              :src="imageUrl"
+                              alt="Preview"
+                              style="
+                                width: 120px;
+                                height: 120px;
+                                border-radius: 10px;
+                                margin-top: 20px;
+                              "
+                            />
+
+
+                </div>
+              </div>
+
+             
+
+             
 
               <div class="col-md-12">
                 <div class="d-md-flex d-grid align-items-center gap-3">
