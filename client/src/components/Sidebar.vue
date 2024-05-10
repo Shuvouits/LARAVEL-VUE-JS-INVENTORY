@@ -85,7 +85,12 @@ export default {
         </router-link>
       </li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/brand-list' ||
+            $route.path === '/add-brand' ||
+            this.$route.path.startsWith('/brand/'),
+        }">
         <router-link to="/brand-list">
           <div class="parent-icon"><i class="bx bx-sync"></i></div>
           <div class="menu-title">Brands</div>

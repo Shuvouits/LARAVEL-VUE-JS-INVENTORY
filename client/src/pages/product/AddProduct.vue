@@ -1,10 +1,67 @@
 <script>
-import Layout from "./Layout.vue";
+import Layout from "../Layout.vue";
+import axios from "axios";
 
 export default {
   components: {
     Layout,
   },
+
+  data() {
+    return {
+      dataTable: null,
+      brand: [],
+      loading: true,
+      category: [],
+    };
+  },
+
+  mounted() {
+    this.getBrands();
+    this.getCategory();
+  },
+
+  methods: {
+
+    getBrands() {
+      const token = this.$store.state.token;
+      console.log(token);
+      axios
+        .get("http://localhost:8000/api/all-brand", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.loading = false;
+          this.brand = response.data.filter(item => item.status === 'Active');
+
+        });
+    },
+
+    getCategory() {
+      const token = this.$store.state.token;
+      console.log(token);
+      axios
+        .get("http://localhost:8000/api/all-category", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.loading = false;
+          this.category = response.data.filter(item => item.status === 'Active');
+        });
+    },
+
+
+  }
+
+
 };
 </script>
 
@@ -25,7 +82,7 @@ export default {
                   <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Data Table
+                  Product Information
                 </li>
               </ol>
             </nav>
@@ -41,7 +98,7 @@ export default {
           </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">DataTable Example</h6>
+        <h6 class="mb-0 text-uppercase">Insert Your Product</h6>
 
         <hr />
         <div class="card">
@@ -55,10 +112,10 @@ export default {
                     type="text"
                     class="form-control"
                     id="input13"
-                    placeholder="First Name"
+                    placeholder="Enter Product Name"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
+                    ><i class="bx bx-coin-stack"></i
                   ></span>
                 </div>
               </div>
@@ -69,49 +126,73 @@ export default {
                     type="text"
                     class="form-control"
                     id="input14"
-                    placeholder="Last Name"
+                    placeholder="Enter your slug"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
+                    ><i class="bx bx-caret-left-circle"></i
                   ></span>
                 </div>
               </div>
-              <div class="col-md-12">
+
+              <div class="col-md-6">
                 <label for="input15" class="form-label">Price</label>
                 <div class="position-relative input-icon">
                   <input
                     type="text"
                     class="form-control"
                     id="input15"
-                    placeholder="Phone"
+                    placeholder="Enter the price of product"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-microphone"></i
+                    ><i class="bx bx-dollar-circle"></i
                   ></span>
                 </div>
               </div>
 
               <div class="col-md-6">
+                <label for="input15" class="form-label">Quantity</label>
+                <div class="position-relative input-icon">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input15"
+                    placeholder="Enter the quantity of product"
+                  />
+                  <span class="position-absolute top-50 translate-middle-y"
+                    ><i class="bx bx-disc"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="input6" class="form-label">Expire of Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="input6"
+                  placeholder="Date of Birth"
+                />
+              </div>
+
+              <div class="col-md-6">
                 <label for="input21" class="form-label">Category</label>
-                <select id="input21" class="form-select">
-                  <option selected="">Choose...</option>
-                  <option>One</option>
-                  <option>Two</option>
-                  <option>Three</option>
+                <select id="input21" name="category" class="form-select">
+                  <option selected="" >Choose...</option>
+              
+                  <option v-for="(item, index) in category" :key="index" >{{ item.name }}</option>
                 </select>
               </div>
 
               <div class="col-md-6">
                 <label for="input21" class="form-label">Brand</label>
-                <select id="input21" class="form-select">
+                <select id="input21" name="brand" class="form-select">
                   <option selected="">Choose...</option>
-                  <option>One</option>
-                  <option>Two</option>
-                  <option>Three</option>
+                  <option v-for="(item, index) in brand" :key="index" >{{ item.name }}</option>
+                  
                 </select>
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <label for="input14" class="form-label">Choose Image</label>
                 <div class="position-relative input-icon">
                   <input
@@ -128,7 +209,7 @@ export default {
 
               <div class="col-md-12">
                 <div class="d-md-flex d-grid align-items-center gap-3">
-                  <button type="button" class="btn btn-primary px-4">
+                  <button type="submit" class="btn btn-primary px-4">
                     Submit
                   </button>
                 </div>
