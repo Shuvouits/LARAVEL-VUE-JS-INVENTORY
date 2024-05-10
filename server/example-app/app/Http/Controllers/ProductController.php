@@ -72,4 +72,46 @@ class ProductController extends Controller
             dd($error->getMessage());
         }
     }
+
+    public function AllProduct(Request $request){
+
+        try {
+
+            $all_product = Product::all();
+            return response()->json($all_product);
+
+        } catch (\Exception $error) {
+            dd($error->getMessage());
+        }
+       
+    }
+
+    public function DeleteProduct(Request $request , $id){
+        try{
+
+            $data = Product::where('id',$id)->first();
+
+            if(!$data){
+
+                return response()->json([
+                    'message' => 'No product found'
+    
+                ],404);
+
+            }
+
+            Product::where('id',$id)->delete();
+
+
+            return response()->json([
+                'message' => 'Data deleted successfully'
+
+            ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
 }

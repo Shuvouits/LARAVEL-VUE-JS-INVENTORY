@@ -53,6 +53,8 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::post('/update-brand/{id}', [BrandController::class, 'UpdateBrand']);
 
     Route::post('/add-product', [ProductController::class, 'AddProduct']);
+    Route::get('/all-product', [ProductController::class, 'AllProduct']);
+    Route::get('/delete-product/{id}', [ProductController::class, 'DeleteProduct']);
    
    
 });

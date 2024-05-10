@@ -5,7 +5,7 @@ import About from '../pages/About.vue';
 import Dashboard from '../pages/Dashboard.vue';
 import Profile from '../pages/profile/Profile.vue'
 import Login from '../pages/Login.vue'
-import AllProduct from '../pages/AllProduct.vue';
+import AllProduct from '../pages/product/AllProduct.vue';
 import AddProduct from '../pages/product/AddProduct.vue'
 import ExpiredProduct from '../pages/ExpiredProduct.vue'
 import LowStock from '../pages/LowStock.vue';
