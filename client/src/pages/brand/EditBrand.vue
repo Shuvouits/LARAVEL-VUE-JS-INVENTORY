@@ -251,7 +251,7 @@ export default {
                   />
 
                   <img
-                    v-if="avatar"
+                    v-if="avatar && !imageUrl"
                     :src="'http://localhost:8000/images/' +avatar"
                     alt="Preview"
                     style="
