@@ -127,11 +127,12 @@ export default {
     },
 
     statusUpdate(categoryId){
+       this.loading = true;
         
         const token = this.$store.state.token;
 
       
-        axios.get(`http://localhost:8000/api/update-status/${categoryId}`, {
+        axios.get(`http://localhost:8000/api/update-category-status/${categoryId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -140,6 +141,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.getCategories();
+          this.loading = false
 
           Swal.fire({
             toast: true,
@@ -269,7 +271,10 @@ export default {
                       <td>{{ formatDate(item.created_at) }}</td>
 
                       <td>
-                        <button type="button" class="btn btn-dark" @click="statusUpdate(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+                        <button 
+                        type="button" 
+                        :class="[item.status === 'Active' ? 'btn btn-dark' : ' btn btn-warning',]"
+                        @click="statusUpdate(item.id)">
                           <i
                             v-if="item.status === 'Active'"
                             class="bx bx-like me-0"

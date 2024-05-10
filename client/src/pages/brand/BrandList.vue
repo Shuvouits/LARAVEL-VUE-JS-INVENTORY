@@ -127,9 +127,10 @@ export default {
 
     statusUpdate(brandId) {
       const token = this.$store.state.token;
+      this.loading = true;
 
       axios
-        .get(`http://localhost:8000/api/update-status/${brandId}`, {
+        .get(`http://localhost:8000/api/update-brand-status/${brandId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -138,6 +139,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.getBrands();
+          this.loading=false;
 
           Swal.fire({
             toast: true,
@@ -296,7 +298,8 @@ export default {
                     <td style="padding-top: 20px; padding-bottom: 20px">
                       <button
                         type="button"
-                        class="btn btn-dark"
+                       
+                        :class="[item.status === 'Active' ? 'btn btn-dark' : ' btn btn-warning',]"
                         @click="statusUpdate(item.id)"
                         data-bs-toggle="tooltip"
                         data-bs-placement="top"

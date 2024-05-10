@@ -41,13 +41,13 @@ Route::middleware('credential')->group(function () {
     Route::get('/category/edit/{id}', [CategoryController::class, 'EditCategory']);
     Route::post('/update-category/{id}', [CategoryController::class, 'UpdateCategory']);
     Route::get('/delete-category/{id}', [CategoryController::class, 'DeleteCategory']);
-    Route::get('/update-status/{id}', [CategoryController::class, 'UpdateStatus']);
+    Route::get('/update-category-status/{id}', [CategoryController::class, 'UpdateStatus']);
 
     //brand Route
     Route::post('/add-brand', [BrandController::class, 'AddBrand']);
     Route::get('/all-brand', [BrandController::class, 'AllBrand']);
     Route::get('/delete-brand/{id}', [BrandController::class, 'DeleteBrand']);
-    Route::get('/update-status/{id}', [BrandController::class, 'UpdateStatus']);
+    Route::get('/update-brand-status/{id}', [BrandController::class, 'UpdateStatus']);
     Route::get('/brand/edit/{id}', [BrandController::class, 'EditBrand']);
     Route::post('/update-brand/{id}', [BrandController::class, 'UpdateBrand']);
    
