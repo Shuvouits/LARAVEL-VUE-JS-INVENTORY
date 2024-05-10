@@ -168,7 +168,7 @@ export default {
                   <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Data Table
+                  Product Table
                 </li>
               </ol>
             </nav>
@@ -184,7 +184,7 @@ export default {
           </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">DataTable Example</h6>
+        <h6 class="mb-0 text-uppercase">Managed Your Product</h6>
 
         <hr />
         <div class="card">
@@ -197,16 +197,18 @@ export default {
               >
                 <thead>
                   <tr>
+                    <th>ID</th>
                     <th>Product Image</th>
                     <th>Price</th>
                     <th>Category</th>
                     <th>Brand</th>
-                    <th>date</th>
+                    <th>Expired Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(item, index) in this.product" :key="index">
+                    <td>{{ index+1 }}</td>
                     <td>
                         <img v-if="item.avatar" :src=" 'http://localhost:8000/images/' +item.avatar" style="width: 50px; height: 50px;" />
 
@@ -229,9 +231,9 @@ export default {
                       <span style="margin-left: 25px;">{{ item.name }}</span>
                     </td>
                     <td>{{ item.price }}</td>
-                    <td>{{ item.category }}</td>
-                    <td>{{ item.brand }}</td>
-                    <td>{{ formatDate(item.created_at) }}</td>
+                    <td>{{ item.category_data.name }}</td>
+                    <td>{{ item.brand_data.name }}</td>
+                    <td>{{ formatDate(item.expire_date) }}</td>
                     <td
                       style="
                         display: flex;
@@ -243,7 +245,7 @@ export default {
                       "
                     >
                       <router-link
-                        :to="'/brand/edit/' + item.id"
+                        :to="'/product/edit/' + item.id"
                         type="button"
                         class="btn btn-primary px-5"
                       >

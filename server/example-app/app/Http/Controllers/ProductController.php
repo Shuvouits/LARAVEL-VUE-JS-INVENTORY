@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -19,6 +20,8 @@ class ProductController extends Controller
             $expire_date = $request->input('expire_date');
             $category = $request->input('category');
             $brand = $request->input('brand');
+
+           // $formattedExpireDate = Carbon::parse($expire_date)->format('m/d/Y');
 
 
             if ($request->hasFile('avatar')) {
@@ -77,7 +80,7 @@ class ProductController extends Controller
 
         try {
 
-            $all_product = Product::all();
+            $all_product = Product::with('categoryData')->with('brandData')->get();
             return response()->json($all_product);
 
         } catch (\Exception $error) {
@@ -107,6 +110,108 @@ class ProductController extends Controller
                 'message' => 'Data deleted successfully'
 
             ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
+
+    public function EditProduct(Request $request, $id)
+    {
+        try {
+            $data = Product::where('id', $id)->first();
+            return response()->json([
+                'name' => $data->name,
+                'slug' => $data->slug,
+                'price' => $data->price,
+                'quantity' => $data->quantity,
+                'date' => $data->expire_date,
+                'category' => $data->category,
+                'brand' => $data->brand,
+                'avatar' => $data->avatar
+
+            ], 201);
+
+        } catch (\Exception $error) {
+            dd($error->getMessage());
+
+        }
+    }
+
+
+    public function UpdateProduct(Request $request , $id){
+        try{
+
+            $name = $request->input('name');
+            $slug = $request->input('slug');
+            $price = $request->input('price');
+            $quantity = $request->input('quantity');
+            $expire_date = $request->input('expire_date');
+
+           // return response()->json($expire_date);
+            $categoryData = $request->input('categoryData');
+            $brandData = $request->input('brandData');
+
+            $product_data = Product::where('id', $id)->first();
+
+            if(!$product_data){
+
+                return response()->json([
+                    'message' => 'No product found'
+    
+                ],404);
+
+            }
+
+            if ($request->hasFile('avatar')) {
+                $request->validate([
+                    'avatar' => 'image|mimes:jpeg,png,jpg,gif,avif,webp|max:2048', // Adjust the validation rules as needed
+                ]);
+
+                if ($request->file('avatar')->isValid()) {
+                    $avatar = $request->file('avatar')->getClientOriginalName();
+                    $request->file('avatar')->move(public_path('images'), $avatar);
+                    $msg = "Image uploaded successfully";
+                }
+
+                
+                $product_data->name = $name;
+                $product_data->slug = $slug;
+                $product_data->price = $price;
+                $product_data->quantity = $quantity;
+                $product_data->expire_date = $expire_date;
+                $product_data->category = $categoryData;
+                $product_data->brand = $brandData;
+                $product_data->avatar = $avatar;
+                $product_data->save();
+
+                return response()->json([
+                    'message' => 'Product updated with image',
+
+                ], 201);
+
+
+            }
+
+
+
+            $product_data->name = $name;
+                $product_data->slug = $slug;
+                $product_data->price = $price;
+                $product_data->quantity = $quantity;
+                $product_data->expire_date = $expire_date;
+                $product_data->category = $categoryData;
+                $product_data->brand = $brandData;
+                
+                $product_data->save();
+
+            return response()->json([
+                'message' => 'Product updated without image',
+
+            ], 201);
+
 
         }catch(\Exception $error){
             dd($error->getMessage());

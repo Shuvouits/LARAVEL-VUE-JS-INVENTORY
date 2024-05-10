@@ -30,6 +30,7 @@ import EditCategory from '../pages/category/EditCategory.vue'
 import Testing from '../pages/category/Testing.vue';
 import BrandList from '../pages/brand/BrandList.vue';
 import EditBrand from '../pages/brand/EditBrand.vue';
+import EditProduct from '../pages/product/EditProduct.vue';
 
 
 
@@ -64,6 +65,12 @@ const routes = [
   {
     path: '/add-product',
     component: AddProduct,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/product/edit/:id',
+    component: EditProduct,
     meta: { requiresAuth: true }
   },
 

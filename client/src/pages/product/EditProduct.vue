@@ -18,9 +18,9 @@ export default {
       slug: "",
       price: "",
       quantity: "",
-      date: "",
-      category: "",
-      brand: "",
+      categoryData: "",
+      brandData: "",
+      brandData: "",
       expire_date: "",
       imageUrl: null,
       formData: new FormData(),
@@ -30,6 +30,8 @@ export default {
   mounted() {
     this.getBrands();
     this.getCategory();
+    this.getProducts(this.$route.params.id);
+    
   },
 
   computed: {
@@ -64,6 +66,36 @@ export default {
         });
     },
 
+    getProducts(productId) {
+      const token = this.$store.state.token;
+
+      axios
+        .get(`http://localhost:8000/api/product/edit/${productId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.loading = false;
+          this.name = response.data.name
+          this.slug = response.data.slug
+          this.price = response.data.price
+          this.quantity = response.data.quantity
+          this.categoryData = response.data.category
+          this.brandData = response.data.brand
+          this.expire_date = response.data.date
+          
+          this.avatar = response.data.avatar
+          
+        });
+
+        console.log('category', this.category)
+    },
+
+    
+
     uploadImage(event) {
       const file = event.target.files[0];
       this.imageUrl = URL.createObjectURL(file);
@@ -81,11 +113,13 @@ export default {
       this.formData.append("price", this.price);
       this.formData.append("quantity", this.quantity);
       this.formData.append("expire_date", this.expire_date);
-      this.formData.append("category", this.category.id);
-      this.formData.append("brand", this.brand.id);
+      this.formData.append("categoryData", this.categoryData);
+      this.formData.append("brandData", this.brandData);
+
+      console.log('formData:', this.formData);
 
       axios
-        .post("http://localhost:8000/api/add-product", this.formData, {
+        .post(`http://localhost:8000/api/update-product/${this.$route.params.id}`, this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -178,7 +212,7 @@ export default {
           </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">Insert Your Product</h6>
+        <h6 class="mb-0 text-uppercase">Update Your Product</h6>
 
         <hr />
         <div class="card">
@@ -259,6 +293,7 @@ export default {
                   class="form-control"
                   id="input6"
                   v-model="expire_date"
+                  
                   placeholder="Date of Birth"
                 />
               </div>
@@ -267,7 +302,7 @@ export default {
                 <label for="c_data" class="form-label">Category</label>
                 <select
                   id="c_data"
-                  v-model="category.id"
+                  v-model="categoryData"
                   name="category"
                   class="form-select"
                 >
@@ -284,7 +319,7 @@ export default {
                 <select
                   id="brand"
                   name="brand"
-                  v-model="brand.id"
+                  v-model="brandData"
                   class="form-select"
                 >
                   <option selected disabled>Choose...</option>
@@ -315,12 +350,31 @@ export default {
                     :src="imageUrl"
                     alt="Preview"
                     style="
-                      width: 150px;
-                      height: 70px;
+                      width: 100px;
+                      height: 60px;
                       border-radius: 10px;
                       margin-top: 20px;
                     "
                   />
+
+                  <img
+                    v-if="avatar && !imageUrl"
+                    :src="'http://localhost:8000/images/' +avatar"
+                    alt="Preview"
+                    style="
+                      width: 100px;
+                      height: 60px;
+                      border-radius: 10px;
+                      margin-top: 20px;
+                    "
+                  />
+
+                  <span v-if="!avatar && !imageUrl">
+                    <img style="margin-top: 20px" src="data:image/svg+xml,%3Csvg height='60' viewBox='0 0 32 32' width='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m30 3.4141-1.4141-1.4141-26.5859 26.5859 1.4141 1.4141 2-2h20.5859a2.0027 2.0027 0 0 0 2-2v-20.5859zm-4 22.5859h-18.5859l7.7929-7.793 2.3788 2.3787a2 2 0 0 0 2.8284 0l1.5858-1.5857 4 3.9973zm0-5.8318-2.5858-2.5859a2 2 0 0 0 -2.8284 0l-1.5858 1.5859-2.377-2.3771 9.377-9.377z'/%3E%3Cpath d='m6 22v-3l5-4.9966 1.3733 1.3733 1.4159-1.416-1.375-1.375a2 2 0 0 0 -2.8284 0l-3.5858 3.5859v-10.1716h16v-2h-16a2.002 2.002 0 0 0 -2 2v16z'/%3E%3Cpath d='m0 0h32v32h-32z' fill='none'/%3E%3C/svg%3E" alt="SVG Image" />
+
+                  </span>
+
+
                 </div>
               </div>
 
