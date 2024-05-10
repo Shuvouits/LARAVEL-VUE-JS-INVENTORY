@@ -33,6 +33,7 @@ export default {
   },
 
   methods: {
+
     uploadImage(event) {
       const file = event.target.files[0];
       this.imageUrl = URL.createObjectURL(file);
@@ -193,6 +194,7 @@ export default {
 
                  
                 </div>
+
                 <div>
                   <img
                     v-if="imageUrl"
@@ -206,6 +208,8 @@ export default {
                     "
                   />
                 </div>
+
+                
               </div>
 
               <div class="col-md-12">

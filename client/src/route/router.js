@@ -57,44 +57,52 @@ const routes = [
 
   {
     path: '/all-product',
-    component: AllProduct
+    component: AllProduct,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/add-product',
-    component: AddProduct
+    component: AddProduct,
+    meta: { requiresAuth: true }
   },
 
 
   {
     path: '/expired-product',
-    component: ExpiredProduct
+    component: ExpiredProduct,
+    meta: { requiresAuth: true }
   },
  
 
   {
     path: '/low-stock',
-    component: LowStock
+    component: LowStock,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/category-list',
-    component: Category
+    component: Category,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/add-category',
-    component: AddCategory
+    component: AddCategory,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/category/edit/:id',
-    component: EditCategory
+    component: EditCategory,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/brand-list',
-    component: BrandList
+    component: BrandList,
+    meta: { requiresAuth: true }
   },
 
   {
@@ -111,79 +119,94 @@ const routes = [
 
   {
     path: '/sales',
-    component: Sales
+    component: Sales,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/sales-return',
-    component: SalesReturn
+    component: SalesReturn,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/add-sales',
-    component: AddSales
+    component: AddSales,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/add-sales-return',
-    component: AddSalesReturn
+    component: AddSalesReturn,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/purchase',
-    component: Purchase
+    component: Purchase,
+    meta: { requiresAuth: true }
   },  
 
 
   
   {
     path: '/add-purchased',
-    component: AddPurchase
+    component: AddPurchase,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/order-purchased',
-    component: PurchasedOrder
+    component: PurchasedOrder,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/return-purchased',
-    component: PurchaseReturn
+    component: PurchaseReturn,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/add-purchased-return',
-    component: AddPurchasedReturn
+    component: AddPurchasedReturn,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/expense',
-    component: Expense
+    component: Expense,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/add-expense',
-    component: AddExpense
+    component: AddExpense,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/category-expense',
-    component: ExpenseCategory
+    component: ExpenseCategory,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/add-category-expense',
-    component: AddCategoryExpense
+    component: AddCategoryExpense,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/setting',
-    component: Setting
+    component: Setting,
+    meta: { requiresAuth: true }
   },
 
   {
     path: '/testing',
-    component : Testing
+    component : Testing,
+    meta: { requiresAuth: true }
   }
 
 
