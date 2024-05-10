@@ -12,28 +12,25 @@ export default {
 
   data() {
     return {
-      imageUrl : null,
-      name:  this.$store.state.name,
-      email :  this.$store.state.email,
-      phone :  this.$store.state.phone,
-      address :  this.$store.state.address,
-      formData : new FormData(),
+      imageUrl: null,
+      name: this.$store.state.name,
+      email: this.$store.state.email,
+      phone: this.$store.state.phone,
+      address: this.$store.state.address,
+      formData: new FormData(),
     };
   },
 
   ...mapActions(["storeUserData"]),
 
   methods: {
-
     uploadImage(event) {
-       const file = event.target.files[0];
-       this.imageUrl = URL.createObjectURL(file);
+      const file = event.target.files[0];
+      this.imageUrl = URL.createObjectURL(file);
 
-       console.log(this.imageUrl)
+      console.log(this.imageUrl);
 
-      this.formData.append('image', file);
-      
-
+      this.formData.append("image", file);
     },
 
     sendData() {
@@ -54,16 +51,22 @@ export default {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
-            
           },
-          params : data
+          params: data,
         })
 
         .then((response) => {
           console.log(response.data);
 
-           const { token, phone, name, address, avatar, email } = response.data;
-           this.$store.dispatch("storeUserData", { token, phone, name, address, avatar, email });
+          const { token, phone, name, address, avatar, email } = response.data;
+          this.$store.dispatch("storeUserData", {
+            token,
+            phone,
+            name,
+            address,
+            avatar,
+            email,
+          });
 
           Swal.fire({
             toast: true,
@@ -75,8 +78,6 @@ export default {
             timer: 3000,
             timerProgressBar: true,
           });
-
-          
         })
 
         .catch((error) => {
@@ -93,8 +94,6 @@ export default {
             timer: 3000,
             timerProgressBar: true,
           });
-
-         
         });
     },
   },
@@ -159,14 +158,28 @@ export default {
                       <div
                         class="d-flex flex-column align-items-center text-center"
                       >
+                        <img
+                          v-if="$store.state.avatar"
+                          :src="
+                            'http://localhost:8000/images/' +
+                            $store.state.avatar
+                          "
+                          
+                          class="rounded-circle p-1 bg-primary"
+                          width="110"
+                          height="110"
+                        />
+                        <img
+                          v-else
+                          :src="
+                            require('../../../assets/images/avatars/avatar-2.png')
+                          "
+                          :alt="AltText"
+                          class="rounded-circle p-1 bg-primary"
+                          width="110"
+                          height="110"
+                        />
 
-                      <img v-if="$store.state.avatar" :src="'http://localhost:8000/images/' + $store.state.avatar" :alt="AltText"  class="rounded-circle p-1 bg-primary"
-                          width="110" height="110" />
-                      <img v-else :src="require('../../../assets/images/avatars/avatar-2.png')" :alt="AltText"  class="rounded-circle p-1 bg-primary"
-                          width="110" height="110" />
-
-                     
-                       
                         <div class="mt-3">
                           <h4>{{ this.$store.state.name }}</h4>
                           <p class="text-secondary mb-1">
@@ -217,11 +230,14 @@ export default {
                     </div>
                   </div>
                 </div>
+
                 <div class="col-lg-8">
                   <div class="card">
-                    <form @submit.prevent="sendData" enctype="multipart/form-data">
+                    <form
+                      @submit.prevent="sendData"
+                      enctype="multipart/form-data"
+                    >
                       <div class="card-body">
-
                         <div class="row mb-3">
                           <div class="col-sm-3">
                             <h6 class="mb-0">Name</h6>
@@ -247,7 +263,6 @@ export default {
                               type="email"
                               class="form-control"
                               placeholder="Enter your mail"
-
                               v-model="email"
                             />
                           </div>
@@ -293,24 +308,20 @@ export default {
                             <input
                               type="file"
                               class="form-control"
-                            
-                              @change="uploadImage">
+                              @change="uploadImage"
+                            />
 
-                              <img
-    v-if="imageUrl"
-    :src="imageUrl"
-    alt="Preview"
-    style="
-        width: 120px;
-        height: 120px;
-        border-radius: 10px;
-        margin-top: 20px;
-    "
-/>
-
-
-
-                            
+                            <img
+                              v-if="imageUrl"
+                              :src="imageUrl"
+                              alt="Preview"
+                              style="
+                                width: 120px;
+                                height: 120px;
+                                border-radius: 10px;
+                                margin-top: 20px;
+                              "
+                            />
                           </div>
                         </div>
 

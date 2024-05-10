@@ -269,7 +269,7 @@ export default {
                       <td>{{ formatDate(item.created_at) }}</td>
 
                       <td>
-                        <button type="button" class="btn btn-dark" @click="statusUpdate(item.id)">
+                        <button type="button" class="btn btn-dark" @click="statusUpdate(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
                           <i
                             v-if="item.status === 'Active'"
                             class="bx bx-like me-0"

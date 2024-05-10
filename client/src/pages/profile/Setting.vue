@@ -136,25 +136,29 @@ export default {
           <div class="container">
             <div class="main-body">
               <div class="row">
+
+
                 <div class="col-lg-4">
                   <div class="card">
                     <div class="card-body">
                       <div
                         class="d-flex flex-column align-items-center text-center"
                       >
-                        <img
-                          src="../../../assets/images/avatars/avatar-2.png"
-                          alt="Admin"
-                          class="rounded-circle p-1 bg-primary"
-                          width="110"
-                        />
+
+                      <img v-if="$store.state.avatar" :src="'http://localhost:8000/images/' + $store.state.avatar" :alt="AltText"  class="rounded-circle p-1 bg-primary"
+                          width="110" height="110" />
+                      <img v-else :src="require('../../../assets/images/avatars/avatar-2.png')" :alt="AltText"  class="rounded-circle p-1 bg-primary"
+                          width="110" height="110" />
+
+                     
+                       
                         <div class="mt-3">
-                          <h4>John Doe</h4>
+                          <h4>{{ this.$store.state.name }}</h4>
                           <p class="text-secondary mb-1">
-                            Full Stack Developer
+                            {{ this.$store.state.email }}
                           </p>
                           <p class="text-muted font-size-sm">
-                            Bay Area, San Francisco, CA
+                            {{ this.$store.state.address }}
                           </p>
                           <button class="btn btn-primary">Follow</button>
                           <button
@@ -198,6 +202,9 @@ export default {
                     </div>
                   </div>
                 </div>
+
+
+
                 <div class="col-lg-8">
                   <div class="card">
                     <form @submit.prevent="sendData">

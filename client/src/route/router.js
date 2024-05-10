@@ -11,8 +11,7 @@ import ExpiredProduct from '../pages/ExpiredProduct.vue'
 import LowStock from '../pages/LowStock.vue';
 import Category from '../pages/category/Category.vue';
 import AddCategory from '../pages/category/AddCategory.vue';
-import Brand from '../pages/Brand.vue';
-import AddBrand from '../pages/AddBrand.vue'
+import AddBrand from '../pages/brand/AddBrand.vue'
 import Sales from '../pages/Sales.vue'
 import SalesReturn from '../pages/SalesReturn.vue'
 import AddSales from '../pages/sale/AddSales.vue'
@@ -29,6 +28,8 @@ import AddCategoryExpense from '../pages/expense/AddCategoryExpense.vue'
 import Setting from '../pages/profile/Setting.vue'
 import EditCategory from '../pages/category/EditCategory.vue'
 import Testing from '../pages/category/Testing.vue';
+import BrandList from '../pages/brand/BrandList.vue';
+import EditBrand from '../pages/brand/EditBrand.vue';
 
 
 
@@ -93,13 +94,20 @@ const routes = [
 
   {
     path: '/brand-list',
-    component: Brand
+    component: BrandList
   },
 
   {
     path: '/add-brand',
-    component: AddBrand
+    component: AddBrand,
+    meta: { requiresAuth: true }
   },  
+
+  {
+    path: '/brand/edit/:id',
+    component: EditBrand,
+    meta: { requiresAuth: true }
+  },
 
   {
     path: '/sales',
