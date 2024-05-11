@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,13 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/product/edit/{id}', [ProductController::class, 'EditProduct']);
     Route::post('/update-product/{id}', [ProductController::class, 'UpdateProduct']);
     Route::get('/expired-product', [ProductController::class, 'ExpiredProduct']);
+    Route::get('/low-stock', [ProductController::class, 'LowStock']);
+    Route::get('/out-stock', [ProductController::class, 'OutStock']);
+
+
+    Route::post('/add-customer', [CustomerController::class, 'AddCustomer']);
+    Route::get('/all-customer', [CustomerController::class, 'AllCustomer']);
+    Route::get('/delete-customer/{id}', [CustomerController::class, 'DeleteCustomer']);
    
    
 });

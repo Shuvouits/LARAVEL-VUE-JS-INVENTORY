@@ -229,4 +229,14 @@ class ProductController extends Controller
         return response()->json($expired_products);
     }
 
+    public function LowStock(){
+        $product = Product::with('brandData')->with('categoryData')->where('quantity', '<=', 5)->where('quantity', '>', 0)->get();
+        return response()->json($product);
+    }
+
+    public function OutStock(){
+        $product = Product::with('brandData')->with('categoryData')->where('quantity', '=', 0)->get();
+        return response()->json($product);
+    }
+
 }

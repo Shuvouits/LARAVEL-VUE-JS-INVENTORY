@@ -21,7 +21,10 @@ export default {
       selectedDate: null,
     };
   },
+
+  
 };
+
 </script>
 
 <template>
@@ -64,6 +67,7 @@ export default {
           <div class="card-body p-4">
             <h5 class="mb-4">Add Sales</h5>
             <form class="row g-3">
+
               <div class="col-md-6">
                 <label for="single-select-field" class="form-label"
                   >Product Name</label
@@ -110,14 +114,17 @@ export default {
                 />
               </div>
 
+               
+
+
               <div class="col-md-6">
-                <label for="input14" class="form-label">Grand Total</label>
+                <label for="input14" class="form-label">Quantity</label>
                 <div class="position-relative input-icon">
                   <input
-                    type="price"
+                    type="number"
                     class="form-control"
                     id="input14"
-                    placeholder="Last Name"
+                    placeholder="Enter quantity"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i

@@ -169,11 +169,14 @@ export default {
 
       <li class="menu-label">Peoples</li>
 
-      <li>
-        <a href="widgets.html">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+      <li  :class="{
+          'mm-active':
+            $route.path === '/customer'
+        }">
+        <router-link to="/customer">
+          <div class="parent-icon"><i class="bx bx-analyse"></i></div>
           <div class="menu-title">Customer</div>
-        </a>
+        </router-link>
       </li>
 
       <li>

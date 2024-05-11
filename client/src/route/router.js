@@ -8,7 +8,7 @@ import Login from '../pages/Login.vue'
 import AllProduct from '../pages/product/AllProduct.vue';
 import AddProduct from '../pages/product/AddProduct.vue'
 import ExpiredProduct from '../pages/product/ExpiredProduct.vue'
-import LowStock from '../pages/LowStock.vue';
+import LowStock from '../pages/product/LowStock.vue';
 import Category from '../pages/category/Category.vue';
 import AddCategory from '../pages/category/AddCategory.vue';
 import AddBrand from '../pages/brand/AddBrand.vue'
@@ -31,6 +31,8 @@ import Testing from '../pages/category/Testing.vue';
 import BrandList from '../pages/brand/BrandList.vue';
 import EditBrand from '../pages/brand/EditBrand.vue';
 import EditProduct from '../pages/product/EditProduct.vue';
+import Customer from '../pages/customer/Customer.vue';
+import AddCustomer from '../pages/customer/AddCustomer.vue'
 
 
 
@@ -213,6 +215,18 @@ const routes = [
   {
     path: '/testing',
     component : Testing,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/customer',
+    component : Customer,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/add-customer',
+    component : AddCustomer,
     meta: { requiresAuth: true }
   }
 
