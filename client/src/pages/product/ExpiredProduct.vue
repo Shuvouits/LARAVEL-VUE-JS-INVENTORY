@@ -52,7 +52,7 @@ export default {
     getProducts() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-product", {
+        .get("http://localhost:8000/api/expired-product", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -173,23 +173,19 @@ export default {
                     <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Product Table
+                    Product List
                   </li>
                 </ol>
               </nav>
             </div>
             <div class="ms-auto">
               <div class="btn-group">
-                <router-link to="/add-product">
-                  <button type="button" class="btn btn-primary">
-                    Add Product
-                  </button>
-                </router-link>
+                
               </div>
             </div>
           </div>
           <!--end breadcrumb-->
-          <h6 class="mb-0 text-uppercase">Managed Your Product</h6>
+          <h6 class="mb-0 text-uppercase">Managed Your Expired Product</h6>
 
           <hr />
           <div class="card">
@@ -205,7 +201,7 @@ export default {
                       <th>ID</th>
                       <th>Product Image</th>
                       <th>Price</th>
-                      <th>Category</th>
+                      <th>Quantity</th>
                       <th>Brand</th>
                       <th>Expired Date</th>
                       <th>Action</th>
@@ -240,7 +236,7 @@ export default {
                         <span style="margin-left: 25px">{{ item.name }}</span>
                       </td>
                       <td>{{ item.price }}</td>
-                      <td>{{ item.category_data.name }}</td>
+                      <td>{{ item.quantity }} </td>
                       <td>{{ item.brand_data.name }}</td>
                       <td>{{ formatDate(item.expire_date) }}</td>
                       <td

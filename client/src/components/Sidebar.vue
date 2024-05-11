@@ -43,21 +43,31 @@ export default {
 
       <li class="menu-label">Inventory</li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/all-product' ||
+            this.$route.path.startsWith('/product/'),
+        }">
         <router-link to="/all-product">
           <div class="parent-icon"><i class="bx bx-health"></i></div>
           <div class="menu-title">Products</div>
         </router-link>
       </li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/add-product'
+        }">
         <router-link to="/add-product">
           <div class="parent-icon"><i class="bx bx-ruble"></i></div>
           <div class="menu-title">Create Product</div>
         </router-link>
       </li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/expired-product'
+        }">
         <router-link to="/expired-product">
           <div class="parent-icon"><i class="bx bx-bolt-circle"></i></div>
           <div class="menu-title">Expired Product</div>

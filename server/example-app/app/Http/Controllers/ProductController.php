@@ -219,4 +219,14 @@ class ProductController extends Controller
         }
     }
 
+    public function ExpiredProduct(){
+        $expiryThreshold = Carbon::now()->addDays(15)->toDateString();
+        
+    
+        $expired_products = Product::with('brandData')->where('expire_date', '<=', $expiryThreshold)
+                                    ->get();
+    
+        return response()->json($expired_products);
+    }
+
 }

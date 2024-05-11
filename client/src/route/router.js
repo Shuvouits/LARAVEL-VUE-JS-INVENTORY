@@ -7,7 +7,7 @@ import Profile from '../pages/profile/Profile.vue'
 import Login from '../pages/Login.vue'
 import AllProduct from '../pages/product/AllProduct.vue';
 import AddProduct from '../pages/product/AddProduct.vue'
-import ExpiredProduct from '../pages/ExpiredProduct.vue'
+import ExpiredProduct from '../pages/product/ExpiredProduct.vue'
 import LowStock from '../pages/LowStock.vue';
 import Category from '../pages/category/Category.vue';
 import AddCategory from '../pages/category/AddCategory.vue';
