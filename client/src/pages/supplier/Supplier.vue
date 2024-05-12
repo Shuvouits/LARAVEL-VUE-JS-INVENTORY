@@ -12,13 +12,13 @@ export default {
   data() {
     return {
       dataTable: null,
-      customer: [],
+      supplier: [],
       loading: true
     };
   },
 
   mounted() {
-    this.getCustomer();
+    this.getSupplier();
   },
 
   beforeRouteEnter(to, from, next) {
@@ -48,11 +48,11 @@ export default {
       return formattedDate;
     },
 
-    getCustomer() {
+    getSupplier() {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-customer", {
+        .get("http://localhost:8000/api/all-supplier", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -61,14 +61,14 @@ export default {
         .then((response) => {
           //console.log(response.data);
           this.loading = false;
-          this.customer = response.data;
+          this.supplier = response.data;
 
           // After setting the data, initialize DataTables
           this.initDataTable();
         });
     },
 
-    customerDelete(customerId) {
+    supplierDelete(supplierId) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -82,7 +82,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-customer/${customerId}`, {
+            .get(`http://localhost:8000/api/delete-supplier/${supplierId}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ export default {
               });
 
               // Refresh the category list or update the UI accordingly
-              this.getCustomer();
+              this.getSupplier();
             })
             .catch((error) => {
               // Handle error response
@@ -185,13 +185,13 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/add-customer">
+              <router-link to="/add-supplier">
                 <button
                   type="button"
                   class="btn btn-primary"
                   style="margin-left: 30px"
                 >
-                  Add Customer
+                  Add Supplier
                 </button>
               </router-link>
             </div>
@@ -212,7 +212,7 @@ export default {
                 <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Customer Name</th>
+                    <th>Supplier Name</th>
                     <th>Address</th>
                     <th>Created On</th>
                     
@@ -221,7 +221,7 @@ export default {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(item, index) in this.customer" :key="index">
+                  <tr v-for="(item, index) in this.supplier" :key="index">
                     <td style="padding-top: 20px; padding-bottom: 20px">
                       {{ index + 1 }}
                     </td>
@@ -284,7 +284,7 @@ export default {
                       </router-link>
 
                       <router-link
-                       :to="'/customer/edit/' + item.id"
+                       :to="'/supplier/edit/' + item.id"
                         
                         class="btn btn-success px-5"
                       >
@@ -294,7 +294,7 @@ export default {
                       <button
                         type="button"
                         class="btn btn-danger px-5"
-                        @click="customerDelete(item.id)"
+                        @click="supplierDelete(item.id)"
                       >
                         <i class="bx bx-trash mr-1"></i>trash
                       </button>

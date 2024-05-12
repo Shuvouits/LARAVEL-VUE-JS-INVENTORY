@@ -65,6 +65,7 @@ export default {
 
           // After setting the data, initialize DataTables
           this.initDataTable();
+          
         });
     },
 
@@ -140,6 +141,7 @@ export default {
           console.log(response.data);
           this.getBrands();
           this.loading=false;
+          
 
           Swal.fire({
             toast: true,
@@ -271,7 +273,7 @@ export default {
                     <td>
                       <img
                         v-if="item.avatar"
-                        style="width: 50px; height: 50px; border-radius: 10px"
+                        style="width: 120px; height: 50px; border-radius: 10px"
                         :src="'http://localhost:8000/images/' + item.avatar"
                       />
                       <span v-else>

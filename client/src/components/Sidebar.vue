@@ -171,7 +171,9 @@ export default {
 
       <li  :class="{
           'mm-active':
-            $route.path === '/customer'
+            $route.path === '/customer' ||
+            $route.path === '/add-customer' ||
+            this.$route.path.startsWith('/customer/'),
         }">
         <router-link to="/customer">
           <div class="parent-icon"><i class="bx bx-analyse"></i></div>
@@ -179,11 +181,16 @@ export default {
         </router-link>
       </li>
 
-      <li>
-        <a href="widgets.html">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+      <li  :class="{
+          'mm-active':
+            $route.path === '/supplier' ||
+            $route.path === '/add-supplier' ||
+            this.$route.path.startsWith('/supplier/'),
+        }">
+        <router-link to="/supplier">
+          <div class="parent-icon"><i class="bx bx-medal"></i></div>
           <div class="menu-title">Suppliers</div>
-        </a>
+        </router-link>
       </li>
 
       <li class="menu-label">Reports</li>

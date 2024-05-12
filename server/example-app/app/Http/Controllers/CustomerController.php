@@ -21,13 +21,62 @@ class CustomerController extends Controller
 
     }
 
-    public function AllCustomer(Request $request){
+    public function AllCustomer(){
 
-       $customer = Customer::all();
+       $customer = Customer::orderBy('id','DESC')->get();
 
         return response()->json($customer);
 
     }
+
+    public function EditCustomer(Request $request , $id){
+        try{
+            $data = Customer::where('id', $id)->first();
+            return response()->json([
+                'name' => $data->name,
+                'address' => $data->address
+
+            ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
+    public function UpdateCustomer(Request $request , $id){
+        try{
+
+            $name = $request->input('name');
+            $address = $request->input('address');
+
+            $customer_data = Customer::where('id', $id)->first();
+
+            if(!$customer_data){
+
+                return response()->json([
+                    'message' => 'No supplier found'
+    
+                ],404);
+
+            }
+
+            $customer_data->name = $name;
+            $customer_data->address = $address;
+           
+            $customer_data->save();
+
+            return response()->json([
+                'message' => 'Data updated successfully'
+
+            ],201);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
 
     public function DeleteCustomer(Request $request, $id)
     {

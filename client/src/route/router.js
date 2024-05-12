@@ -33,6 +33,10 @@ import EditBrand from '../pages/brand/EditBrand.vue';
 import EditProduct from '../pages/product/EditProduct.vue';
 import Customer from '../pages/customer/Customer.vue';
 import AddCustomer from '../pages/customer/AddCustomer.vue'
+import Supplier from '../pages/supplier/Supplier.vue';
+import AddSupplier from "../pages/supplier/AddSupplier.vue";
+import EditSupplier from '../pages/supplier/EditSupplier.vue'
+import EditCustomer from '../pages/customer/EditCustomer.vue';
 
 
 
@@ -228,7 +232,32 @@ const routes = [
     path: '/add-customer',
     component : AddCustomer,
     meta: { requiresAuth: true }
-  }
+  },
+
+  {
+    path: '/customer/edit/:id',
+    component: EditCustomer,
+    meta: { requiresAuth: true }
+  },
+
+
+  {
+    path: '/supplier',
+    component : Supplier,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/add-supplier',
+    component : AddSupplier,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/supplier/edit/:id',
+    component: EditSupplier,
+    meta: { requiresAuth: true }
+  },
 
 
 
