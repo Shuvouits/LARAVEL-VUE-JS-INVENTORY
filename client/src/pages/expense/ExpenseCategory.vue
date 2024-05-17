@@ -86,7 +86,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-expense/${id}`, {
+            .get(`http://localhost:8000/api/delete-category-expense/${id}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,

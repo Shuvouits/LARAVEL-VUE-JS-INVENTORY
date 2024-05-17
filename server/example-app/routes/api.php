@@ -81,9 +81,16 @@ Route::middleware(['credential', 'cors'])->group(function () {
     //Expense-category
     Route::post('/add-category-expense', [ExpenseController::class, 'AddCategoryExpense']);
     Route::get('/all-category-expense', [ExpenseController::class, 'AllCategoryExpense']);
-    Route::get('/delete-expense/{id}', [ExpenseController::class, 'DeleteExpense']);
+    Route::get('/delete-category-expense/{id}', [ExpenseController::class, 'DeleteCategoryExpense']);
     Route::get('/expense-category/edit/{id}', [ExpenseController::class, 'EditExpenseCategory']);
     Route::post('/update-category-expense/{id}', [ExpenseController::class, 'UpdateCategoryExpense']);
+
+    //Expense
+    Route::post('/add-expense', [ExpenseController::class, 'AddExpense']);
+    Route::get('/all-expense', [ExpenseController::class, 'AllExpense']);
+    Route::get('/expense/edit/{id}', [ExpenseController::class, 'EditExpense']);
+    Route::post('/update-expense/{id}', [ExpenseController::class, 'UpdateExpense']);
+    Route::get('/delete-expense/{id}', [ExpenseController::class, 'DeleteExpense']);
    
    
 });

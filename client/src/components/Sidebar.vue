@@ -148,15 +148,16 @@ export default {
 
       <li class="menu-label">Finance & Accounts</li>
 
-      <li :class="{ 'mm-active': visible || $route.path === '/expense-category' || $route.path === '/expense' || this.$route.path.startsWith('/expense/'), }" @click="handleClick">
+      <li :class="{ 'mm-active': visible || $route.path === '/expense-category' || $route.path === '/add-expense' || $route.path === '/expense' || this.$route.path.startsWith('/expense/'), }" @click="handleClick">
         <a href="javascript:;" class="has-arrow">
           <div class="parent-icon"><i class="bx bx-home-alt"></i></div>
           <div class="menu-title">Expenses</div>
         </a>
-        <ul :class="{ 'mm-collapse': true, 'mm-show': visible || $route.path === '/expense-category' || $route.path === '/expense' || this.$route.path.startsWith('/expense/')  }">
+        <ul :class="{ 'mm-collapse': true, 'mm-show': visible || $route.path === '/expense-category' || $route.path === '/add-expense' || $route.path === '/expense' || this.$route.path.startsWith('/expense/')  }">
           <li :class="{
           'mm-active':
-            $route.path === '/expense'
+            $route.path === '/expense' ||
+            $route.path === '/add-expense' 
         }">
             <router-link to="/expense"
               ><i class="bx bx-radio-circle"></i>Expenses</router-link
@@ -166,6 +167,7 @@ export default {
           'mm-active':
             $route.path === '/expense-category' ||
             $route.path === '/add-category-expense' ||
+            
             this.$route.path.startsWith('/expense/category/'),
         }">
             <router-link to="/expense-category"

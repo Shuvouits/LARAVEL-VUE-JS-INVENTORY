@@ -21,9 +21,38 @@ export default {
   },
 
   mounted() {
+
+    this.getExpense(this.$route.params.id);
+
+
     this.getExpenseCategory();
 
-    this.$nextTick(() => {
+
+  },
+
+  methods: {
+
+    getExpense(id) {
+      const token = this.$store.state.token;
+
+      axios
+        .get(`http://localhost:8000/api/expense/edit/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.loading = false;
+          this.expense_id = response.data.expense_id
+          this.date = response.data.date
+          this.amount = response.data.amount
+          this.description = response.data.description
+          
+        });
+
+        this.$nextTick(() => {
       $(this.$refs.selectElement).select2().on('change', () => {
         this.expense_id = $(this.$refs.selectElement).val();
       });
@@ -31,10 +60,10 @@ export default {
       $(this.$refs.selectElement1).select2();
     });
 
+        
 
-  },
 
-  methods: {
+    },
 
     getExpenseCategory() {
       const token = this.$store.state.token;
@@ -64,7 +93,7 @@ export default {
       console.log(this.expense_id);
 
       axios
-        .post("http://localhost:8000/api/add-expense", data, {
+        .post(`http://localhost:8000/api/update-expense/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -100,6 +129,10 @@ export default {
           });
         });
     },
+
+   
+
+
   },
 
   destroyed() {
@@ -133,7 +166,7 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/add-router">
+              <router-link to="/add-expense">
                 <button type="button" class="btn btn-primary">
                   Add Expense
                 </button>
@@ -149,7 +182,7 @@ export default {
         <hr />
         <div class="card">
           <div class="card-body p-4">
-            <h5 class="mb-4">Add Expense</h5>
+            <h5 class="mb-4">Update Expense</h5>
             <form class="row g-3" @submit.prevent="sendData">
               <div class="col-md-6">
                 <label for="single-select-field" class="form-label"

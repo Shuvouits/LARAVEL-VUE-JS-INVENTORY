@@ -38,6 +38,7 @@ import AddSupplier from "../pages/supplier/AddSupplier.vue";
 import EditSupplier from '../pages/supplier/EditSupplier.vue'
 import EditCustomer from '../pages/customer/EditCustomer.vue';
 import EditCategoryExpense from '../pages/expense/EditCategoryExpense.vue';
+import EditExpense from "../pages/expense/EditExpense.vue";
 
 
 
@@ -214,6 +215,12 @@ const routes = [
   {
     path: '/expense/category/edit/:id',
     component: EditCategoryExpense,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/expense/edit/:id',
+    component: EditExpense,
     meta: { requiresAuth: true }
   },
 
