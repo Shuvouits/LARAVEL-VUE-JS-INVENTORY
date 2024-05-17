@@ -37,6 +37,7 @@ import Supplier from '../pages/supplier/Supplier.vue';
 import AddSupplier from "../pages/supplier/AddSupplier.vue";
 import EditSupplier from '../pages/supplier/EditSupplier.vue'
 import EditCustomer from '../pages/customer/EditCustomer.vue';
+import EditCategoryExpense from '../pages/expense/EditCategoryExpense.vue';
 
 
 
@@ -199,7 +200,7 @@ const routes = [
   },
 
   {
-    path: '/category-expense',
+    path: '/expense-category',
     component: ExpenseCategory,
     meta: { requiresAuth: true }
   },
@@ -207,6 +208,12 @@ const routes = [
   {
     path: '/add-category-expense',
     component: AddCategoryExpense,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/expense/category/edit/:id',
+    component: EditCategoryExpense,
     meta: { requiresAuth: true }
   },
 
@@ -258,6 +265,8 @@ const routes = [
     component: EditSupplier,
     meta: { requiresAuth: true }
   },
+
+ 
 
 
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
@@ -76,6 +77,13 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/delete-supplier/{id}', [SupplierController::class, 'DeleteSupplier']);
     Route::get('/supplier/edit/{id}', [SupplierController::class, 'EditSupplier']);
     Route::post('/update-supplier/{id}', [SupplierController::class, 'UpdateSupplier']);
+
+    //Expense-category
+    Route::post('/add-category-expense', [ExpenseController::class, 'AddCategoryExpense']);
+    Route::get('/all-category-expense', [ExpenseController::class, 'AllCategoryExpense']);
+    Route::get('/delete-expense/{id}', [ExpenseController::class, 'DeleteExpense']);
+    Route::get('/expense-category/edit/{id}', [ExpenseController::class, 'EditExpenseCategory']);
+    Route::post('/update-category-expense/{id}', [ExpenseController::class, 'UpdateCategoryExpense']);
    
    
 });

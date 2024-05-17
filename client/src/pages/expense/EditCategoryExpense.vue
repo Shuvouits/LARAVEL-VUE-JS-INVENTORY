@@ -14,7 +14,31 @@ export default {
     };
   },
 
+  mounted() {
+    this.getExpense(this.$route.params.id);
+  },
+
   methods: {
+
+    getExpense(id) {
+      const token = this.$store.state.token;
+
+      axios
+        .get(`http://localhost:8000/api/expense-category/edit/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.loading = false;
+          this.name = response.data.name
+          
+        });
+    },
+
+
     sendData() {
       const data = {
         // Your data to send to the API
@@ -24,7 +48,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/add-category-expense", data, {
+        .post(`http://localhost:8000/api/update-category-expense/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -84,7 +108,7 @@ export default {
                   <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Add Expense Category
+                  Edit Expense Category
                 </li>
               </ol>
             </nav>
@@ -96,14 +120,14 @@ export default {
           </div>
         </div>
         <!--end breadcrumb-->
-        <router-link to="/sales"
+        <router-link to="/category-expense"
           ><h6 class="mb-0 text-uppercase">Expense History</h6></router-link
         >
 
         <hr />
         <div class="card col-md-8">
           <div class="card-body p-4">
-            <h5 class="mb-4">Create Expense</h5>
+            <h5 class="mb-4">Edit Expense</h5>
             <form class="row g-3" @submit.prevent="sendData">
             
                <div class="col-md-12">
