@@ -68,7 +68,7 @@ export default {
             timerProgressBar: true,
           });
 
-          this.$router.push("/category-expense");
+          this.$router.push("/expense-category");
         })
         .catch((error) => {
           console.error(error);

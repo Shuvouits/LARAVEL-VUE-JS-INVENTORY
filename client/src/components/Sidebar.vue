@@ -125,23 +125,28 @@ export default {
 
       <li class="menu-label">Purchase</li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/purchase' ||
+            $route.path === '/add-purchased' ||
+            this.$route.path.startsWith('/purchase/'),
+        }">
         <router-link to="/purchase">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+          <div class="parent-icon"><i class="bx bx-calendar-edit"></i></div>
           <div class="menu-title">Purchase</div>
         </router-link>
       </li>
 
       <li>
         <router-link to="/order-purchased">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+          <div class="parent-icon"><i class="bx bx-card"></i></div>
           <div class="menu-title">Purchase Order</div>
         </router-link>
       </li>
 
       <li>
         <router-link to="/return-purchased">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+          <div class="parent-icon"><i class="bx bx-help-circle"></i></div>
           <div class="menu-title">Purchase Return</div>
         </router-link>
       </li>

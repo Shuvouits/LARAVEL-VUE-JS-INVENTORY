@@ -34,6 +34,7 @@ export default {
 
 
   methods: {
+    
     formatDate(dateString) {
       // Create a new Date object from the dateString
       const date = new Date(dateString);

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchasedController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -91,6 +92,13 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/expense/edit/{id}', [ExpenseController::class, 'EditExpense']);
     Route::post('/update-expense/{id}', [ExpenseController::class, 'UpdateExpense']);
     Route::get('/delete-expense/{id}', [ExpenseController::class, 'DeleteExpense']);
+
+    //Purchased
+    Route::post('/add-purchased', [PurchasedController::class, 'AddPurchased']);
+    Route::get('/all-purchased', [PurchasedController::class, 'AllPurchased']);
+    Route::get('/purchase/edit/{id}', [PurchasedController::class, 'EditPurchased']);
+    Route::post('/update-purchase/{id}', [PurchasedController::class, 'UpdatePurchased']);
+    Route::get('/delete-purchase/{id}', [PurchasedController::class, 'DeletePurchased']);
    
    
 });

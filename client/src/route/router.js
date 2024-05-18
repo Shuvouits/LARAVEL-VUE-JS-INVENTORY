@@ -39,6 +39,7 @@ import EditSupplier from '../pages/supplier/EditSupplier.vue'
 import EditCustomer from '../pages/customer/EditCustomer.vue';
 import EditCategoryExpense from '../pages/expense/EditCategoryExpense.vue';
 import EditExpense from "../pages/expense/EditExpense.vue";
+import EditPurchase from '../pages/purchase/EditPurchase.vue';
 
 
 
@@ -179,6 +180,12 @@ const routes = [
   {
     path: '/return-purchased',
     component: PurchaseReturn,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/purchase/edit/:id',
+    component: EditPurchase,
     meta: { requiresAuth: true }
   },
 

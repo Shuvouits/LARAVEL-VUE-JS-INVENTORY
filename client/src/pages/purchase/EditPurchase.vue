@@ -35,6 +35,9 @@ export default {
   },
 
   mounted() {
+
+    this.getPurchase(this.$route.params.id);
+
     this.getSupplier();
     this.getProduct();
 
@@ -54,6 +57,43 @@ export default {
   },
 
   methods: {
+
+    getPurchase(id) {
+      const token = this.$store.state.token;
+
+      axios
+        .get(`http://localhost:8000/api/purchase/edit/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.loading = false;
+          this.supplier_id = response.data.supplier_id
+          this.product_id = response.data.product_id
+          this.date = response.data.date
+          this.status = response.data.status
+          this.qty = response.data.qty
+          this.g_total = response.data.g_total
+          this.p_amount = response.data.p_amount
+          
+          
+        });
+
+        this.$nextTick(() => {
+      $(this.$refs.selectElement).select2().on('change', () => {
+        this.expense_id = $(this.$refs.selectElement).val();
+      });
+
+      $(this.$refs.selectElement1).select2();
+    });
+
+        
+
+
+    },
 
     getSupplier() {
       const token = this.$store.state.token;
@@ -80,7 +120,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+         // console.log(response.data);
           this.loading = false;
           this.product = response.data;
         });
@@ -103,7 +143,7 @@ export default {
       console.log(this.expense_id);
 
       axios
-        .post("http://localhost:8000/api/add-purchased", data, {
+        .post(`http://localhost:8000/api/update-purchase/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -172,7 +212,7 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/add-router">
+              <router-link to="/add-purchased">
                 <button type="button" class="btn btn-primary">
                   Add Purchased
                 </button>
