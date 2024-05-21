@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->string('supplier_name');
-            $table->string('product_name');
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('product_id'); // Ensure product_id is an unsigned big integer
             $table->string('qty');
             $table->string('date');
             $table->string('status');
             $table->integer('g_total');
             $table->integer('p_amount');
             $table->integer('d_amount');
+
+             // Add foreign key constraint with cascading deletes
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->timestamps();
         });

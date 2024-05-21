@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,16 @@ class PurchasedController extends Controller
             $purchased->p_amount = $p_amount;
             $purchased->d_amount = $d_amount;
             $purchased->save();
+
+            //update product quantity
+            if($status == 'Received'){
+                $product = Product::where('id', $product_id)->first();
+                $product->quantity = $product->quantity + $qty;
+                $product->save();
+
+            }
+            
+
 
             return response()->json(['message' => 'Data inserted successfully'], 201);
 
@@ -108,6 +119,13 @@ class PurchasedController extends Controller
             $purchased->d_amount = $d_amount;
             $purchased->save();
 
+            if($status == 'Received'){
+                $product = Product::where('id', $product_id)->first();
+                $product->quantity = $product->quantity + $qty;
+                $product->save();
+
+            }
+
             return response()->json(['message' => 'Data updated successfully'], 201);
 
 
@@ -126,6 +144,14 @@ class PurchasedController extends Controller
         try {
 
             $data = Purchase::where('id', $id)->first();
+
+            if($data->status == 'Received'){
+
+                $product = Product::where('id', $data->product_id)->first();
+                $product->quantity = $product->quantity - $data->qty;
+                $product->save();
+
+            }
 
             if (!$data) {
 
@@ -149,5 +175,39 @@ class PurchasedController extends Controller
 
         }
     }
+
+    public function PurchasedOrder()
+    {
+
+        try {
+
+            $purchase = Purchase::orderBy('id', 'DESC')->where('status', 'Ordered')->with('supplier', 'product')->get();
+
+            return response()->json($purchase);
+
+        } catch (\Exception $error) {
+            dd($error->getMessage());
+        }
+
+
+
+    } 
+
+    public function PurchasedReceived()
+    {
+
+        try {
+
+            $purchase = Purchase::orderBy('id', 'DESC')->where('status', 'Received')->with('supplier', 'product')->get();
+
+            return response()->json($purchase);
+
+        } catch (\Exception $error) {
+            dd($error->getMessage());
+        }
+
+
+
+    } 
 
 }

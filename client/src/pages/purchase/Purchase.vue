@@ -212,6 +212,7 @@ export default {
                       <th>Supplier Name</th>
                       <th>Product Name</th>
                       <th>Status</th>
+                      <th>Quantity</th>
 
                       <th>Grand Total</th>
                       <th>Paid</th>
@@ -241,6 +242,8 @@ export default {
                           >{{ item.status }}</span
                         >
                       </td>
+
+                      <td>{{ item.qty }}</td>
 
                       <td>{{ item.g_total }}</td>
                       <td>{{ item.p_amount }}</td>

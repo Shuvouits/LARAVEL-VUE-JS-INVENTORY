@@ -99,6 +99,9 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/purchase/edit/{id}', [PurchasedController::class, 'EditPurchased']);
     Route::post('/update-purchase/{id}', [PurchasedController::class, 'UpdatePurchased']);
     Route::get('/delete-purchase/{id}', [PurchasedController::class, 'DeletePurchased']);
+
+    Route::get('/purchased-order', [PurchasedController::class, 'PurchasedOrder']);
+    Route::get('/purchased-received', [PurchasedController::class, 'PurchasedReceived']);
    
    
 });

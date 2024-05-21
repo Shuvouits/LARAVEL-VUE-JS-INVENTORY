@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->string('expense_id');
+            $table->unsignedBigInteger('expense_id');
             $table->string('date');
             $table->integer('amount');
             $table->string('description');
             $table->timestamps();
+               // Add foreign key constraint with cascading deletes
+               $table->foreign('expense_id')->references('id')->on('expense_categories')->onDelete('cascade');
         });
     }
 
