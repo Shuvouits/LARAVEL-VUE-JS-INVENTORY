@@ -24,7 +24,8 @@ return new class extends Migration
 
              // Add foreign key constraint with cascading deletes
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

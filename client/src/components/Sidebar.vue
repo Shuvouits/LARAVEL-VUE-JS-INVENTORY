@@ -109,16 +109,21 @@ export default {
 
       <li class="menu-label">Sales</li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/sales' ||
+            $route.path === '/add-sales' ||
+            this.$route.path.startsWith('/sales/'),
+        }">
         <router-link to="/sales">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+          <div class="parent-icon"><i class="bx bx-message-x"></i></div>
           <div class="menu-title">Sales</div>
         </router-link>
       </li>
 
       <li>
         <router-link to="sales-return">
-          <div class="parent-icon"><i class="bx bx-cookie"></i></div>
+          <div class="parent-icon"><i class="bx bx-atom"></i></div>
           <div class="menu-title">Sales Return</div>
         </router-link>
       </li>

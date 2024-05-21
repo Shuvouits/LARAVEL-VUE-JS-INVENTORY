@@ -18,10 +18,13 @@ return new class extends Migration
             $table->string('price');
             $table->string('quantity');
             $table->string('expire_date');
-            $table->string('category');
-            $table->string('brand');
+            $table->unsignedBigInteger('category');
+            $table->unsignedBigInteger('brand');
             $table->string('avatar');
             $table->timestamps();
+
+            $table->foreign('category')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('brand')->references('id')->on('brands')->onDelete('cascade');
         });
     }
 

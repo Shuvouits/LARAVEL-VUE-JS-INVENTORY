@@ -10,19 +10,18 @@ export default {
   },
 
   data() {
-    const currentDate = new Date().toISOString().slice(0, 10);
-
     return {
       selectedDate: null,
       customer: [],
       product: [],
-      customer_id: "",
-      product_id: "",
-      date: currentDate,
-      status: "Paid",
-      quantity: "",
-      g_total: "",
-      p_amount: "",
+      customer_id : "",
+      product_id : "",
+      date : "",
+      status : "",
+      quantity : "",
+      g_total : "",
+      p_amount : ""
+
     };
   },
 
@@ -33,55 +32,69 @@ export default {
       let p_amount = parseFloat(this.p_amount) || 0;
       return g_total - p_amount;
     },
-
-    g_calculation() {
-      let c_quantity = parseFloat(this.quantity) || 0;
-      console.log(c_quantity);
-      let selectedProduct = this.product.find(
-        (product) => product.id === Number(this.product_id)
-      );
-      let c_g_total = selectedProduct ? selectedProduct.price : 0;
-      return c_quantity * c_g_total;
-    },
-  },
-
-  watch: {
-    product_id(newProductId) {
-      // Ensure newProductId is treated as a number for comparison
-      const selectedProduct = this.product.find(
-        (product) => product.id === Number(newProductId)
-      );
-
-      if (selectedProduct) {
-        this.g_total = selectedProduct.price; // Update g_total with the selected product's price
-      }
-    },
-    quantity() {
-      // Update g_total whenever quantity changes
-      this.g_total = this.g_calculation;
-    },
   },
 
   mounted() {
+
+    this.getSales(this.$route.params.id);
+
     this.getCustomer();
     this.getProduct();
 
     this.$nextTick(() => {
-      $(this.$refs.selectElement)
-        .select2()
-        .on("change", () => {
-          this.product_id = $(this.$refs.selectElement).val();
-        });
+      $(this.$refs.selectElement).select2().on('change', () => {
+        this.product_id = $(this.$refs.selectElement).val();
+      });
 
-      $(this.$refs.selectElement1)
-        .select2()
-        .on("change", () => {
-          this.customer_id = $(this.$refs.selectElement1).val();
-        });
+      $(this.$refs.selectElement1).select2().on('change', () => {
+        this.customer_id = $(this.$refs.selectElement1).val();
+      });
+
+      
     });
+
+   
   },
 
   methods: {
+
+    getSales(id) {
+      const token = this.$store.state.token;
+
+      axios
+        .get(`http://localhost:8000/api/sales/edit/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          this.loading = false;
+          this.customer_id = response.data.customer_id
+          this.product_id = response.data.product_id
+          this.date = response.data.date
+          this.status = response.data.status
+          this.quantity = response.data.quantity
+          this.g_total = response.data.g_total
+          this.p_amount = response.data.p_amount
+          
+          
+        });
+
+       /* this.$nextTick(() => {
+      $(this.$refs.selectElement).select2().on('change', () => {
+        this.expense_id = $(this.$refs.selectElement).val();
+      });
+
+      $(this.$refs.selectElement1).select2();
+    }); */
+
+        
+
+
+    },
+
     getCustomer() {
       const token = this.$store.state.token;
       axios
@@ -107,7 +120,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+         // console.log(response.data);
           this.loading = false;
           this.product = response.data;
         });
@@ -116,21 +129,20 @@ export default {
     sendData() {
       const data = {
         customer_id: this.customer_id, // Ensure the correct data is sent
-        product_id: this.product_id,
+        product_id : this.product_id,
         date: this.date,
-        status: this.status,
-        quantity: this.quantity,
-        g_total: this.g_calculation,
-        p_amount: this.p_amount,
-        d_amount: this.d_amount,
+        status : this.status,
+        quantity : this.quantity,
+        g_total : this.g_total,
+        p_amount : this.p_amount,
+        d_amount: this.d_amount
       };
 
       const token = this.$store.state.token;
 
-      console.log(this.expense_id);
 
       axios
-        .post("http://localhost:8000/api/add-sales", data, {
+        .post(`http://localhost:8000/api/update-sales/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -200,7 +212,9 @@ export default {
           <div class="ms-auto">
             <div class="btn-group">
               <router-link to="/sales">
-                <button type="button" class="btn btn-primary">Go Sales</button>
+                <button type="button" class="btn btn-primary">
+                  Go Sales
+                </button>
               </router-link>
             </div>
           </div>
@@ -213,14 +227,11 @@ export default {
         <hr />
         <div class="card">
           <div class="card-body p-4">
-            <h5 class="mb-4">Add Sales</h5>
+            <h5 class="mb-4">Update Sales</h5>
 
             <form class="row g-3" @submit.prevent="sendData">
               <div class="col-md-6">
-                <label
-                  for="single-select-field"
-                  class="form-label"
-                  id="supplier"
+                <label for="single-select-field" class="form-label" id="supplier"
                   >Product Name</label
                 >
 
@@ -230,13 +241,9 @@ export default {
                   ref="selectElement"
                   v-model="product_id"
                 >
-                  <option
-                    v-for="(item, index) in product"
-                    :key="index"
-                    :value="item.id"
-                  >
-                    {{ item.name }}
-                  </option>
+
+                  <option v-for="(item, index) in product" :key="index" :value="item.id">{{ item.name }}</option>
+                 
                 </select>
               </div>
 
@@ -249,15 +256,9 @@ export default {
                   class="form-select custom-select"
                   id="single-select-field"
                   ref="selectElement1"
-                  v-model="customer_id"
+                  v-model = "customer_id"
                 >
-                  <option
-                    v-for="(item, index) in customer"
-                    :key="index"
-                    :value="item.id"
-                  >
-                    {{ item.name }}
-                  </option>
+                <option v-for="(item, index) in customer" :key="index" :value="item.id">{{ item.name }}</option>
                 </select>
               </div>
 
@@ -268,7 +269,7 @@ export default {
                   class="form-control"
                   id="input6"
                   placeholder="Date of Birth"
-                  v-model="date"
+                  v-model = 'date'
                 />
               </div>
 
@@ -280,7 +281,7 @@ export default {
                     class="form-control"
                     id="input14"
                     placeholder="Enter quantity"
-                    v-model="quantity"
+                    v-model="quantity" 
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -295,7 +296,7 @@ export default {
                     type="number"
                     class="form-control"
                     id="input14"
-                    v-model="g_total"
+                    v-model = 'g_total'
                     placeholder="Enter Grand total"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
@@ -328,7 +329,7 @@ export default {
                     class="form-control"
                     id="input14"
                     placeholder="Enter due amount"
-                    v-model="d_amount"
+                    v-model = "d_amount"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -336,13 +337,23 @@ export default {
                 </div>
               </div>
 
+
               <div class="col-md-6">
                 <label for="status" class="form-label">Status</label>
                 <select id="status" v-model="status" class="form-select">
+                 
                   <option value="Paid">Paid</option>
                   <option value="UnPaid">UnPaid</option>
                 </select>
               </div>
+
+              
+
+              
+
+             
+
+              
 
               <div class="col-md-12">
                 <div class="d-md-flex d-grid align-items-center gap-3">
@@ -352,6 +363,8 @@ export default {
                 </div>
               </div>
             </form>
+
+
           </div>
         </div>
       </div>

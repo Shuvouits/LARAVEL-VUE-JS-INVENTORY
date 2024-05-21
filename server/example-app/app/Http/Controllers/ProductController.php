@@ -26,7 +26,7 @@ class ProductController extends Controller
 
             if ($request->hasFile('avatar')) {
                 $request->validate([
-                    'avatar' => 'image|mimes:jpeg,png,jpg,gif,avif,webp|max:2048', // Adjust the validation rules as needed
+                    'avatar' => 'image|mimes:jpeg,png,jpg,gif,avif,svg,webp|max:2048', // Adjust the validation rules as needed
                 ]);
 
                 if ($request->file('avatar')->isValid()) {
@@ -167,7 +167,7 @@ class ProductController extends Controller
 
             if ($request->hasFile('avatar')) {
                 $request->validate([
-                    'avatar' => 'image|mimes:jpeg,png,jpg,gif,avif,webp|max:2048', // Adjust the validation rules as needed
+                    'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg,avif,webp|max:2048', // Adjust the validation rules as needed
                 ]);
 
                 if ($request->file('avatar')->isValid()) {

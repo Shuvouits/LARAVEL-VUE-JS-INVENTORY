@@ -12,7 +12,7 @@ import LowStock from '../pages/product/LowStock.vue';
 import Category from '../pages/category/Category.vue';
 import AddCategory from '../pages/category/AddCategory.vue';
 import AddBrand from '../pages/brand/AddBrand.vue'
-import Sales from '../pages/Sales.vue'
+import Sales from '../pages/sale/Sales.vue'
 import SalesReturn from '../pages/SalesReturn.vue'
 import AddSales from '../pages/sale/AddSales.vue'
 import AddSalesReturn from '../pages/sale/AddSalesReturn.vue'
@@ -40,6 +40,7 @@ import EditCustomer from '../pages/customer/EditCustomer.vue';
 import EditCategoryExpense from '../pages/expense/EditCategoryExpense.vue';
 import EditExpense from "../pages/expense/EditExpense.vue";
 import EditPurchase from '../pages/purchase/EditPurchase.vue';
+import EditSales from '../pages/sale/EditSales.vue';
 
 
 
@@ -136,6 +137,12 @@ const routes = [
   {
     path: '/sales',
     component: Sales,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/sales/edit/:id',
+    component: EditSales,
     meta: { requiresAuth: true }
   },
 
