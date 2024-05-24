@@ -72,6 +72,7 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/delete-customer/{id}', [CustomerController::class, 'DeleteCustomer']);
     Route::get('/customer/edit/{id}', [CustomerController::class, 'EditCustomer']);
     Route::post('/update-customer/{id}', [CustomerController::class, 'UpdateCustomer']);
+    Route::get('/customer-details/{id}', [CustomerController::class, 'CustomerDetails']);
 
     //Supplier
     Route::post('/add-supplier', [SupplierController::class, 'AddSupplier']);
@@ -108,6 +109,7 @@ Route::middleware(['credential', 'cors'])->group(function () {
     //Sales
     Route::post('/add-sales', [SalesController::class, 'AddSales']);
     Route::get('/all-sales', [SalesController::class, 'AllSales']);
+    Route::get('/all-sales-return', [SalesController::class, 'AllSalesReturn']);
     Route::get('/delete-sales/{id}', [SalesController::class, 'DeleteSales']);
     Route::post('/update-sales/{id}', [SalesController::class, 'UpdateSales']);
     Route::get('/sales/edit/{id}', [SalesController::class, 'EditSales']);

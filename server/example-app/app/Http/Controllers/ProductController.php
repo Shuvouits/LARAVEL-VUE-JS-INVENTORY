@@ -80,7 +80,7 @@ class ProductController extends Controller
 
         try {
 
-            $all_product = Product::with('categoryData')->with('brandData')->get();
+            $all_product = Product::with('categoryData')->with('brandData')->orderBy('id','DESC')->get();
             return response()->json($all_product);
 
         } catch (\Exception $error) {

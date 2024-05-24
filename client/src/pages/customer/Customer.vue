@@ -178,7 +178,7 @@ export default {
                   <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  Brand
+                  Customer
                 </li>
               </ol>
             </nav>
@@ -198,7 +198,7 @@ export default {
           </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">Manage Your Brand</h6>
+        <h6 class="mb-0 text-uppercase">Manage Your Customer</h6>
 
         <hr />
         <div class="card">
@@ -247,7 +247,7 @@ export default {
                       "
                     >
                       <router-link
-                        :to="'/brand/edit/' + item.id"
+                        :to="'/customer/details/' + item.id"
                         type="button"
                         class="btn btn-primary px-5"
                       >

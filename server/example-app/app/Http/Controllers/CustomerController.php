@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -72,6 +73,32 @@ class CustomerController extends Controller
             ],201);
 
         }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
+
+    public function CustomerDetails($id){
+
+        try{
+            $sale_data = Sale::where('customer_id', $id)->with('product')->orderBy('id', 'DESC')->get();
+            $customer_data = Customer::where('id', $id)->first();
+
+            $total_quantity = Sale::where('customer_id', $id)->sum('quantity');
+            $g_total = Sale::where('customer_id', $id)->sum('g_total');
+            $p_amount = Sale::where('customer_id', $id)->sum('p_amount');
+            $d_amount = Sale::where('customer_id', $id)->sum('d_amount');
+    
+            return response()->json([
+                'sale_data' => $sale_data,
+                'customer_data' => $customer_data,
+                'total_quantity' => $total_quantity,
+                'g_total' => $g_total,
+                'p_amount' => $p_amount,
+                'd_amount' => $d_amount
+            ], 201);
+
+        }catch (\Exception $error) {
             dd($error->getMessage());
 
         }

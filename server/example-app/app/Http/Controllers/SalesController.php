@@ -69,6 +69,20 @@ class SalesController extends Controller
 
     }
 
+    public function AllSalesReturn(Request $request)
+    {
+
+        try {
+
+            $sales = Sale::where('status', 'Return')->with('product', 'customer')->orderBy('id', 'DESC')->get();
+            return response()->json($sales);
+
+        } catch (\Exception $error) {
+            dd($error->getMessage());
+        }
+
+    }
+
     public function DeleteSales($id)
     {
         try {
@@ -152,6 +166,14 @@ class SalesController extends Controller
             } else {
                 $product = Product::where('id', $product_id)->first();
                 $product->quantity = $product->quantity + ($sale->quantity - $quantity);
+                $product->save();
+
+            }
+
+            if($status == 'Return'){
+                $product = Product::where('id', $product_id)->first();
+                
+                $product->quantity = $product->quantity + ($quantity);
                 $product->save();
 
             }

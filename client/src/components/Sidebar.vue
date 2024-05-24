@@ -121,7 +121,11 @@ export default {
         </router-link>
       </li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/sales-return'
+           
+        }">
         <router-link to="sales-return">
           <div class="parent-icon"><i class="bx bx-atom"></i></div>
           <div class="menu-title">Sales Return</div>

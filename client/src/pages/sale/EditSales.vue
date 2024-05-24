@@ -344,6 +344,7 @@ export default {
                  
                   <option value="Paid">Paid</option>
                   <option value="UnPaid">UnPaid</option>
+                  <option value="Return">Return</option>
                 </select>
               </div>
 
