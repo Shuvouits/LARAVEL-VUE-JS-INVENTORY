@@ -137,19 +137,35 @@ export default {
             this.$route.path.startsWith('/purchase/'),
         }">
         <router-link to="/purchase">
-          <div class="parent-icon"><i class="bx bx-calendar-edit"></i></div>
+          <div class="parent-icon"><i class="bx bx-book-reader"></i></div>
           <div class="menu-title">Purchase</div>
         </router-link>
       </li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/order-purchased'
+        }">
         <router-link to="/order-purchased">
-          <div class="parent-icon"><i class="bx bx-card"></i></div>
+          <div class="parent-icon"><i class="bx bx-arrow-to-right"></i></div>
           <div class="menu-title">Purchase Order</div>
         </router-link>
       </li>
 
-      <li>
+      <li :class="{
+          'mm-active':
+            $route.path === '/received-purchased'
+        }">
+        <router-link to="/received-purchased">
+          <div class="parent-icon"><i class="bx bx-slider"></i></div>
+          <div class="menu-title">Purchase Received</div>
+        </router-link>
+      </li>
+
+      <li  :class="{
+          'mm-active':
+            $route.path === '/return-purchased'
+        }">
         <router-link to="/return-purchased">
           <div class="parent-icon"><i class="bx bx-help-circle"></i></div>
           <div class="menu-title">Purchase Return</div>

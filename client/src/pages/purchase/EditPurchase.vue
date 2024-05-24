@@ -280,6 +280,7 @@ export default {
                  
                   <option value="Received">Received</option>
                   <option value="Ordered">Ordered</option>
+                  <option value="Return">Return</option>
                 </select>
               </div>
 

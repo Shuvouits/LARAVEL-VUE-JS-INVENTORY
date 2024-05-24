@@ -126,6 +126,13 @@ class PurchasedController extends Controller
 
             }
 
+            if($status == 'Return'){
+                $product = Product::where('id', $product_id)->first();
+                $product->quantity = $product->quantity - $qty;
+                $product->save();
+
+            }
+
             return response()->json(['message' => 'Data updated successfully'], 201);
 
 
@@ -145,7 +152,7 @@ class PurchasedController extends Controller
 
             $data = Purchase::where('id', $id)->first();
 
-            if($data->status == 'Received'){
+            if($data->status == 'Received' || $data->status == 'Return'){
 
                 $product = Product::where('id', $data->product_id)->first();
                 $product->quantity = $product->quantity - $data->qty;
@@ -199,6 +206,23 @@ class PurchasedController extends Controller
         try {
 
             $purchase = Purchase::orderBy('id', 'DESC')->where('status', 'Received')->with('supplier', 'product')->get();
+
+            return response()->json($purchase);
+
+        } catch (\Exception $error) {
+            dd($error->getMessage());
+        }
+
+
+
+    } 
+
+    public function PurchasedReturn()
+    {
+
+        try {
+
+            $purchase = Purchase::orderBy('id', 'DESC')->where('status', 'Return')->with('supplier', 'product')->get();
 
             return response()->json($purchase);
 

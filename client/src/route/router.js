@@ -41,6 +41,7 @@ import EditCategoryExpense from '../pages/expense/EditCategoryExpense.vue';
 import EditExpense from "../pages/expense/EditExpense.vue";
 import EditPurchase from '../pages/purchase/EditPurchase.vue';
 import EditSales from '../pages/sale/EditSales.vue';
+import PurchaseReceive from '../pages/purchase/PurchaseReceive.vue';
 
 
 
@@ -181,6 +182,12 @@ const routes = [
   {
     path: '/order-purchased',
     component: PurchasedOrder,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/received-purchased',
+    component: PurchaseReceive,
     meta: { requiresAuth: true }
   },
 

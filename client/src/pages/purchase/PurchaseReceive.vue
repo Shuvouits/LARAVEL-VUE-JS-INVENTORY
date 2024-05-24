@@ -54,7 +54,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/purchased-return", {
+        .get("http://localhost:8000/api/purchased-received", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -195,7 +195,7 @@ export default {
             </div>
           </div>
           <!--end breadcrumb-->
-          <h6 class="mb-0 text-uppercase">Manage Your Purchased Return</h6>
+          <h6 class="mb-0 text-uppercase">Manage Your Purchased</h6>
 
           <hr />
           <div class="card">
