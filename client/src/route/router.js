@@ -44,6 +44,7 @@ import EditSales from '../pages/sale/EditSales.vue';
 import PurchaseReceive from '../pages/purchase/PurchaseReceive.vue';
 import CustomerDetails from '../pages/customer/CustomerDetails.vue';
 import DetailsSupplier from '../pages/supplier/DetailsSupplier.vue';
+import SalesReport from '../pages/report/SalesReport.vue'
 
 
 
@@ -309,6 +310,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
 
+  {
+    path: '/sales-report',
+    component: SalesReport,
+    meta: { requiresAuth: true }
+  },
+
  
 
 
@@ -321,11 +328,13 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+
 });
 
 
 router.beforeEach((to, from, next) => {
+
   if (to.meta.requiresAuth) {
     // Check if token is present in Vuex store
     if (store.state.token) {

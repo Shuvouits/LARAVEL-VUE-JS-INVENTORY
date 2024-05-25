@@ -123,7 +123,7 @@ export default {
 
       <li class="menu-label">Sales</li>
 
-      <li :class="{
+      <li  :class="{
           'mm-active':
             $route.path === '/sales' ||
             $route.path === '/add-sales' ||
@@ -135,7 +135,7 @@ export default {
         </router-link>
       </li>
 
-      <li :class="{
+      <li  :class="{
           'mm-active':
             $route.path === '/sales-return'
            
@@ -223,7 +223,7 @@ export default {
 
       <li class="menu-label">Peoples</li>
 
-      <li  :class="{
+      <li :id="'customer'"  :class="{
           'mm-active':
             $route.path === '/customer' ||
             $route.path === '/add-customer' ||
@@ -235,7 +235,7 @@ export default {
         </router-link>
       </li>
 
-      <li  :class="{
+      <li id="supplier"  :class="{
           'mm-active':
             $route.path === '/supplier' ||
             $route.path === '/add-supplier' ||
@@ -249,11 +249,14 @@ export default {
 
       <li class="menu-label">Reports</li>
 
-      <li>
-        <a href="widgets.html">
+      <li :class="{
+          'mm-active':
+            $route.path === '/sales-report'
+        }">
+        <router-link to="/sales-report">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Sales Report</div>
-        </a>
+        </router-link>
       </li>
 
       <li>

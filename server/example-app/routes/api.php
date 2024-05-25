@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchasedController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
@@ -114,6 +115,9 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/delete-sales/{id}', [SalesController::class, 'DeleteSales']);
     Route::post('/update-sales/{id}', [SalesController::class, 'UpdateSales']);
     Route::get('/sales/edit/{id}', [SalesController::class, 'EditSales']);
+
+    Route::get('/sales-report', [ReportController::class, 'SalesReport']);
+    Route::post('/sales-report-date', [ReportController::class, 'SalesReportDate']);
    
    
 });

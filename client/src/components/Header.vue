@@ -26,16 +26,13 @@ export default {
       <nav class="navbar navbar-expand gap-3">
         <div class="mobile-toggle-menu"><i class="bx bx-menu"></i></div>
 
-        <div
-          class="position-relative search-bar d-lg-block d-none"
-          data-bs-toggle="modal"
-          data-bs-target="#SearchModal"
-        >
-          <input class="form-control px-5" type="search" placeholder="Search" />
-          <span
-            class="position-absolute top-50 search-show ms-3 translate-middle-y start-0 top-50 fs-5"
-            ><i class="bx bx-search"></i
-          ></span>
+        <div style="display: flex; gap: 20px;">
+          <router-link to="/all-product" class="btn btn-primary" style="width: 150px;">Product</router-link>
+          <router-link to="/sales" class="btn btn-primary" style="width: 150px;">Sales</router-link>
+          <router-link to="/purchase" class="btn btn-primary" style="width: 150px;">Purchase</router-link>
+          <router-link to="/expense" class="btn btn-primary" style="width: 150px;">Expense</router-link>
+          <router-link to="/customer" class="btn btn-primary" style="width: 150px;">Customer</router-link>
+          <router-link to="/supplier" class="btn btn-primary" style="width: 150px;">Supplier</router-link>
         </div>
 
         <div class="top-menu ms-auto">
