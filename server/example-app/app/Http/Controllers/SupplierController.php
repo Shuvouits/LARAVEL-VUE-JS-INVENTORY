@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 
@@ -104,7 +105,33 @@ class SupplierController extends Controller
              dd($error->getMessage());
  
          }
-     }
+     }  
+
+     public function SupplierDetails($id){
+
+        try{
+            $purchase_data = Purchase::where('supplier_id', $id)->with('product')->orderBy('id', 'DESC')->get();
+            $supplier_data = Supplier::where('id', $id)->first();
+
+            $total_quantity = Purchase::where('supplier_id', $id)->sum('qty');
+            $g_total = Purchase::where('supplier_id', $id)->sum('g_total');
+            $p_amount = Purchase::where('supplier_id', $id)->sum('p_amount');
+            $d_amount = Purchase::where('supplier_id', $id)->sum('d_amount');
+    
+            return response()->json([
+                'purchase_data' => $purchase_data,
+                'supplier_data' => $supplier_data,
+                'total_quantity' => $total_quantity,
+                'g_total' => $g_total,
+                'p_amount' => $p_amount,
+                'd_amount' => $d_amount
+            ], 201);
+
+        }catch (\Exception $error) {
+            dd($error->getMessage());
+
+        }
+    }
 
 
 }

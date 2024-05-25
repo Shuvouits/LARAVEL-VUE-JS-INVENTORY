@@ -235,6 +235,15 @@ export default {
                           >{{ item.status }}</span
                         >
                       </td>
+
+                      <td v-if="item.status === 'Received'">
+                        <span
+                          class="badge bg-primary"
+                          style="font-size: 13px"
+                          >{{ item.status }}</span
+                        >
+                      </td>
+
                       <td v-else>
                         <span
                           class="badge bg-warning"

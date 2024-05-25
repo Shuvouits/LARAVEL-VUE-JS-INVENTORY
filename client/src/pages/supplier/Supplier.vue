@@ -247,7 +247,7 @@ export default {
                       "
                     >
                       <router-link
-                        :to="'/brand/edit/' + item.id"
+                        :to="'/supplier/details/' + item.id"
                         type="button"
                         class="btn btn-primary px-5"
                       >

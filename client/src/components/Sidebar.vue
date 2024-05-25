@@ -1,5 +1,7 @@
 <script>
 export default {
+
+
   data() {
     return {
       visible: false, // Initial state value
@@ -11,7 +13,19 @@ export default {
       this.visible = !this.visible; // Toggle the state value
       console.log(this.visible);
     },
+
+    scrollToSection(sectionId) {
+      // Scroll to the section with the given id
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+
   },
+
+
 };
 </script>
 
@@ -126,7 +140,7 @@ export default {
             $route.path === '/sales-return'
            
         }">
-        <router-link to="sales-return">
+        <router-link to="/sales-return">
           <div class="parent-icon"><i class="bx bx-atom"></i></div>
           <div class="menu-title">Sales Return</div>
         </router-link>
@@ -217,7 +231,7 @@ export default {
         }">
         <router-link to="/customer">
           <div class="parent-icon"><i class="bx bx-analyse"></i></div>
-          <div class="menu-title">Customer</div>
+          <div class="menu-title" id="customer">Customer</div>
         </router-link>
       </li>
 

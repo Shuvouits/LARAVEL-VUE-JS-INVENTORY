@@ -43,13 +43,14 @@ import EditPurchase from '../pages/purchase/EditPurchase.vue';
 import EditSales from '../pages/sale/EditSales.vue';
 import PurchaseReceive from '../pages/purchase/PurchaseReceive.vue';
 import CustomerDetails from '../pages/customer/CustomerDetails.vue';
+import DetailsSupplier from '../pages/supplier/DetailsSupplier.vue';
+
 
 
 
 
 const routes = [
 
-  
 
   {
     path: '/profile',
@@ -260,6 +261,7 @@ const routes = [
 
   {
     path: '/customer',
+    hash: '#customer',
     component : Customer,
     meta: { requiresAuth: true }
   },
@@ -301,6 +303,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
 
+  {
+    path: '/supplier/details/:id',
+    component: DetailsSupplier,
+    meta: { requiresAuth: true }
+  },
+
  
 
 
@@ -330,6 +338,8 @@ router.beforeEach((to, from, next) => {
     next(); // Allow access to public routes
   }
 });
+
+
 
 
 

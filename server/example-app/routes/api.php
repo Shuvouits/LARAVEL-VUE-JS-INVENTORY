@@ -80,6 +80,7 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/delete-supplier/{id}', [SupplierController::class, 'DeleteSupplier']);
     Route::get('/supplier/edit/{id}', [SupplierController::class, 'EditSupplier']);
     Route::post('/update-supplier/{id}', [SupplierController::class, 'UpdateSupplier']);
+    Route::get('/supplier-details/{id}', [SupplierController::class, 'SupplierDetails']);
 
     //Expense-category
     Route::post('/add-category-expense', [ExpenseController::class, 'AddCategoryExpense']);
