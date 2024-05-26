@@ -244,7 +244,7 @@ export default {
                         >
                       </td>
 
-                      <td v-else>
+                      <td v-if="item.status === 'Return' ">
                         <span
                           class="badge bg-warning"
                           style="font-size: 13px"

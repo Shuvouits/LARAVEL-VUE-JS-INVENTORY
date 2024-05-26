@@ -118,6 +118,8 @@ Route::middleware(['credential', 'cors'])->group(function () {
 
     Route::get('/sales-report', [ReportController::class, 'SalesReport']);
     Route::post('/sales-report-date', [ReportController::class, 'SalesReportDate']);
+    Route::get('/purchase-report', [ReportController::class, 'PurchaseReport']);
+    Route::post('/purchase-report-date', [ReportController::class, 'PurchaseReportDate']);
    
    
 });

@@ -44,7 +44,8 @@ import EditSales from '../pages/sale/EditSales.vue';
 import PurchaseReceive from '../pages/purchase/PurchaseReceive.vue';
 import CustomerDetails from '../pages/customer/CustomerDetails.vue';
 import DetailsSupplier from '../pages/supplier/DetailsSupplier.vue';
-import SalesReport from '../pages/report/SalesReport.vue'
+import SalesReport from '../pages/report/SalesReport.vue';
+import PurchaseReport from '../pages/report/PurchaseReport.vue';
 
 
 
@@ -313,6 +314,12 @@ const routes = [
   {
     path: '/sales-report',
     component: SalesReport,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/purchase-report',
+    component: PurchaseReport,
     meta: { requiresAuth: true }
   },
 

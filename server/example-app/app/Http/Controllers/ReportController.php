@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -54,6 +55,67 @@ class ReportController extends Controller
             return response()->json([
                 'message' => 'Custom filter success',
                 'sale' => $sale,
+                'total_quantity' => $total_quantity,
+                'g_total' => $g_total,
+                'p_amount' => $p_amount,
+                'd_amount' => $d_amount
+            ]);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+
+      
+
+    }
+
+    public function PurchaseReport(){
+
+        try{
+            $currentDate = Carbon::now();
+            $startOfMonth = $currentDate->copy()->startOfMonth()->toDateString();
+            $endOfMonth = $currentDate->copy()->endOfMonth()->toDateString();
+            
+            $purchase = Purchase::whereBetween('date', [$startOfMonth, $endOfMonth])->with('product','supplier')->get();
+            $total_quantity = Purchase::whereBetween('date', [$startOfMonth, $endOfMonth])->sum('qty');
+            $g_total = Purchase::whereBetween('date', [$startOfMonth, $endOfMonth])->sum('g_total');
+            $p_amount = Purchase::whereBetween('date', [$startOfMonth, $endOfMonth])->sum('p_amount');
+            $d_amount = Purchase::whereBetween('date', [$startOfMonth, $endOfMonth])->sum('d_amount');
+
+            return response()->json([
+                'purchase' => $purchase,
+                'total_quantity' => $total_quantity,
+                'g_total' => $g_total,
+                'p_amount' => $p_amount,
+                'd_amount' => $d_amount
+            ]);
+
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+
+      
+
+    }
+
+    public function PurchaseReportDate(Request $request){
+
+        try{
+
+           $start_date = $request->input('start_date');
+           $end_date = $request->input('end_date');
+            
+            $purchase = Purchase::whereBetween('date', [$start_date, $end_date])->with('product','supplier')->get();
+            $total_quantity = Purchase::whereBetween('date', [$start_date, $end_date])->sum('qty');
+            $g_total = Purchase::whereBetween('date', [$start_date, $end_date])->sum('g_total');
+            $p_amount = Purchase::whereBetween('date', [$start_date, $end_date])->sum('p_amount');
+            $d_amount = Purchase::whereBetween('date', [$start_date, $end_date])->sum('d_amount');
+
+            return response()->json([
+                'message' => 'Custom filter success',
+                'purchase' => $purchase,
                 'total_quantity' => $total_quantity,
                 'g_total' => $g_total,
                 'p_amount' => $p_amount,

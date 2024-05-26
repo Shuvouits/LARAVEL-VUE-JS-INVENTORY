@@ -259,11 +259,14 @@ export default {
         </router-link>
       </li>
 
-      <li>
-        <a href="widgets.html">
+      <li :class="{
+          'mm-active':
+            $route.path === '/purchase-report'
+        }">
+        <router-link to="/purchase-report">
           <div class="parent-icon"><i class="bx bx-cookie"></i></div>
           <div class="menu-title">Purchase Reports</div>
-        </a>
+        </router-link>
       </li>
 
       <li>
