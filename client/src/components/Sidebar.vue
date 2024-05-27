@@ -11,6 +11,14 @@ export default {
     };
   },
 
+  props: {
+    handleSidebar: {
+      type: String,
+      required: true
+    },
+  },
+  
+
   methods: {
     handleClick() {
       this.visible = !this.visible; // Toggle the state value
@@ -63,7 +71,7 @@ export default {
           <h4 class="logo-text">Bike-Buzz</h4>
         </router-link>
       </div>
-      <div class="toggle-icon ms-auto"><i class="bx bx-arrow-back"></i></div>
+      <div class="toggle-icon ms-auto" @click="handleSidebar"><i class="bx bx-arrow-back"></i></div>
     </div>
 
     <!--navigation-->

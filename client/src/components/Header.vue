@@ -1,5 +1,15 @@
 <script>
+
+
 export default {
+
+  props: {
+    handleSidebar: {
+      type: String,
+      required: true
+    },
+  },
+
   methods: {
     logout() {
       // Remove token from local storage
@@ -24,9 +34,9 @@ export default {
   <header>
     <div class="topbar d-flex align-items-center">
       <nav class="navbar navbar-expand gap-3">
-        <div class="mobile-toggle-menu"><i class="bx bx-menu"></i></div>
+        <div class="mobile-toggle-menu" @click="handleSidebar"><i class="bx bx-menu"></i></div>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <div class="custom-link" style="display: flex; flex-wrap: wrap; gap: 20px;">
           <router-link to="/all-product">Product</router-link>
           <router-link to="/sales">Sales</router-link>
           <router-link to="/purchase">Purchase</router-link>
@@ -569,3 +579,11 @@ export default {
     </div>
   </header>
 </template>
+
+<style>
+@media only screen and (max-width: 767px) {
+  .custom-link{
+     display: none !important;
+  }
+}
+</style>
