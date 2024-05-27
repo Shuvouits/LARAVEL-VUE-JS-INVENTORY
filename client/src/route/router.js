@@ -46,6 +46,8 @@ import CustomerDetails from '../pages/customer/CustomerDetails.vue';
 import DetailsSupplier from '../pages/supplier/DetailsSupplier.vue';
 import SalesReport from '../pages/report/SalesReport.vue';
 import PurchaseReport from '../pages/report/PurchaseReport.vue';
+import ExpenseReport from '../pages/report/ExpenseReport.vue';
+import ProfitLoss from '../pages/report/ProfitLoss.vue';
 
 
 
@@ -322,6 +324,20 @@ const routes = [
     component: PurchaseReport,
     meta: { requiresAuth: true }
   },
+
+
+  {
+    path: '/expense-report',
+    component: ExpenseReport,
+    meta: { requiresAuth: true }
+  },
+
+  {
+    path: '/profit-loss-report',
+    component: ProfitLoss,
+    meta: { requiresAuth: true }
+  },
+ 
 
  
 

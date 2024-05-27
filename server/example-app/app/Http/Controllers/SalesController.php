@@ -23,26 +23,37 @@ class SalesController extends Controller
             $d_amount = $request->input('d_amount');
             $status = $request->input('status');
 
+            $product = Product::where('id',$product_id)->first();
 
-            $sale = new Sale();
-            $sale->customer_id = $customer_id;
-            $sale->product_id = $product_id;
-            $sale->quantity = $quantity;
-            $sale->g_total = $g_total;
-            $sale->date = $date;
-            $sale->p_amount = $p_amount;
-            $sale->d_amount = $d_amount;
-            $sale->status = $status;
-            $sale->save();
+            if($product->quantity > 0){
 
-            //update product quantity
-            $product = Product::where('id', $product_id)->first();
-            $product->quantity = $product->quantity - $quantity;
-            $product->save();
+                $sale = new Sale();
+                $sale->customer_id = $customer_id;
+                $sale->product_id = $product_id;
+                $sale->quantity = $quantity;
+                $sale->g_total = $g_total;
+                $sale->date = $date;
+                $sale->p_amount = $p_amount;
+                $sale->d_amount = $d_amount;
+                $sale->status = $status;
+               // $sale->save();
+    
+                //update product quantity
+                $product = Product::where('id', $product_id)->first();
+                $product->quantity = $product->quantity - $quantity;
+                $product->save();
+    
+    
+    
+                return response()->json(['message' => 'Data inserted successfully'], 201);
+
+            }else{
+                return response()->json(['message' => 'Your Product is Out of stock'], 401);
+
+            }
 
 
-
-            return response()->json(['message' => 'Data inserted successfully'], 201);
+           
 
 
 

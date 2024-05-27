@@ -13,16 +13,16 @@ export default {
   data() {
     return {
       dataTable: null,
-      purchase: [],
+      expense: [],
       loading: true,
       date: new Date(),
       total_quantity: {},
       g_total: "",
-      p_amount: "",
+      amount: "",
       d_amount: "",
       start_date: "",
       end_date: "",
-      purchase_report: [],
+      expense_report: [],
       visible: false,
     };
   },
@@ -35,7 +35,7 @@ export default {
   },
 
   mounted() {
-    this.getPurchase();
+    this.getExpense();
   },
 
   beforeRouteEnter(to, from, next) {
@@ -51,6 +51,8 @@ export default {
   methods: {
     reset() {
       this.visible = false;
+      this.start_date = '';
+      this.end_date = '';
       // Add your logic here
     },
 
@@ -80,7 +82,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/purchase-report-date", data, {
+        .post("http://localhost:8000/api/expense-report-date", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -88,11 +90,8 @@ export default {
         })
         .then((response) => {
           console.log(response.data.purchase);
-          this.purchase_report = response.data.purchase;
-          this.total_quantity = response.data.total_quantity;
-          this.g_total = response.data.g_total;
-          this.p_amount = response.data.p_amount;
-          this.d_amount = response.data.d_amount;
+          this.expense_report = response.data.expense;
+          this.amount = response.data.amount;
           this.visible = true;
 
           //console.log(this.sell_report)
@@ -123,10 +122,10 @@ export default {
         });
     },
 
-    getPurchase() {
+    getExpense() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/purchase-report", {
+        .get("http://localhost:8000/api/expense-report", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -134,18 +133,17 @@ export default {
         })
         .then((response) => {
           this.loading = false;
-          this.purchase = response.data.purchase;
-          this.total_quantity = response.data.total_quantity;
-          this.g_total = response.data.g_total;
-          this.p_amount = response.data.p_amount;
-          this.d_amount = response.data.d_amount;
+          this.expense = response.data.expense;
+          console.log(this.expense)
+         
+          this.amount = response.data.amount;
 
           // After setting the data, initialize DataTables
           this.initDataTable();
         });
     },
 
-    saleDelete(id) {
+    expenseDelete(id) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -159,7 +157,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-purchase/${id}`, {
+            .get(`http://localhost:8000/api/delete-expense/${id}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -250,7 +248,7 @@ export default {
                     <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                   </li>
                   <li  class="breadcrumb-item active" aria-current="page">
-                    Purchase Report ||
+                    Expense Report ||
                     <span style="font-weight: bold">
                       <span :style="{ display: visible ? 'none' : '' }">{{
                         currentDate
@@ -320,43 +318,22 @@ export default {
                   <thead>
                     <tr>
                       <th>Sl</th>
-                      <th>Product Name</th>
-                      <th>Customer Name</th>
+                      <th>Category Name</th>
+                      <th>Amount</th>
                       <th>Date</th>
-                      <th>Quantity</th>
-                      <th>Grand Total</th>
-                      <th>Paid Amount</th>
-                      <th>Due Amount</th>
-                      <th>Status</th>
+                      <th>Description</th>
+                     
                       <th>Action</th>
                     </tr>
                   </thead>
 
                   <tbody :style="{ display: visible ? 'none' : '' }">
-                    <tr v-for="(item, index) in this.purchase" :key="index">
+                    <tr v-for="(item, index) in this.expense" :key="index">
                       <td>{{ index + 1 }}</td>
-                      <td>{{ item.product.name }}</td>
-                      <td>{{ item.supplier.name }}</td>
-                      <td>{{ item.date }}</td>
-                      <td>{{ item.qty }}</td>
-                      <td>{{ item.g_total }}</td>
-                      <td>{{ item.p_amount }}</td>
-                      <td>{{ item.d_amount }}</td>
-
-                      <td v-if="item.status === 'Paid'">
-                        <span
-                          class="badge bg-success"
-                          style="font-size: 13px"
-                          >{{ item.status }}</span
-                        >
-                      </td>
-                      <td v-else>
-                        <span
-                          class="badge bg-warning"
-                          style="font-size: 13px"
-                          >{{ item.status }}</span
-                        >
-                      </td>
+                      <td>{{ item.expense_category_data.name }}</td>
+                      <td>{{ item.amount }}</td>
+                      <td>{{ formatDate(item.date) }}</td>
+                      <td>{{ item.description }}</td>
 
                       <td
                         style="
@@ -367,7 +344,7 @@ export default {
                         "
                       >
                         <router-link
-                          :to="'/purchase/edit/' + item.id"
+                          :to="'/expense/edit/' + item.id"
                           type="button"
                           class="btn btn-primary px-5"
                         >
@@ -376,7 +353,7 @@ export default {
                         <button
                           type="button"
                           class="btn btn-danger px-5"
-                          @click="purchaseDelete(item.id)"
+                          @click="expenseDelete(item.id)"
                         >
                           <i class="bx bx-trash mr-1"></i>trash
                         </button>
@@ -386,20 +363,9 @@ export default {
                     <tr style="background: black">
                       <td style="color: brown; font-weight: bold">*</td>
                       <td style="color: brown; font-weight: bold">-</td>
+                      <td style="color: brown; font-weight: bold">{{ amount }}</td>
                       <td style="color: brown; font-weight: bold">-</td>
-                      <td style="color: brown; font-weight: bold">-</td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ total_quantity }}
-                      </td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ g_total }}
-                      </td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ p_amount }}
-                      </td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ d_amount }}
-                      </td>
+                     
                       <td style="color: brown; font-weight: bold">-</td>
                       <td style="color: brown; font-weight: bold">-</td>
                     </tr>
@@ -407,50 +373,21 @@ export default {
 
                   <tbody :style="{ display: visible ? '' : 'none' }">
                     <tr style="background: black">
-                      <td style="color: brown; font-weight: bold">*</td>
+                        <td style="color: brown; font-weight: bold">*</td>
                       <td style="color: brown; font-weight: bold">-</td>
+                      <td style="color: brown; font-weight: bold">{{ amount }}</td>
                       <td style="color: brown; font-weight: bold">-</td>
-                      <td style="color: brown; font-weight: bold">-</td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ total_quantity }}
-                      </td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ g_total }}
-                      </td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ p_amount }}
-                      </td>
-                      <td style="color: brown; font-weight: bold">
-                        {{ d_amount }}
-                      </td>
+                     
                       <td style="color: brown; font-weight: bold">-</td>
                       <td style="color: brown; font-weight: bold">-</td>
                     </tr>
 
-                    <tr v-for="(item, index) in this.purchase_report" :key="index">
+                    <tr v-for="(item, index) in this.expense_report" :key="index">
                       <td>{{ index + 1 }}</td>
-                      <td>{{ item.product.name }}</td>
-                      <td>{{ item.supplier.name }}</td>
-                      <td>{{ item.date }}</td>
-                      <td>{{ item.qty }}</td>
-                      <td>{{ item.g_total }}</td>
-                      <td>{{ item.p_amount }}</td>
-                      <td>{{ item.d_amount }}</td>
-
-                      <td v-if="item.status === 'Paid'">
-                        <span
-                          class="badge bg-success"
-                          style="font-size: 13px"
-                          >{{ item.status }}</span
-                        >
-                      </td>
-                      <td v-else>
-                        <span
-                          class="badge bg-warning"
-                          style="font-size: 13px"
-                          >{{ item.status }}</span
-                        >
-                      </td>
+                      <td>{{ item.expense_category_data.name }}</td>
+                      <td>{{ item.amount }}</td>
+                      <td>{{ formatDate(item.date) }}</td>
+                      <td>{{ item.description }}</td>
 
                       <td
                         style="
@@ -461,7 +398,7 @@ export default {
                         "
                       >
                         <router-link
-                          :to="'/purchase/edit/' + item.id"
+                          :to="'/expense/edit/' + item.id"
                           type="button"
                           class="btn btn-primary px-5"
                         >
@@ -470,7 +407,7 @@ export default {
                         <button
                           type="button"
                           class="btn btn-danger px-5"
-                          @click="purchaseDelete(item.id)"
+                          @click="expenseDelete(item.id)"
                         >
                           <i class="bx bx-trash mr-1"></i>trash
                         </button>

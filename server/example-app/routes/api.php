@@ -116,10 +116,19 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::post('/update-sales/{id}', [SalesController::class, 'UpdateSales']);
     Route::get('/sales/edit/{id}', [SalesController::class, 'EditSales']);
 
+    /* Report */
     Route::get('/sales-report', [ReportController::class, 'SalesReport']);
     Route::post('/sales-report-date', [ReportController::class, 'SalesReportDate']);
+
     Route::get('/purchase-report', [ReportController::class, 'PurchaseReport']);
     Route::post('/purchase-report-date', [ReportController::class, 'PurchaseReportDate']);
+
+    Route::get('/expense-report', [ReportController::class, 'ExpenseReport']);
+    Route::post('/expense-report-date', [ReportController::class, 'ExpenseReportDate']);
+
+    Route::get('/profit-loss-report', [ReportController::class, 'ProfitLossReport']);
+
+    Route::post('/profit-loss-report-date', [ReportController::class, 'ProfitLossReportDate']);
    
    
 });

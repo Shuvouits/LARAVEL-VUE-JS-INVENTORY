@@ -26,13 +26,15 @@ export default {
       <nav class="navbar navbar-expand gap-3">
         <div class="mobile-toggle-menu"><i class="bx bx-menu"></i></div>
 
-        <div style="display: flex; gap: 20px;">
-          <router-link to="/all-product" class="btn btn-primary" style="width: 150px;">Product</router-link>
-          <router-link to="/sales" class="btn btn-primary" style="width: 150px;">Sales</router-link>
-          <router-link to="/purchase" class="btn btn-primary" style="width: 150px;">Purchase</router-link>
-          <router-link to="/expense" class="btn btn-primary" style="width: 150px;">Expense</router-link>
-          <router-link to="/customer" class="btn btn-primary" style="width: 150px;">Customer</router-link>
-          <router-link to="/supplier" class="btn btn-primary" style="width: 150px;">Supplier</router-link>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+          <router-link to="/all-product">Product</router-link>
+          <router-link to="/sales">Sales</router-link>
+          <router-link to="/purchase">Purchase</router-link>
+          <router-link to="/expense">Expense</router-link>
+          <router-link to="/customer">Customer</router-link>
+          <router-link to="/supplier">Supplier</router-link>
+          <router-link to="/sales-report">Sales Report</router-link>
+          <router-link to="/profit-loss-report">Profit Loss Report</router-link>
         </div>
 
         <div class="top-menu ms-auto">
