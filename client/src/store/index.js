@@ -8,7 +8,8 @@ export default createStore({
     name: localStorage.getItem('name') || '', 
     address: localStorage.getItem('address') || '',
     email: localStorage.getItem('email') || '',
-    avatar: localStorage.getItem('avatar') || ''
+    avatar: localStorage.getItem('avatar') || '',
+  
     
   },
   mutations: {
@@ -28,6 +29,7 @@ export default createStore({
       localStorage.setItem('address', userData.address);
       localStorage.setItem('name', userData.name);
       localStorage.setItem('avatar', userData.avatar);
+  
       
 
     }

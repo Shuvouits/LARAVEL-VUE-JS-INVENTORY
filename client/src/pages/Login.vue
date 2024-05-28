@@ -15,12 +15,20 @@ export default {
       password: "",
       loading: false,
       errorMessage: "",
+      theme: "",
     };
   },
 
   ...mapActions(["storeUserData"]),
 
   methods: {
+
+    handleTheme() {
+      this.theme = "semi-dark";
+      localStorage.setItem("theme", this.theme);
+      document.documentElement.className = this.theme;
+    },
+
     sendData() {
       this.loading = true;
       const data = {
@@ -37,6 +45,8 @@ export default {
 
           const { token, phone, name, email, address, avatar } = response.data;
           this.$store.dispatch("storeUserData", { token, phone, name, email, address, avatar });
+          
+          this.handleTheme();
 
          this.$router.push("/dashboard");
         })

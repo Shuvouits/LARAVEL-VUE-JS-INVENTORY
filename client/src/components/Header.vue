@@ -1,17 +1,45 @@
 <script>
-
-
 export default {
+  data() {
+    return {
+      theme: localStorage.getItem('theme'),
+    };
+
+   
+  },
+
+ 
 
   props: {
     handleSidebar: {
       type: String,
-      required: true
+      required: true,
     },
   },
 
   methods: {
+
+    
+
+    handleTheme() {
+      this.theme = "dark-theme";
+      localStorage.setItem("theme", this.theme);
+      document.documentElement.className = this.theme;
+    },
+
+    handleThemeLight() {
+      this.theme = "light";
+      localStorage.setItem("theme", this.theme);
+      document.documentElement.className = this.theme;
+    },
+
+    created() {
+      this.theme = localStorage.getItem("theme") || ""; // Set initial theme from localStorage
+      document.documentElement.className = this.theme; // Apply initial theme class to <html> element
+    },
+
     logout() {
+
       // Remove token from local storage
       localStorage.removeItem("token");
       localStorage.removeItem("phone");
@@ -20,11 +48,13 @@ export default {
       localStorage.removeItem("address");
       localStorage.removeItem("avatar");
       localStorage.removeItem("name");
+      localStorage.removeItem('theme');
 
       // Optionally, you can also clear the token from Vuex store if you're using it
       this.$store.commit("CLEAR_TOKEN"); // Assuming you have a mutation named 'CLEAR_TOKEN'
       // Redirect the user to the login page or any other appropriate route
-      this.$router.push("/");
+     // this.$router.push("/");
+      window.location.reload("/");
     },
   },
 };
@@ -34,9 +64,14 @@ export default {
   <header>
     <div class="topbar d-flex align-items-center">
       <nav class="navbar navbar-expand gap-3">
-        <div class="mobile-toggle-menu" @click="handleSidebar"><i class="bx bx-menu"></i></div>
+        <div class="mobile-toggle-menu" @click="handleSidebar">
+          <i class="bx bx-menu"></i>
+        </div>
 
-        <div class="custom-link" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <div
+          class="custom-link"
+          style="display: flex; flex-wrap: wrap; gap: 20px"
+        >
           <router-link to="/all-product">Product</router-link>
           <router-link to="/sales">Sales</router-link>
           <router-link to="/purchase">Purchase</router-link>
@@ -45,6 +80,7 @@ export default {
           <router-link to="/supplier">Supplier</router-link>
           <router-link to="/sales-report">Sales Report</router-link>
           <router-link to="/profit-loss-report">Profit Loss Report</router-link>
+          {{ theme }}
         </div>
 
         <div class="top-menu ms-auto">
@@ -59,14 +95,26 @@ export default {
               </a>
             </li>
 
-           
-            <li class="nav-item dark-mode d-none d-sm-flex">
-              <a class="nav-link dark-mode-icon" href="javascript:;"
+            
+
+            <li v-if="theme === 'semi-dark' || theme === 'light' " class="nav-item dark-mode d-none d-sm-flex">
+              <a
+                class="nav-link dark-mode-icon"
+                @click="handleTheme"
+                href="javascript:;"
                 ><i class="bx bx-moon"></i>
               </a>
             </li>
 
-           
+            <li v-else class="nav-item dark-mode d-none d-sm-flex">
+              <a
+                class="nav-link dark-mode-icon"
+                @click="handleThemeLight"
+                href="javascript:;"
+                ><i class="bx bx-sun"></i>
+              </a>
+            </li>
+
 
             <li class="nav-item dropdown dropdown-large">
               <a
@@ -516,7 +564,6 @@ export default {
             <img
               v-if="$store.state.avatar"
               :src="'http://localhost:8000/images/' + $store.state.avatar"
-              
               class="rounded-circle p-1 bg-primary"
               width="60"
               height="60"
@@ -582,8 +629,8 @@ export default {
 
 <style>
 @media only screen and (max-width: 767px) {
-  .custom-link{
-     display: none !important;
+  .custom-link {
+    display: none !important;
   }
 }
 </style>

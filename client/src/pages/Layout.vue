@@ -25,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <div :class="sidebarToggle ? 'wrapper toggled' : 'wrapper' ">
+  <div :class="sidebarToggle ? 'wrapper toggled' : 'wrapper' " >
     <Sidebar :handleSidebar="handleSidebar"  />
     <Header :handleSidebar="handleSidebar" />
 
