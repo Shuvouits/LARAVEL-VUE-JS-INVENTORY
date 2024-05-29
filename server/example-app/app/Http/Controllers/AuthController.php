@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Product;
+use App\Models\Sale;
+use Carbon\Carbon;
 
 
 class AuthController extends Controller
@@ -40,6 +43,13 @@ class AuthController extends Controller
 
             ]);
 
+            $currentDate = Carbon::now();
+            $startOfMonth = $currentDate->copy()->startOfMonth()->toDateString();
+            $endOfMonth = $currentDate->copy()->endOfMonth()->toDateString();
+    
+            $top_customer = Sale::whereBetween('date', [$startOfMonth, $endOfMonth])->with('customer')->orderBy('g_total', 'DESC')->limit(10)->get();
+            $out_of_stock = Product::where('quantity', 0)->get();
+
             return response()->json([
                 'token' => $token,
                 'phone' => $phone,
@@ -47,6 +57,8 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'address' => $user->address,
                 'avatar' => $user->avatar,
+                'top_customer' => $top_customer,
+                'out_of_stock' => $out_of_stock,
                 'message' => 'Login successful',
                 // Add more user data here if needed
             ], 200);

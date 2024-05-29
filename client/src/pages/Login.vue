@@ -17,16 +17,14 @@ export default {
       errorMessage: "",
       theme: "",
       visible: false,
-      top_selling_product : [],
+      top_customer : [],
       out_of_stock: [],
     };
   },
 
   ...mapActions(["storeUserData"]),
 
-  mounted() {
-    this.getHeader();
-  },
+
 
   methods: {
 
@@ -41,31 +39,7 @@ export default {
     },
 
 
-    getHeader() {
-      const token = this.$store.state.token;
-      axios
-        .get("http://localhost:8000/api/header-info", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          this.loading = false;
-          
-          
-          this.out_of_stock = response.data.out_of_stock;
-          this.top_customer = response.data.top_customer;
-          localStorage.setItem("out_of_stock", JSON.stringify(this.out_of_stock) );
-          localStorage.setItem("top_customer", JSON.stringify(this.top_customer) );
-          
-         
-        });
-
-      
-
-        
-    },
+   
 
    
 
@@ -83,11 +57,10 @@ export default {
 
           this.loading = false;
 
-          const { token, phone, name, email, address, avatar } = response.data;
-          this.$store.dispatch("storeUserData", { token, phone, name, email, address, avatar });
+          const { token, phone, name, email, address, avatar, top_customer, out_of_stock } = response.data;
+          this.$store.dispatch("storeUserData", { token, phone, name, email, address, avatar, top_customer, out_of_stock });
           
           this.handleTheme();
-          this.getHeader();
 
          this.$router.push("/dashboard");
         })

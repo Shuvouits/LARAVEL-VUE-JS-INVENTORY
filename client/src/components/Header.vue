@@ -3,8 +3,8 @@
 export default {
   data() {
     return {
-      out_of_stock: JSON.parse(localStorage.getItem("out_of_stock")) || [],
-      top_customer: JSON.parse(localStorage.getItem("top_customer")) || [],
+      out_of_stock: this.$store.state.out_of_stock,
+      top_customer: this.$store.state.top_customer,
       theme: localStorage.getItem("theme"),
     };
   },
