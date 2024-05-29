@@ -10,8 +10,8 @@ export default createStore({
     email: localStorage.getItem('email') || '',
     avatar: localStorage.getItem('avatar') || '',
 
-    top_customer: localStorage.getItem('top_customer') || '',
-    out_of_stock: localStorage.getItem('out_of_stock') || '',
+    top_customer: JSON.parse(localStorage.getItem('top_customer') || '[]'),
+    out_of_stock: JSON.parse(localStorage.getItem('out_of_stock') || '[]'),
 
  
   
@@ -40,8 +40,8 @@ export default createStore({
       localStorage.setItem('name', userData.name);
       localStorage.setItem('avatar', userData.avatar);
 
-      localStorage.setItem('top_customer', userData.top_customer);
-      localStorage.setItem('out_of_stock', userData.out_of_stock);
+      localStorage.setItem('top_customer', JSON.stringify(userData.top_customer));
+      localStorage.setItem('out_of_stock', JSON.stringify(userData.out_of_stock));
 
     
   

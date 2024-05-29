@@ -141,7 +141,7 @@ export default {
 										<p class="mb-0 text-secondary">Total Purchase Due</p>
                    <!----<h1>Your phone: {{ this.$store.state.phone }}</h1>  -->
 										<h4 class="my-1">${{ total_purchase_due }}</h4>
-										<p class="mb-0 font-13 text-success"><i class="bx bxs-up-arrow align-middle"></i>${{ monthly_purchase_due }} from last Month</p>
+										<p class="mb-0 font-13 text-success"><i class="bx bxs-up-arrow align-middle"></i>${{ monthly_purchase_due }} from current Month</p>
 									</div>
 									<div class="widgets-icons rounded-circle text-white ms-auto bg-gradient-burning"><i class="bx bxs-wallet"></i>
 									</div>
@@ -156,7 +156,7 @@ export default {
 									<div>
 										<p class="mb-0 text-secondary">Total Sale Due</p>
 										<h4 class="my-1">${{ total_sale_due }}</h4>
-										<p class="mb-0 font-13 text-danger"><i class="bx bxs-down-arrow align-middle"></i>${{ monthly_sales_due }} from last Month</p>
+										<p class="mb-0 font-13 text-danger"><i class="bx bxs-down-arrow align-middle"></i>${{ monthly_sales_due }} from current Month</p>
 									</div>
 									<div class="widgets-icons rounded-circle text-white ms-auto bg-gradient-voilet"><i class="bx bxs-group"></i>
 									</div>
@@ -171,7 +171,7 @@ export default {
 									<div>
 										<p class="mb-0 text-secondary">Total Sale Amount</p>
 										<h4 class="my-1">${{ total_sale }}</h4>
-										<p class="mb-0 font-13 text-success"><i class="bx bxs-up-arrow align-middle"></i>${{ monthly_sale }} from last Month</p>
+										<p class="mb-0 font-13 text-success"><i class="bx bxs-up-arrow align-middle"></i>${{ monthly_sale }} from current Month</p>
 									</div>
 									<div class="widgets-icons rounded-circle text-white ms-auto bg-gradient-branding"><i class="bx bxs-binoculars"></i>
 									</div>
@@ -186,7 +186,7 @@ export default {
 									<div>
 										<p class="mb-0 text-secondary">Total Expense Amount</p>
 										<h4 class="my-1">${{ total_expense }}</h4>
-										<p class="mb-0 font-13 text-danger"><i class="bx bxs-down-arrow align-middle"></i>${{monthly_expense }} from last Month</p>
+										<p class="mb-0 font-13 text-danger"><i class="bx bxs-down-arrow align-middle"></i>${{monthly_expense }} from current Month</p>
 									</div>
 									<div class="widgets-icons rounded-circle text-white ms-auto bg-gradient-kyoto"><i class="bx bx-line-chart-down"></i>
 									</div>
