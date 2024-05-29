@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardControlller;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchasedController;
@@ -129,6 +130,11 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/profit-loss-report', [ReportController::class, 'ProfitLossReport']);
 
     Route::post('/profit-loss-report-date', [ReportController::class, 'ProfitLossReportDate']);
+
+    Route::get('/dashboard', [DashboardControlller::class, 'Dashboard']);
    
    
 });
+
+
+Route::get('/header-info', [DashboardControlller::class, 'HeaderInfo']);

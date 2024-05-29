@@ -16,18 +16,58 @@ export default {
       loading: false,
       errorMessage: "",
       theme: "",
+      visible: false,
+      top_selling_product : [],
+      out_of_stock: [],
     };
   },
 
   ...mapActions(["storeUserData"]),
 
+  mounted() {
+    this.getHeader();
+  },
+
   methods: {
+
+    handleClick(){
+      this.visible = !this.visible
+    },
 
     handleTheme() {
       this.theme = "semi-dark";
       localStorage.setItem("theme", this.theme);
       document.documentElement.className = this.theme;
     },
+
+
+    getHeader() {
+      const token = this.$store.state.token;
+      axios
+        .get("http://localhost:8000/api/header-info", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          this.loading = false;
+          
+          
+          this.out_of_stock = response.data.out_of_stock;
+          this.top_customer = response.data.top_customer;
+          localStorage.setItem("out_of_stock", JSON.stringify(this.out_of_stock) );
+          localStorage.setItem("top_customer", JSON.stringify(this.top_customer) );
+          
+         
+        });
+
+      
+
+        
+    },
+
+   
 
     sendData() {
       this.loading = true;
@@ -47,6 +87,7 @@ export default {
           this.$store.dispatch("storeUserData", { token, phone, name, email, address, avatar });
           
           this.handleTheme();
+          this.getHeader();
 
          this.$router.push("/dashboard");
         })
@@ -142,8 +183,9 @@ export default {
                             >Password</label
                           >
                           <div class="input-group" id="show_hide_password">
+                            
                             <input
-                              type="password"
+                              :type=" visible ? 'text' : 'password' "
                               class="form-control border-end-0"
                               id="inputChoosePassword"
                               placeholder="Enter Your Password"
@@ -151,10 +193,13 @@ export default {
                               required
                             />
                             <a
+
+                             @click="handleClick"
                               href="javascript:;"
                               class="input-group-text bg-transparent"
-                              ><i class="bx bx-hide"></i
-                            ></a>
+                              >
+                              <i :class="visible ? 'bx bx-show' : 'bx bx-hide' "></i>
+                            </a>
                           </div>
                         </div>
                         <div class="col-md-6">

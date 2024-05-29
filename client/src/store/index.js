@@ -9,6 +9,8 @@ export default createStore({
     address: localStorage.getItem('address') || '',
     email: localStorage.getItem('email') || '',
     avatar: localStorage.getItem('avatar') || '',
+
+ 
   
     
   },
@@ -21,6 +23,8 @@ export default createStore({
       state.address = userData.address || '';
       state.name = userData.name || '';
       state.avatar = userData.avatar || '';
+      
+     
 
 
       localStorage.setItem('token', userData.token);
@@ -29,6 +33,8 @@ export default createStore({
       localStorage.setItem('address', userData.address);
       localStorage.setItem('name', userData.name);
       localStorage.setItem('avatar', userData.avatar);
+
+    
   
       
 

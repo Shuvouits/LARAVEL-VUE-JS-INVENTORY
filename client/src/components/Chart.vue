@@ -16,22 +16,25 @@ export default {
   components: {
     apexchart: VueApexCharts,
   },
+
+  props: {
+    month_wise_sale: {
+      type: Array,
+      required: true,
+    },
+    month_wise_purchase: {
+      type: Array,
+      required: true,
+    },
+    month_wise_expense: {
+      type: Array,
+      required: true,
+    },
+  },
+
   data() {
     return {
-      series: [
-        {
-          name: "Net Profit",
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-        },
-        {
-          name: "Revenue",
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-        },
-        {
-          name: "Free Cash Flow",
-          data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
-        },
-      ],
+      series: [],
       chartOptions: {
         chart: {
           type: "bar",
@@ -40,7 +43,7 @@ export default {
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: "55%",
+            columnWidth: "95%",
             endingShape: "rounded",
           },
         },
@@ -54,6 +57,7 @@ export default {
         },
         xaxis: {
           categories: [
+            "Jan",
             "Feb",
             "Mar",
             "Apr",
@@ -63,15 +67,13 @@ export default {
             "Aug",
             "Sep",
             "Oct",
+            "Nov",
+            "Dec"
           ],
         },
         yaxis: {
-
-          
-
-
           title: {
-            text: "$ (thousands)",
+            text: "$ (taka)",
           },
         },
         fill: {
@@ -80,12 +82,43 @@ export default {
         tooltip: {
           y: {
             formatter: function (val) {
-              return "$ " + val + " thousands";
+              return "$ " + val + " taka";
             },
           },
         },
       },
     };
+  },
+
+  watch: {
+    // Watch for changes in the props and update the series accordingly
+    month_wise_sale: 'updateSeries',
+    month_wise_purchase: 'updateSeries',
+    month_wise_expense: 'updateSeries',
+  },
+
+  created() {
+    // Initialize the series data here with the prop value
+    this.updateSeries();
+  },
+
+  methods: {
+    updateSeries() {
+      this.series = [
+        {
+          name: "Sale",
+          data: this.month_wise_sale,
+        },
+        {
+          name: "Purchase",
+          data: this.month_wise_purchase,
+        },
+        {
+          name: "Expense",
+          data: this.month_wise_expense,
+        },
+      ];
+    },
   },
 };
 </script>
