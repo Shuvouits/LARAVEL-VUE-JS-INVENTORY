@@ -228,7 +228,15 @@ export default {
             </div>
             <div class="ms-auto">
               <div class="btn-group">
-                <router-link to="/add-category">
+
+               
+              </div>
+            </div>
+          </div>
+          <!--end breadcrumb-->
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <h6 class="mb-0 text-uppercase">Managed Your Category</h6>
+            <router-link to="/add-category">
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -237,11 +245,8 @@ export default {
                     Add Category
                   </button>
                 </router-link>
-              </div>
-            </div>
           </div>
-          <!--end breadcrumb-->
-          <h6 class="mb-0 text-uppercase">Managed Your Category</h6>
+          
 
           <hr />
           <div class="card">

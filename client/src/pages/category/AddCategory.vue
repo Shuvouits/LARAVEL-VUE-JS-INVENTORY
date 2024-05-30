@@ -106,16 +106,20 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/category-list">
-                <button type="button" class="btn btn-primary">
-                  Category List
-                </button>
-              </router-link>
+             
             </div>
           </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">Manage Category</h6>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <h6 class="mb-0 text-uppercase">Manage Category</h6>
+          <router-link to="/category-list">
+                <button type="button" class="btn btn-primary">
+                  Category List
+                </button>
+              </router-link>
+        </div>
+        
 
         <hr />
         <div class="card">

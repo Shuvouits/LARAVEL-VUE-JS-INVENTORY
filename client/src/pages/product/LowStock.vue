@@ -201,7 +201,20 @@ export default {
             </div>
             <div class="ml-auto">
               <div class="btn-group">
-                <button
+
+              
+              </div>
+            </div>
+          </div>
+          <!--end breadcrumb-->
+          <div style="display: flex; align-items: center; justify-content: flex-start; gap: 20px;">
+
+            <h6 v-if="visible" class="mb-0 text-uppercase">
+            Manage Your Low Stock
+          </h6>
+          <h6 v-else class="mb-0 text-uppercase">Manage Your Out Stock</h6>
+
+            <button
                   type="button"
                   @click="lowStock"
                   class="btn btn-primary"
@@ -217,14 +230,8 @@ export default {
                 >
                   Out Of Stock
                 </button>
-              </div>
-            </div>
           </div>
-          <!--end breadcrumb-->
-          <h6 v-if="visible" class="mb-0 text-uppercase">
-            Manage Your Low Stock
-          </h6>
-          <h6 v-else class="mb-0 text-uppercase">Manage Your Out Stock</h6>
+          
 
           <hr />
           <div class="card">

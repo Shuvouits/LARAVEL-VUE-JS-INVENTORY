@@ -91,11 +91,14 @@ export default {
             visible ||
             $route.path === '/all-product' ||
             $route.path === '/add-product' ||
+            $route.path === '/add-category' ||
+            $route.path === '/add-brand' ||
             $route.path === '/expired-product' ||
             $route.path === '/low-stock' ||
             $route.path === '/category-list' ||
             $route.path === '/brand-list' ||
-            this.$route.path.startsWith('/product/'),
+            this.$route.path.startsWith('/product/')||
+            this.$route.path.startsWith('/category/edit/'),
         }"
         @click="handleClick"
       >
@@ -114,6 +117,8 @@ export default {
               $route.path === '/low-stock' ||
               $route.path === '/category-list' ||
               $route.path === '/brand-list' ||
+              $route.path === '/add-brand' ||
+              this.$route.path.startsWith('/category/edit/')||
               this.$route.path.startsWith('/product/'),
           }"
         >
