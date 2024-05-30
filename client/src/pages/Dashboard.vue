@@ -74,7 +74,7 @@ export default {
     getData() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/dashboard", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/dashboard", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -387,7 +387,7 @@ export default {
                     <td>
                         <img
                           v-if="item.product.avatar"
-                          :src="'http://localhost:8000/images/' + item.product.avatar"
+                          :src="'https://appinventory.shuvobhowmik.xyz/images/' + item.product.avatar"
                           style="width: 40px; height: 40px; border-radius: 5px; "
                         />
 

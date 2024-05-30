@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from '../store';
-
-import About from '../pages/About.vue';
 import Dashboard from '../pages/Dashboard.vue';
 import Profile from '../pages/profile/Profile.vue'
 import Login from '../pages/Login.vue'
@@ -27,7 +25,6 @@ import ExpenseCategory from '../pages/expense/ExpenseCategory.vue'
 import AddCategoryExpense from '../pages/expense/AddCategoryExpense.vue'
 import Setting from '../pages/profile/Setting.vue'
 import EditCategory from '../pages/category/EditCategory.vue'
-import Testing from '../pages/category/Testing.vue';
 import BrandList from '../pages/brand/BrandList.vue';
 import EditBrand from '../pages/brand/EditBrand.vue';
 import EditProduct from '../pages/product/EditProduct.vue';
@@ -257,11 +254,7 @@ const routes = [
     meta: { requiresAuth: true }
   },
 
-  {
-    path: '/testing',
-    component : Testing,
-    meta: { requiresAuth: true }
-  },
+ 
 
   {
     path: '/customer',

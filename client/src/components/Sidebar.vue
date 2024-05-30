@@ -345,7 +345,7 @@ export default {
           <li
             :class="{
               'mm-active':
-                $route.path === '/expense' || $route.path === '/add-expense',
+                $route.path === '/expense' || $route.path === '/add-expense' ||  this.$route.path.startsWith('/expense/edit/'),
             }"
           >
             <router-link to="/expense"

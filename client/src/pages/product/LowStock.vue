@@ -257,7 +257,7 @@ export default {
                       <td>
                         <img
                           v-if="item.avatar"
-                          :src="'https://appinventory.shuvobhowmik.xyz/api/images/' + item.avatar"
+                          :src="'https://appinventory.shuvobhowmik.xyz/images/' + item.avatar"
                           style="width: 50px; height: 50px; border-radius: 5px"
                         />
 
@@ -316,7 +316,7 @@ export default {
                       <td>
                         <img
                           v-if="data.avatar"
-                          :src="'https://appinventory.shuvobhowmik.xyz/api/images/' + data.avatar"
+                          :src="'https://appinventory.shuvobhowmik.xyz/images/' + data.avatar"
                           style="width: 50px; height: 50px; border-radius: 5px"
                         />
 

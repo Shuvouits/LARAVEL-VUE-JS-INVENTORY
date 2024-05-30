@@ -218,7 +218,7 @@ export default {
                       <td>
                         <img
                           v-if="item.avatar"
-                          :src="'http://localhost:8000/images/' + item.avatar"
+                          :src="'https://appinventory.shuvobhowmik.xyz/images/' + item.avatar"
                           style="width: 100px; height: 50px; border-radius: 5px; "
                         />
 
