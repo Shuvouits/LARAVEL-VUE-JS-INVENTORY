@@ -31,7 +31,7 @@ class ProductController extends Controller
 
                 if ($request->file('avatar')->isValid()) {
                     $avatar = $request->file('avatar')->getClientOriginalName();
-                    $request->file('avatar')->move(public_path('images'), $avatar);
+                    $request->file('avatar')->move(('images'), $avatar);
                     $msg = "Image uploaded successfully";
                 }
 
@@ -172,7 +172,7 @@ class ProductController extends Controller
 
                 if ($request->file('avatar')->isValid()) {
                     $avatar = $request->file('avatar')->getClientOriginalName();
-                    $request->file('avatar')->move(public_path('images'), $avatar);
+                    $request->file('avatar')->move(('images'), $avatar);
                     $msg = "Image uploaded successfully";
                 }
 

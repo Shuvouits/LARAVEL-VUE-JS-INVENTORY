@@ -159,7 +159,7 @@ class AuthController extends Controller
             if ($request->file('avatar')->isValid()) {
 
                 $avatar = $request->file('avatar')->getClientOriginalName();
-                $request->file('avatar')->move(public_path('images'), $avatar);
+                $request->file('avatar')->move(('images'), $avatar);
                 $msg = "Image uploaded successfully";
 
                 User::where('id', $user_id)->update([
@@ -216,7 +216,7 @@ class AuthController extends Controller
 
             if ($request->file('image')->isValid()) {
                 $avatar = $request->file('image')->getClientOriginalName();
-                $request->file('image')->move(public_path('images'), $avatar);
+                $request->file('image')->move(('images'), $avatar);
                 $msg = "Image uploaded successfully";
 
                 User::where('id', $user_id)->update([
