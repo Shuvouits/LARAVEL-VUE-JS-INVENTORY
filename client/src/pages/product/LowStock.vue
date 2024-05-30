@@ -55,7 +55,7 @@ export default {
     lowStockProduct() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/low-stock", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/low-stock", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ export default {
     outStockProduct() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/out-stock", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/out-stock", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-product/${productId}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-product/${productId}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -248,7 +248,7 @@ export default {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr
+                    <tr 
                       v-if="visible"
                       v-for="(item, index) in product"
                       :key="index"
@@ -257,7 +257,7 @@ export default {
                       <td>
                         <img
                           v-if="item.avatar"
-                          :src="'http://localhost:8000/images/' + item.avatar"
+                          :src="'https://appinventory.shuvobhowmik.xyz/api/images/' + item.avatar"
                           style="width: 50px; height: 50px; border-radius: 5px"
                         />
 
@@ -316,7 +316,7 @@ export default {
                       <td>
                         <img
                           v-if="data.avatar"
-                          :src="'http://localhost:8000/images/' + data.avatar"
+                          :src="'https://appinventory.shuvobhowmik.xyz/api/images/' + data.avatar"
                           style="width: 50px; height: 50px; border-radius: 5px"
                         />
 

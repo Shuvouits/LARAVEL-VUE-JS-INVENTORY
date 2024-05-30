@@ -45,7 +45,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .get(`http://localhost:8000/api/brand/edit/${brandId}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/brand/edit/${brandId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -82,7 +82,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post(`http://localhost:8000/api/update-brand/${this.$route.params.id}`, this.formData, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-brand/${this.$route.params.id}`, this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -252,7 +252,7 @@ export default {
 
                   <img
                     v-if="avatar && !imageUrl"
-                    :src="'http://localhost:8000/images/' +avatar"
+                    :src="'https://appinventory.shuvobhowmik.xyz/images/' +avatar"
                     alt="Preview"
                     style="
                       width: 120px;

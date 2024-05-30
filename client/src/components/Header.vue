@@ -150,7 +150,7 @@ export default {
                        
                         <img
                           v-if="item.avatar"
-                          :src="'http://localhost:8000/images/' + item.avatar"
+                          :src="'https://appinventory.shuvobhowmik.xyz/images/' + item.avatar"
                           style="width: 40px; height: 40px; border-radius: 5px; "
                         />
 
@@ -249,7 +249,7 @@ export default {
           >
             <img
               v-if="$store.state.avatar"
-              :src="'http://localhost:8000/images/' + $store.state.avatar"
+              :src="'https://appinventory.shuvobhowmik.xyz/images/' + $store.state.avatar"
               class="rounded-circle p-1 bg-primary"
               width="60"
               height="60"

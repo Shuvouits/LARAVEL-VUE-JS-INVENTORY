@@ -51,7 +51,7 @@ export default {
       };
 
       axios
-        .post("http://localhost:8000/api/login", data)
+        .post("https://appinventory.shuvobhowmik.xyz/api/login", data)
         .then((response) => {
           console.log(response.data);
 

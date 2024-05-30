@@ -54,7 +54,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-purchased", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-purchased", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-purchase/${id}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-purchase/${id}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,

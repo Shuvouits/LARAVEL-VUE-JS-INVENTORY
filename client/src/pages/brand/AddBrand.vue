@@ -54,7 +54,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/add-brand", this.formData, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/add-brand", this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,

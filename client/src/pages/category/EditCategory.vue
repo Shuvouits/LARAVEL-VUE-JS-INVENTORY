@@ -35,7 +35,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .get(`http://localhost:8000/api/category/edit/${categoryId}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/category/edit/${categoryId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post(`http://localhost:8000/api/update-category/${this.$route.params.id}`, data, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-category/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

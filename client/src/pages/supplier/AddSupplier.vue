@@ -30,7 +30,7 @@ export default {
       this.formData.append("address", this.address);
 
       axios
-        .post("http://localhost:8000/api/add-supplier", this.formData, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/add-supplier", this.formData, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

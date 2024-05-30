@@ -33,7 +33,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .get(`http://localhost:8000/api/supplier/edit/${supplierId}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/supplier/edit/${supplierId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post(`http://localhost:8000/api/update-supplier/${this.$route.params.id}`, data, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-supplier/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

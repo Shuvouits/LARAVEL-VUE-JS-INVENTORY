@@ -36,7 +36,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .get(`http://localhost:8000/api/expense/edit/${id}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/expense/edit/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -68,7 +68,7 @@ export default {
     getExpenseCategory() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-category-expense", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-category-expense", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ export default {
       console.log(this.expense_id);
 
       axios
-        .post(`http://localhost:8000/api/update-expense/${this.$route.params.id}`, data, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-expense/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

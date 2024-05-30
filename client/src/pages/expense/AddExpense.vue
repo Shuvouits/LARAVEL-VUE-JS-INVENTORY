@@ -39,7 +39,7 @@ export default {
     getExpenseCategory() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-category-expense", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-category-expense", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ export default {
       console.log(this.expense_id);
 
       axios
-        .post("http://localhost:8000/api/add-expense", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/add-expense", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

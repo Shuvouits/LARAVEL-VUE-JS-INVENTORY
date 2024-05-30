@@ -80,7 +80,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/sales-report-date", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/sales-report-date", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -126,7 +126,7 @@ export default {
     getSale() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/sales-report", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/sales-report", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -159,7 +159,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-sales/${id}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-sales/${id}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,

@@ -52,7 +52,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-brand", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-brand", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -83,7 +83,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-brand/${brandId}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-brand/${brandId}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -131,7 +131,7 @@ export default {
       this.loading = true;
 
       axios
-        .get(`http://localhost:8000/api/update-brand-status/${brandId}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/update-brand-status/${brandId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -274,7 +274,7 @@ export default {
                       <img
                         v-if="item.avatar"
                         style="width: 120px; height: 50px; border-radius: 10px"
-                        :src="'http://localhost:8000/images/' + item.avatar"
+                        :src="'https://appinventory.shuvobhowmik.xyz/images/' + item.avatar"
                       />
                       <span v-else>
                         <svg

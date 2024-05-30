@@ -52,7 +52,7 @@ export default {
     getProducts() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-product", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-product", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -82,7 +82,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-product/${productId}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-product/${productId}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,

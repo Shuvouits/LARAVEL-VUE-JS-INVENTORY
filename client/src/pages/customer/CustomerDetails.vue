@@ -48,7 +48,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get(`http://localhost:8000/api/customer-details/${customerId}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/customer-details/${customerId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-customer/${customerId}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-customer/${customerId}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -181,7 +181,7 @@ export default {
                           <img
                             v-if="$store.state.avatar"
                             :src="
-                              'http://localhost:8000/images/' +
+                              'https://appinventory.shuvobhowmik.xyz/images/' +
                               $store.state.avatar
                             "
                             class="rounded-circle p-1 bg-primary"

@@ -82,7 +82,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/expense-report-date", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/expense-report-date", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -125,7 +125,7 @@ export default {
     getExpense() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/expense-report", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/expense-report", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -157,7 +157,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-expense/${id}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-expense/${id}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,

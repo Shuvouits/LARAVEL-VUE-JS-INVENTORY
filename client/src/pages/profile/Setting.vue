@@ -37,7 +37,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/setting", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/setting", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -145,7 +145,7 @@ export default {
                         class="d-flex flex-column align-items-center text-center"
                       >
 
-                      <img v-if="$store.state.avatar" :src="'http://localhost:8000/images/' + $store.state.avatar" :alt="AltText"  class="rounded-circle p-1 bg-primary"
+                      <img v-if="$store.state.avatar" :src="'https://appinventory.shuvobhowmik.xyz/images/' + $store.state.avatar" :alt="AltText"  class="rounded-circle p-1 bg-primary"
                           width="110" height="110" />
                       <img v-else :src="require('../../../assets/images/avatars/avatar-2.png')" :alt="AltText"  class="rounded-circle p-1 bg-primary"
                           width="110" height="110" />

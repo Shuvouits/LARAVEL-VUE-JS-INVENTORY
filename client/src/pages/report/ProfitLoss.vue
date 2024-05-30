@@ -84,7 +84,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/profit-loss-report-date", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/profit-loss-report-date", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -132,7 +132,7 @@ export default {
     getProfitLoss() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/profit-loss-report", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/profit-loss-report", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

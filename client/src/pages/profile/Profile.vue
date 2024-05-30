@@ -47,7 +47,7 @@ export default {
       //console.log(this.formData.get('name'));
 
       axios
-        .post("http://localhost:8000/api/profile-setting", this.formData, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/profile-setting", this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -161,7 +161,7 @@ export default {
                         <img
                           v-if="$store.state.avatar"
                           :src="
-                            'http://localhost:8000/images/' +
+                            'https://appinventory.shuvobhowmik.xyz/images/' +
                             $store.state.avatar
                           "
                           

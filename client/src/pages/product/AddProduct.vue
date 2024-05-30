@@ -51,7 +51,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-brand", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-brand", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ export default {
       this.formData.append("brand", this.brand.id);
 
       axios
-        .post("http://localhost:8000/api/add-product", this.formData, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/add-product", this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -127,7 +127,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-category", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-category", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

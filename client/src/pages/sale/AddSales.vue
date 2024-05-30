@@ -100,7 +100,7 @@ export default {
     getProduct() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-product", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-product", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -130,7 +130,7 @@ export default {
       console.log(this.expense_id);
 
       axios
-        .post("http://localhost:8000/api/add-sales", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/add-sales", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

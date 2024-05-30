@@ -58,7 +58,7 @@ export default {
     getSupplier() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-supplier", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-supplier", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ export default {
     getProduct() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-product", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-product", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -103,7 +103,7 @@ export default {
       console.log(this.expense_id);
 
       axios
-        .post("http://localhost:8000/api/add-purchased", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/add-purchased", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

@@ -62,7 +62,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .get(`http://localhost:8000/api/sales/edit/${id}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/sales/edit/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ export default {
     getCustomer() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-customer", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-customer", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ export default {
     getProduct() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-product", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-product", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -142,7 +142,7 @@ export default {
 
 
       axios
-        .post(`http://localhost:8000/api/update-sales/${this.$route.params.id}`, data, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-sales/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

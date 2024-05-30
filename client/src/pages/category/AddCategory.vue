@@ -38,7 +38,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("http://localhost:8000/api/add-category", data, {
+        .post("https://appinventory.shuvobhowmik.xyz/api/add-category", data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

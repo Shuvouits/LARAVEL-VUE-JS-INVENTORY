@@ -53,7 +53,7 @@ export default {
     getCategories() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-category", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-category", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -83,7 +83,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-category/${categoryId}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-category/${categoryId}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -132,7 +132,7 @@ export default {
         const token = this.$store.state.token;
 
       
-        axios.get(`http://localhost:8000/api/update-category-status/${categoryId}`, {
+        axios.get(`https://appinventory.shuvobhowmik.xyz/api/update-category-status/${categoryId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

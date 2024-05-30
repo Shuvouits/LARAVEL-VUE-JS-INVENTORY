@@ -53,7 +53,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-brand", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-brand", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .get(`http://localhost:8000/api/product/edit/${productId}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/product/edit/${productId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ export default {
       console.log('formData:', this.formData);
 
       axios
-        .post(`http://localhost:8000/api/update-product/${this.$route.params.id}`, this.formData, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-product/${this.$route.params.id}`, this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -161,7 +161,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-category", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-category", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -359,7 +359,7 @@ export default {
 
                   <img
                     v-if="avatar && !imageUrl"
-                    :src="'http://localhost:8000/images/' +avatar"
+                    :src="'https://appinventory.shuvobhowmik.xyz/images/' +avatar"
                     alt="Preview"
                     style="
                       width: 100px;

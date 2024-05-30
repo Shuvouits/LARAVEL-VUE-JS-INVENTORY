@@ -24,7 +24,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .get(`http://localhost:8000/api/expense-category/edit/${id}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/expense-category/edit/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post(`http://localhost:8000/api/update-category-expense/${this.$route.params.id}`, data, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-category-expense/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

@@ -56,7 +56,7 @@ export default {
       const token = this.$store.state.token;
       console.log(token);
       axios
-        .get("http://localhost:8000/api/all-expense", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-expense", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`http://localhost:8000/api/delete-expense/${id}`, {
+            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-expense/${id}`, {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
@@ -135,7 +135,7 @@ export default {
       this.loading = true;
 
       axios
-        .get(`http://localhost:8000/api/update-brand-status/${brandId}`, {
+        .get(`https://appinventory.shuvobhowmik.xyz/api/update-brand-status/${brandId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
