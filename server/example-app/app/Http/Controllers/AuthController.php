@@ -80,6 +80,9 @@ class AuthController extends Controller
             $user_phone = $request->user->phone;
             $user = User::where('phone', $user_phone)->first();
             $token = $user->token;
+            $email = $user->email;
+
+           
 
             if (!$user) {
                 return response()->json(['message' => 'User Not Found'], 401);
@@ -122,6 +125,8 @@ class AuthController extends Controller
 
                     return response()->json([
                         'message' => 'Your password updated',
+                        'email' => $email,
+                        
                         'phone' => $user_phone,
                         'name' => $user->name,
                         'address' => $user->address,

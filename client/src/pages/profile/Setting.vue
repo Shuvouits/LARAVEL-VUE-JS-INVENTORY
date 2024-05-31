@@ -48,8 +48,8 @@ export default {
           console.log(response.data);
 
            //store Data
-           const { token, phone, name, email, address, top_customer, out_of_stock } = response.data;
-          this.$store.dispatch("storeUserData", { token, phone, name, email, address, top_customer, out_of_stock });
+           const { token, avatar, phone, name, email, address, top_customer, out_of_stock } = response.data;
+          this.$store.dispatch("storeUserData", { token, phone, name, email, address, top_customer, out_of_stock, avatar });
 
           
           this.errorMessage = "",
