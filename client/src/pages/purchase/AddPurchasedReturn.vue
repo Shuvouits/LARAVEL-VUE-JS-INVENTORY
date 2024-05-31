@@ -48,16 +48,24 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/add-router">
-                <button type="button" class="btn btn-primary">Add Purchased</button>
-              </router-link>
+             
             </div>
           </div>
         </div>
         <!--end breadcrumb-->
-        <router-link to="/sales"
+
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+
+          <router-link to="/sales"
           ><h6 class="mb-0 text-uppercase">Purchased History</h6></router-link
         >
+
+          <router-link to="/add-router">
+                <button type="button" class="btn btn-primary">Add Purchased</button>
+              </router-link>
+
+        </div>
+       
 
         <hr />
         <div class="card">

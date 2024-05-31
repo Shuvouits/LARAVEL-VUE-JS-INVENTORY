@@ -172,18 +172,25 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/add-router">
-                <button type="button" class="btn btn-primary">
-                  Add Purchased
-                </button>
-              </router-link>
+             
             </div>
           </div>
         </div>
         <!--end breadcrumb-->
-        <router-link to="/sales"
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+
+          <router-link to="/sales"
           ><h6 class="mb-0 text-uppercase">Purchased History</h6></router-link
         >
+
+          <router-link to="/add-router">
+                <button type="button" class="btn btn-primary">
+                  Add Purchased
+                </button>
+              </router-link>
+
+        </div>
+        
 
         <hr />
         <div class="card">
@@ -201,6 +208,7 @@ export default {
                   id="supplier"
                   ref="selectElement"
                   v-model="supplier_id"
+                  required
                 >
 
                   <option v-for="(item, index) in supplier" :key="index" :value="item.id">{{ item.name }}</option>
@@ -218,6 +226,7 @@ export default {
                   id="single-select-field"
                   ref="selectElement1"
                   v-model = "product_id"
+                  required
                 >
                 <option v-for="(item, index) in product" :key="index" :value="item.id">{{ item.name }}</option>
                 </select>
@@ -231,12 +240,13 @@ export default {
                   id="input6"
                   placeholder="Date of Birth"
                   v-model = 'date'
+                  required
                 />
               </div>
 
               <div class="col-md-6">
                 <label for="input7" class="form-label">Status</label>
-                <select id="input7" v-model="status" class="form-select">
+                <select id="input7" v-model="status" class="form-select" required>
                  
                   <option value="Received">Received</option>
                   <option value="Ordered">Ordered</option>
@@ -251,7 +261,8 @@ export default {
                     class="form-control"
                     id="input14"
                     placeholder="Enter quantity"
-                    v-model="qty" 
+                    v-model="qty"
+                    required 
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -268,6 +279,7 @@ export default {
                     id="input14"
                     v-model = 'g_total'
                     placeholder="Enter Grand total"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -284,6 +296,7 @@ export default {
                     id="input14"
                     placeholder="Enter paid amount"
                     v-model="p_amount"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -300,6 +313,7 @@ export default {
                     id="input14"
                     placeholder="Enter due amount"
                     v-model = "d_amount"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i

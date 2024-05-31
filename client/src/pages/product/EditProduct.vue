@@ -62,7 +62,17 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.loading = false;
-          this.brand = response.data.filter((item) => item.status === "Active");
+
+          const activeBrands = response.data.filter(
+            (item) => item.status === "Active"
+          );
+
+          this.brand = activeBrands.sort((a, b) => {
+            return a.name.localeCompare(b.name); // For ascending order
+            // For descending order, uncomment the following line and comment the previous line
+            // return b.name.localeCompare(a.name);
+          });
+          
         });
     },
 
@@ -170,9 +180,19 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.loading = false;
-          this.category = response.data.filter(
+
+
+          const activeCategory = response.data.filter(
             (item) => item.status === "Active"
           );
+
+          this.category = activeCategory.sort((a, b) => {
+            return a.name.localeCompare(b.name); // For ascending order
+            // For descending order, uncomment the following line and comment the previous line
+            // return b.name.localeCompare(a.name);
+          });
+
+
         });
     },
   },

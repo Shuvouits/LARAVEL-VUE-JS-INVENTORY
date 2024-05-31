@@ -60,7 +60,17 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.loading = false;
-          this.brand = response.data.filter((item) => item.status === "Active");
+          
+          const activeBrands = response.data.filter(
+            (item) => item.status === "Active"
+          );
+
+          this.brand = activeBrands.sort((a, b) => {
+            return a.name.localeCompare(b.name); // For ascending order
+            // For descending order, uncomment the following line and comment the previous line
+            // return b.name.localeCompare(a.name);
+          });
+
         });
     },
 
@@ -85,13 +95,17 @@ export default {
       this.formData.append("brand", this.brand.id);
 
       axios
-        .post("https://appinventory.shuvobhowmik.xyz/api/add-product", this.formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-          //params: data,
-        })
+        .post(
+          "https://appinventory.shuvobhowmik.xyz/api/add-product",
+          this.formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+            //params: data,
+          }
+        )
         .then((response) => {
           console.log(response.data);
 
@@ -136,9 +150,19 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.loading = false;
-          this.category = response.data.filter(
+         
+
+          const activeCategory = response.data.filter(
             (item) => item.status === "Active"
           );
+
+          this.category = activeCategory.sort((a, b) => {
+            return a.name.localeCompare(b.name); // For ascending order
+            // For descending order, uncomment the following line and comment the previous line
+            // return b.name.localeCompare(a.name);
+          });
+
+
         });
     },
   },
@@ -168,22 +192,23 @@ export default {
             </nav>
           </div>
           <div class="ms-auto">
-            <div class="btn-group">
-              
-            </div>
+            <div class="btn-group"></div>
           </div>
         </div>
         <!--end breadcrumb-->
-        
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-            <h6 class="mb-0 text-uppercase">Insert Your Product</h6>
-          <router-link to="/add-product">
-                  <button type="button" class="btn btn-primary">
-                    Add Product
-                  </button>
-                </router-link>
 
-          </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <h6 class="mb-0 text-uppercase">Insert Your Product</h6>
+          <router-link to="/add-product">
+            <button type="button" class="btn btn-primary">Add Product</button>
+          </router-link>
+        </div>
 
         <hr />
         <div class="card">
@@ -203,6 +228,7 @@ export default {
                     id="input13"
                     v-model="name"
                     placeholder="Enter Product Name"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-coin-stack"></i
@@ -218,6 +244,7 @@ export default {
                     id="input14"
                     v-model="slug"
                     placeholder="Enter your slug"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-caret-left-circle"></i
@@ -234,6 +261,7 @@ export default {
                     id="input15"
                     v-model="price"
                     placeholder="Enter the price of product"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-dollar-circle"></i
@@ -250,6 +278,7 @@ export default {
                     id="input15"
                     v-model="quantity"
                     placeholder="Enter the quantity of product"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-disc"></i
@@ -264,7 +293,8 @@ export default {
                   class="form-control"
                   id="input6"
                   v-model="expire_date"
-                  placeholder="Date of Birth"
+                  placeholder="Expire of date"
+                  required
                 />
               </div>
 
@@ -275,10 +305,15 @@ export default {
                   v-model="category.id"
                   name="category"
                   class="form-select"
+                  required
                 >
                   <option selected disabled>Choose...</option>
 
-                  <option v-for="(item, index) in category" :value="item.id" :key="index">
+                  <option
+                    v-for="(item, index) in category"
+                    :value="item.id"
+                    :key="index"
+                  >
                     {{ item.name }}
                   </option>
                 </select>
@@ -291,9 +326,14 @@ export default {
                   name="brand"
                   v-model="brand.id"
                   class="form-select"
+                  required
                 >
                   <option selected disabled>Choose...</option>
-                  <option v-for="(item, index) in brand" :value="item.id"  :key="index">
+                  <option
+                    v-for="(item, index) in brand"
+                    :value="item.id"
+                    :key="index"
+                  >
                     {{ item.name }}
                   </option>
                 </select>
@@ -308,6 +348,7 @@ export default {
                     id="input14"
                     placeholder="Last Name"
                     @change="uploadImage"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i

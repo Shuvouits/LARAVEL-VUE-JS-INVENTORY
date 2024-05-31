@@ -85,7 +85,7 @@ export default {
     getCustomer() {
       const token = this.$store.state.token;
       axios
-        .get("http://localhost:8000/api/all-customer", {
+        .get("https://appinventory.shuvobhowmik.xyz/api/all-customer", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -199,16 +199,23 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/sales">
-                <button type="button" class="btn btn-primary">Go Sales</button>
-              </router-link>
+             
             </div>
           </div>
         </div>
         <!--end breadcrumb-->
-        <router-link to="/sales"
+
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <router-link to="/sales"
           ><h6 class="mb-0 text-uppercase">Sales History</h6></router-link
         >
+
+        <router-link to="/sales">
+                <button type="button" class="btn btn-primary">Go Sales</button>
+              </router-link>
+        </div>
+
+       
 
         <hr />
         <div class="card">
@@ -229,6 +236,7 @@ export default {
                   id="supplier"
                   ref="selectElement"
                   v-model="product_id"
+                  required
                 >
                   <option
                     v-for="(item, index) in product"
@@ -250,6 +258,7 @@ export default {
                   id="single-select-field"
                   ref="selectElement1"
                   v-model="customer_id"
+                  required
                 >
                   <option
                     v-for="(item, index) in customer"
@@ -269,6 +278,7 @@ export default {
                   id="input6"
                   placeholder="Date of Birth"
                   v-model="date"
+                  required
                 />
               </div>
 
@@ -281,6 +291,7 @@ export default {
                     id="input14"
                     placeholder="Enter quantity"
                     v-model="quantity"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -297,6 +308,7 @@ export default {
                     id="input14"
                     v-model="g_total"
                     placeholder="Enter Grand total"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -313,6 +325,7 @@ export default {
                     id="input14"
                     placeholder="Enter paid amount"
                     v-model="p_amount"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -329,6 +342,7 @@ export default {
                     id="input14"
                     placeholder="Enter due amount"
                     v-model="d_amount"
+                    required
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -338,7 +352,7 @@ export default {
 
               <div class="col-md-6">
                 <label for="status" class="form-label">Status</label>
-                <select id="status" v-model="status" class="form-select">
+                <select id="status" v-model="status" class="form-select"  required>
                   <option value="Paid">Paid</option>
                   <option value="UnPaid">UnPaid</option>
                 </select>

@@ -182,7 +182,15 @@ export default {
             </div>
             <div class="ms-auto">
               <div class="btn-group">
-                <router-link to="/add-sales">
+               
+              </div>
+            </div>
+          </div>
+          <!--end breadcrumb-->
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+
+            <h6 class="mb-0 text-uppercase">Manage Your Sales</h6>
+          <router-link to="/add-sales">
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -191,12 +199,10 @@ export default {
                     Add Sales
                   </button>
                 </router-link>
-              </div>
-            </div>
-          </div>
-          <!--end breadcrumb-->
-          <h6 class="mb-0 text-uppercase">Manage Your Sales</h6>
 
+
+          </div>
+          
           <hr />
           <div class="card">
             <div class="card-body">
@@ -225,7 +231,7 @@ export default {
                       <td>{{ index + 1 }}</td>
                       <td>{{ item.product.name }}</td>
                       <td>{{ item.customer.name }}</td>
-                      <td>{{ item.date }}</td>
+                      <td>{{ formatDate(item.date) }}</td>
                       <td>{{ item.quantity }}</td>
                       <td>{{ item.g_total }}</td>
                       <td>{{ item.p_amount }}</td>

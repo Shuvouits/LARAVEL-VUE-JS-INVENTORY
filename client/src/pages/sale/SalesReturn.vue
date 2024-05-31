@@ -182,7 +182,14 @@ export default {
             </div>
             <div class="ms-auto">
               <div class="btn-group">
-                <router-link to="/add-sales">
+                
+              </div>
+            </div>
+          </div>
+          <!--end breadcrumb-->
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <h6 class="mb-0 text-uppercase">Manage Your Sales Return</h6>
+          <router-link to="/add-sales">
                   <button
                     type="button"
                     class="btn btn-primary"
@@ -191,11 +198,9 @@ export default {
                     Add Sales
                   </button>
                 </router-link>
-              </div>
-            </div>
+                
           </div>
-          <!--end breadcrumb-->
-          <h6 class="mb-0 text-uppercase">Manage Your Sales Return</h6>
+         
 
           <hr />
           <div class="card">

@@ -48,7 +48,7 @@ export default {
           </div>
           <div class="ms-auto">
             <div class="btn-group">
-              <router-link to="/add-router">
+              <router-link to="#">
                 <button type="button" class="btn btn-primary">Add Sales Return</button>
               </router-link>
             </div>

@@ -17,6 +17,7 @@ export default {
       email: this.$store.state.email,
       phone: this.$store.state.phone,
       address: this.$store.state.address,
+
       formData: new FormData(),
     };
   },
@@ -58,7 +59,7 @@ export default {
         .then((response) => {
           console.log(response.data);
 
-          const { token, phone, name, address, avatar, email } = response.data;
+          const { token, phone, name, address, avatar, email, top_customer, out_of_stock } = response.data;
           this.$store.dispatch("storeUserData", {
             token,
             phone,
@@ -66,6 +67,8 @@ export default {
             address,
             avatar,
             email,
+            top_customer,
+            out_of_stock
           });
 
           Swal.fire({

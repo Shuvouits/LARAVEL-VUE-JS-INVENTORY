@@ -46,7 +46,7 @@ class AuthController extends Controller
             $currentDate = Carbon::now();
             $startOfMonth = $currentDate->copy()->startOfMonth()->toDateString();
             $endOfMonth = $currentDate->copy()->endOfMonth()->toDateString();
-    
+
             $top_customer = Sale::whereBetween('date', [$startOfMonth, $endOfMonth])->with('customer')->orderBy('g_total', 'DESC')->limit(10)->get();
             $out_of_stock = Product::where('quantity', 0)->get();
 
@@ -109,6 +109,13 @@ class AuthController extends Controller
 
                     ]);
 
+                    $currentDate = Carbon::now();
+                    $startOfMonth = $currentDate->copy()->startOfMonth()->toDateString();
+                    $endOfMonth = $currentDate->copy()->endOfMonth()->toDateString();
+
+                    $top_customer = Sale::whereBetween('date', [$startOfMonth, $endOfMonth])->with('customer')->orderBy('g_total', 'DESC')->limit(10)->get();
+                    $out_of_stock = Product::where('quantity', 0)->get();
+
 
 
 
@@ -119,7 +126,9 @@ class AuthController extends Controller
                         'name' => $user->name,
                         'address' => $user->address,
                         'avatar' => $user->avatar,
-                        'token' => $token
+                        'token' => $token,
+                        'top_customer' => $top_customer,
+                        'out_of_stock' => $out_of_stock
 
                     ], 201);
 
@@ -151,6 +160,13 @@ class AuthController extends Controller
             $address = $request->input('address');
             $email = $request->input('email');
 
+            $currentDate = Carbon::now();
+            $startOfMonth = $currentDate->copy()->startOfMonth()->toDateString();
+            $endOfMonth = $currentDate->copy()->endOfMonth()->toDateString();
+
+            $top_customer = Sale::whereBetween('date', [$startOfMonth, $endOfMonth])->with('customer')->orderBy('g_total', 'DESC')->limit(10)->get();
+            $out_of_stock = Product::where('quantity', 0)->get();
+
 
             $request->validate([
                 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,avif,webp|max:2048', // Adjust the validation rules as needed
@@ -162,12 +178,22 @@ class AuthController extends Controller
                 $request->file('avatar')->move(('images'), $avatar);
                 $msg = "Image uploaded successfully";
 
+
+
+
+
+
+
+
+
                 User::where('id', $user_id)->update([
                     'name' => $name,
                     'email' => $email,
                     'address' => $address,
                     'phone' => $phone,
-                    'avatar' => $avatar
+                    'avatar' => $avatar,
+                    'top_customer' => $top_customer,
+                    'out_of_stock' => $out_of_stock
 
                 ]);
             } else {
@@ -177,6 +203,10 @@ class AuthController extends Controller
                     'email' => $email,
                     'address' => $address,
                     'phone' => $phone,
+
+                    'top_customer' => $top_customer,
+                    'out_of_stock' => $out_of_stock
+
                     //'avatar' => $avatar
 
                 ]);
@@ -200,6 +230,8 @@ class AuthController extends Controller
     public function ProfileSetting(Request $request)
     {
 
+       
+
         $user_id = $request->user->id;
         $token = $request->user->token;
 
@@ -207,6 +239,16 @@ class AuthController extends Controller
         $phone = $request->input('phone');
         $address = $request->input('address');
         $email = $request->input('email');
+
+        $currentDate = Carbon::now();
+        $startOfMonth = $currentDate->copy()->startOfMonth()->toDateString();
+        $endOfMonth = $currentDate->copy()->endOfMonth()->toDateString();
+
+        $top_customer = Sale::whereBetween('date', [$startOfMonth, $endOfMonth])->with('customer')->orderBy('g_total', 'DESC')->limit(10)->get();
+        $out_of_stock = Product::where('quantity', 0)->get();
+
+        
+
 
         if ($request->hasFile('image')) {
 
@@ -219,12 +261,15 @@ class AuthController extends Controller
                 $request->file('image')->move(('images'), $avatar);
                 $msg = "Image uploaded successfully";
 
+
+
                 User::where('id', $user_id)->update([
                     'name' => $name,
                     'email' => $email,
                     'address' => $address,
                     'phone' => $phone,
-                    'avatar' => $avatar
+                    'avatar' => $avatar,
+                    
 
                 ]);
 
@@ -236,13 +281,17 @@ class AuthController extends Controller
                     'email' => $email,
                     'address' => $address,
                     'avatar' => $avatar,
+
+                    'top_customer' => $top_customer,
+                    'out_of_stock' => $out_of_stock
+
                 ], 201);
             } else {
 
 
             }
 
-        } 
+        }
 
         User::where('id', $user_id)->update([
             'name' => $name,
@@ -262,6 +311,10 @@ class AuthController extends Controller
             'name' => $name,
             'address' => $address,
             'avatar' => $user->avatar,
+
+            'top_customer' => $top_customer,
+            'out_of_stock' => $out_of_stock
+
         ], 201);
     }
 

@@ -25,7 +25,7 @@ class SalesController extends Controller
 
             $product = Product::where('id',$product_id)->first();
 
-            if($product->quantity > 0){
+            if($product->quantity > $quantity){
 
                 $sale = new Sale();
                 $sale->customer_id = $customer_id;
@@ -36,7 +36,7 @@ class SalesController extends Controller
                 $sale->p_amount = $p_amount;
                 $sale->d_amount = $d_amount;
                 $sale->status = $status;
-               // $sale->save();
+                $sale->save();
     
                 //update product quantity
                 $product = Product::where('id', $product_id)->first();

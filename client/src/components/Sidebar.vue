@@ -76,10 +76,13 @@ export default {
 
     <!--navigation-->
     <ul :class="{ metismenu: true, 'mm-show': visible }" id="menu">
-      <li>
+      <li :class="{
+              'mm-active':
+                $route.path === '/dashboard'
+            }">
         <router-link to="/dashboard">
           <div class="parent-icon"><i class="bx bx-category"></i></div>
-          <div class="menu-title">Dashboard</div>
+          <div class="menu-title ">Dashboard</div>
         </router-link>
       </li>
 
@@ -271,6 +274,7 @@ export default {
               $route.path === '/add-purchased' ||
               $route.path === '/order-purchased' ||
               $route.path === '/return-purchased' ||
+              $route.path === '/received-purchased' ||
               this.$route.path.startsWith('/purchase/'),
           }"
         >
