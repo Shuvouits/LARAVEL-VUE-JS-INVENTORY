@@ -55,8 +55,8 @@ const routes = [
 
   {
     path: '/profile',
-    name: 'Profile',
-    component: Profile
+    component: Profile,
+    meta: { requiresAuth: true }
   },
 
   {
