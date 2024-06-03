@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('g_total');
             $table->integer('p_amount');
             $table->integer('d_amount');
+            $table->integer('amount_per');
 
              // Add foreign key constraint with cascading deletes
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

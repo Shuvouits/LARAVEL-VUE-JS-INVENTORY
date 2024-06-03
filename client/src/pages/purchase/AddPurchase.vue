@@ -19,13 +19,22 @@ export default {
       date : "",
       status : "Ordered",
       qty : "",
-      g_total : "",
-      p_amount : ""
+      p_amount : "",
+      amount_per : ""
 
     };
   },
 
   computed: {
+
+    g_total(){
+      
+      let amount_per = parseFloat(this.amount_per) || 0;
+      let qty = parseFloat(this.qty) || 0;
+      return amount_per * qty;
+
+    },
+
     d_amount() {
       // Calculate the due amount based on the grand total and paid amount
       let g_total = parseFloat(this.g_total) || 0;
@@ -95,7 +104,8 @@ export default {
         qty : this.qty,
         g_total : this.g_total,
         p_amount : this.p_amount,
-        d_amount: this.d_amount
+        d_amount: this.d_amount,
+        amount_per: this.amount_per
       };
 
       const token = this.$store.state.token;
@@ -262,6 +272,23 @@ export default {
                     id="input14"
                     placeholder="Enter quantity"
                     v-model="qty"
+                    required 
+                  />
+                  <span class="position-absolute top-50 translate-middle-y"
+                    ><i class="bx bx-user"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="input14" class="form-label">Amount / Per Piece</label>
+                <div class="position-relative input-icon">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="input14"
+                    placeholder="Enter quantity"
+                    v-model="amount_per"
                     required 
                   />
                   <span class="position-absolute top-50 translate-middle-y"

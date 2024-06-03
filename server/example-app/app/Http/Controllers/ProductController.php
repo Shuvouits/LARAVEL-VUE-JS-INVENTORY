@@ -21,7 +21,7 @@ class ProductController extends Controller
             $category = $request->input('category');
             $brand = $request->input('brand');
 
-           // $formattedExpireDate = Carbon::parse($expire_date)->format('m/d/Y');
+            // $formattedExpireDate = Carbon::parse($expire_date)->format('m/d/Y');
 
 
             if ($request->hasFile('avatar')) {
@@ -55,19 +55,19 @@ class ProductController extends Controller
             }
 
             $product = new Product();
-                $product->name = $name;
-                $product->slug = $slug;
-                $product->price = $price;
-                $product->quantity = $quantity;
-                $product->expire_date = $expire_date;
-                $product->category = $category;
-                $product->brand = $brand;
-                $product->save();
+            $product->name = $name;
+            $product->slug = $slug;
+            $product->price = $price;
+            $product->quantity = $quantity;
+            $product->expire_date = $expire_date;
+            $product->category = $category;
+            $product->brand = $brand;
+            $product->save();
 
-                return response()->json([
-                    'message' => 'New product insert without image',
+            return response()->json([
+                'message' => 'New product insert without image',
 
-                ], 201);
+            ], 201);
 
 
 
@@ -76,42 +76,50 @@ class ProductController extends Controller
         }
     }
 
-    public function AllProduct(Request $request){
+    public function AllProduct(Request $request)
+    {
 
         try {
 
-            $all_product = Product::with('categoryData')->with('brandData')->orderBy('id','DESC')->get();
+            $all_product = Product::with('categoryData')->with('brandData')->with('purchase')->orderBy('id', 'DESC')->get();
+
+            // Iterate over each product and calculate the sum of g_total for purchases
+            $all_product->each(function ($product) {
+                $product->total_g_total = $product->purchase->sum('g_total');
+            });
+
             return response()->json($all_product);
 
         } catch (\Exception $error) {
             dd($error->getMessage());
         }
-       
+
     }
 
-    public function DeleteProduct(Request $request , $id){
-        try{
+    public function DeleteProduct(Request $request, $id)
+    {
+        try {
 
-            $data = Product::where('id',$id)->first();
+            $data = Product::where('id', $id)->first();
 
-            if(!$data){
+            if (!$data) {
 
                 return response()->json([
                     'message' => 'No product found'
-    
-                ],404);
+
+                ], 404);
 
             }
 
-            Product::where('id',$id)->delete();
+            Product::where('id', $id)->delete();
 
 
             return response()->json([
                 'message' => 'Data deleted successfully'
 
-            ],201);
+            ], 201);
 
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             dd($error->getMessage());
 
         }
@@ -141,8 +149,9 @@ class ProductController extends Controller
     }
 
 
-    public function UpdateProduct(Request $request , $id){
-        try{
+    public function UpdateProduct(Request $request, $id)
+    {
+        try {
 
             $name = $request->input('name');
             $slug = $request->input('slug');
@@ -150,18 +159,18 @@ class ProductController extends Controller
             $quantity = $request->input('quantity');
             $expire_date = $request->input('expire_date');
 
-           // return response()->json($expire_date);
+            // return response()->json($expire_date);
             $categoryData = $request->input('categoryData');
             $brandData = $request->input('brandData');
 
             $product_data = Product::where('id', $id)->first();
 
-            if(!$product_data){
+            if (!$product_data) {
 
                 return response()->json([
                     'message' => 'No product found'
-    
-                ],404);
+
+                ], 404);
 
             }
 
@@ -176,7 +185,7 @@ class ProductController extends Controller
                     $msg = "Image uploaded successfully";
                 }
 
-                
+
                 $product_data->name = $name;
                 $product_data->slug = $slug;
                 $product_data->price = $price;
@@ -198,14 +207,14 @@ class ProductController extends Controller
 
 
             $product_data->name = $name;
-                $product_data->slug = $slug;
-                $product_data->price = $price;
-                $product_data->quantity = $quantity;
-                $product_data->expire_date = $expire_date;
-                $product_data->category = $categoryData;
-                $product_data->brand = $brandData;
-                
-                $product_data->save();
+            $product_data->slug = $slug;
+            $product_data->price = $price;
+            $product_data->quantity = $quantity;
+            $product_data->expire_date = $expire_date;
+            $product_data->category = $categoryData;
+            $product_data->brand = $brandData;
+
+            $product_data->save();
 
             return response()->json([
                 'message' => 'Product updated without image',
@@ -213,30 +222,33 @@ class ProductController extends Controller
             ], 201);
 
 
-        }catch(\Exception $error){
+        } catch (\Exception $error) {
             dd($error->getMessage());
 
         }
     }
 
-    public function ExpiredProduct(){
+    public function ExpiredProduct()
+    {
         //$expiryThreshold = Carbon::now()->addDays(15)->toDateString();
         $expiryThreshold = Carbon::now()->toDateString();
-        
-        
-    
+
+
+
         $expired_products = Product::with('brandData')->where('expire_date', '<=', $expiryThreshold)->orderBy('id', 'DESC')
-                                    ->get();
-    
+            ->get();
+
         return response()->json($expired_products);
     }
 
-    public function LowStock(){
+    public function LowStock()
+    {
         $product = Product::with('brandData')->with('categoryData')->where('quantity', '<=', 5)->where('quantity', '>', 0)->get();
         return response()->json($product);
     }
 
-    public function OutStock(){
+    public function OutStock()
+    {
         $product = Product::with('brandData')->with('categoryData')->where('quantity', '=', 0)->get();
         return response()->json($product);
     }

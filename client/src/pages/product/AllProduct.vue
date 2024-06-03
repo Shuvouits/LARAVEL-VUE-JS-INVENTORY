@@ -212,6 +212,7 @@ export default {
                       <th>Product Image</th>
                       <th>Price</th>
                       <th>Quantity</th>
+                      <th>Purchase Amount</th>
                       <th>Category</th>
                       <th>Brand</th>
                       <th>Expired Date</th>
@@ -248,6 +249,7 @@ export default {
                       </td>
                       <td>{{ item.price }}</td>
                       <td>{{ item.quantity }}</td>
+                      <td>{{ (item.total_g_total) / (item.quantity) }}</td>
                       <td>{{ item.category_data.name }}</td>
                       <td>{{ item.brand_data.name }}</td>
                       <td>{{ formatDate(item.expire_date) }}</td>

@@ -220,6 +220,7 @@ export default {
                       <th>Product Name</th>
                       <th>Status</th>
                       <th>Quantity</th>
+                      <th>Amount/Per</th>
 
                       <th>Grand Total</th>
                       <th>Paid</th>
@@ -260,6 +261,7 @@ export default {
                       </td>
 
                       <td>{{ item.qty }}</td>
+                      <td>{{ item.amount_per }}</td>
 
                       <td>{{ item.g_total }}</td>
                       <td>{{ item.p_amount }}</td>

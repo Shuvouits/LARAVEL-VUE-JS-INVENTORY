@@ -22,6 +22,7 @@ class PurchasedController extends Controller
             $g_total = $request->input('g_total');
             $p_amount = $request->input('p_amount');
             $d_amount = $request->input('d_amount');
+            $amount_per = $request->input('amount_per');
 
             $purchased = new Purchase();
             $purchased->supplier_id = $supplier_id;
@@ -32,6 +33,7 @@ class PurchasedController extends Controller
             $purchased->g_total = $g_total;
             $purchased->p_amount = $p_amount;
             $purchased->d_amount = $d_amount;
+            $purchased->amount_per = $amount_per;
             $purchased->save();
 
             //update product quantity

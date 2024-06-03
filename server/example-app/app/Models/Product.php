@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Purchase;
 
 class Product extends Model
 {
@@ -31,6 +32,10 @@ class Product extends Model
 
     public function brandData(){
         return $this->belongsTo(Brand::class, 'brand', 'id');
+    } 
+
+    public function purchase(){
+        return $this->hasMany(Purchase::class, 'product_id', 'id');
     } 
 
 

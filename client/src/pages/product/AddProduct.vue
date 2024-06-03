@@ -348,7 +348,7 @@ export default {
                     id="input14"
                     placeholder="Last Name"
                     @change="uploadImage"
-                    required
+                    
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
