@@ -85,7 +85,7 @@ class SalesController extends Controller
 
         try {
 
-            $sales = Sale::where('status', 'Return')->with('product', 'customer')->orderBy('id', 'DESC')->get();
+            $sales = Sale::where('return_qty', '>', 0)->with('product', 'customer')->orderBy('id', 'DESC')->get();
             return response()->json($sales);
 
         } catch (\Exception $error) {
@@ -134,7 +134,7 @@ class SalesController extends Controller
 
         try {
 
-            $sale = Sale::where('id', $id)->first();
+            $sale = Sale::where('id', $id)->with('product','customer')->first();
 
             return response()->json($sale);
 
@@ -218,6 +218,48 @@ class SalesController extends Controller
 
 
 
+    }
+
+    public function UpdateReturn(Request $request, $id){
+        try{
+
+            $quantity = $request->input('quantity');
+
+            $sale_product = Sale::where('id', $id)->first();
+
+            $product_id = $sale_product->product_id;
+
+            if(!$sale_product){
+                return response()->json(['message' => 'Sales Product not found'], 401);
+            }
+
+            if($sale_product->quantity < $quantity){
+                return response()->json(['message' => 'Product quantity is not appropriate'], 401);
+
+            }
+
+             //Update Product
+
+             $product = Product::where('id', $product_id)->first();
+             $product->quantity = $product->quantity + $quantity;
+             $product->save();
+
+            //update purchase
+
+            $sale_product->quantity = $sale_product->quantity - $quantity;
+            $sale_product->return_qty = $quantity;
+            $sale_product->save();
+
+           
+
+            return response()->json(['message' => 'Product return successfully'], 201);
+
+
+            
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
     }
 
 

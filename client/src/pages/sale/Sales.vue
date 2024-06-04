@@ -270,6 +270,15 @@ export default {
                         >
                           <i class="bx bx-pencil mr-1"></i>Edit
                         </router-link>
+
+                        <router-link
+                          :to="'/sales/return/' + item.id"
+                          type="button"
+                          class="btn btn-success px-5"
+                        >
+                          <i class="bx bx-sad mr-1"></i>Return
+                        </router-link>
+
                         <button
                           type="button"
                           class="btn btn-danger px-5"
@@ -277,6 +286,10 @@ export default {
                         >
                           <i class="bx bx-trash mr-1"></i>trash
                         </button>
+
+                      
+
+
                       </td>
                     </tr>
                   </tbody>

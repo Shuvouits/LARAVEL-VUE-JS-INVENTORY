@@ -231,26 +231,24 @@ export default {
                       <td>{{ item.product.name }}</td>
                       <td>{{ item.customer.name }}</td>
                       <td>{{ item.date }}</td>
-                      <td>{{ item.quantity }}</td>
+                      <td>{{ item.return_qty }}</td>
                       <td>{{ item.g_total }}</td>
                       <td>{{ item.p_amount }}</td>
                       <td>{{ item.d_amount }}</td>
-                   
 
-                      <td v-if="item.status === 'Paid'">
+                      <td>
+
                         <span
                           class="badge bg-success"
                           style="font-size: 13px"
-                          >{{ item.status }}</span
+                          >Return</span
                         >
+
                       </td>
-                      <td v-else>
-                        <span
-                          class="badge bg-warning"
-                          style="font-size: 13px"
-                          >{{ item.status }}</span
-                        >
-                      </td>
+                   
+
+                     
+                   
 
                      
                       <td

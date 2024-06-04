@@ -115,7 +115,10 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/all-sales', [SalesController::class, 'AllSales']);
     Route::get('/all-sales-return', [SalesController::class, 'AllSalesReturn']);
     Route::get('/delete-sales/{id}', [SalesController::class, 'DeleteSales']);
+
     Route::post('/update-sales/{id}', [SalesController::class, 'UpdateSales']);
+    Route::post('/return-sales/{id}', [SalesController::class, 'UpdateReturn']);
+
     Route::get('/sales/edit/{id}', [SalesController::class, 'EditSales']);
 
     /* Report */

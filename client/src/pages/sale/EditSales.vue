@@ -14,50 +14,65 @@ export default {
       selectedDate: null,
       customer: [],
       product: [],
-      customer_id : "",
-      product_id : "",
-      date : "",
-      status : "",
+      customer_id: "",
+      product_id: "",
+      date: "",
+      status: "",
+      quantity: "",
+      g_total: "",
+      p_amount: "",
+      amount_per : "",
       quantity : "",
-      g_total : "",
-      p_amount : ""
-
+      return_qty : "",
+      product_price : ""
     };
+  },
+
+  watch: {
+    quantity(val) {
+      this.calculateGrandTotal();
+    },
+
+    amount_per(val) {
+      this.calculateGrandTotal();
+    },
+
+    g_total(val) {
+      this.calculateDueAmount();
+    },
+    p_amount(val) {
+      this.calculateDueAmount();
+    },
   },
 
   computed: {
     d_amount() {
-      // Calculate the due amount based on the grand total and paid amount
-      let g_total = parseFloat(this.g_total) || 0;
-      let p_amount = parseFloat(this.p_amount) || 0;
-      return g_total - p_amount;
+      return this.calculateDueAmount();
     },
   },
 
   mounted() {
-
     this.getSales(this.$route.params.id);
 
     this.getCustomer();
     this.getProduct();
 
     this.$nextTick(() => {
-      $(this.$refs.selectElement).select2().on('change', () => {
-        this.product_id = $(this.$refs.selectElement).val();
-      });
+      $(this.$refs.selectElement)
+        .select2()
+        .on("change", () => {
+          this.product_id = $(this.$refs.selectElement).val();
+        });
 
-      $(this.$refs.selectElement1).select2().on('change', () => {
-        this.customer_id = $(this.$refs.selectElement1).val();
-      });
-
-      
+      $(this.$refs.selectElement1)
+        .select2()
+        .on("change", () => {
+          this.customer_id = $(this.$refs.selectElement1).val();
+        });
     });
-
-   
   },
 
   methods: {
-
     getSales(id) {
       const token = this.$store.state.token;
 
@@ -71,28 +86,30 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.loading = false;
-          this.customer_id = response.data.customer_id
-          this.product_id = response.data.product_id
-          this.date = response.data.date
-          this.status = response.data.status
-          this.quantity = response.data.quantity
-          this.g_total = response.data.g_total
-          this.p_amount = response.data.p_amount
-          
-          
+          this.customer_id = response.data.customer_id;
+          this.product_id = response.data.product_id;
+          this.date = response.data.date;
+          this.status = response.data.status;
+          this.quantity = response.data.quantity;
+          this.g_total = response.data.g_total;
+          this.p_amount = response.data.p_amount;
+          this.amount_per = response.data.product.price;
+          this.return_qty = response.data.return_qty;
+          this.product_price = response.data.product.price
+        
         });
 
-       /* this.$nextTick(() => {
+       
+
+       
+
+      /* this.$nextTick(() => {
       $(this.$refs.selectElement).select2().on('change', () => {
         this.expense_id = $(this.$refs.selectElement).val();
       });
 
       $(this.$refs.selectElement1).select2();
     }); */
-
-        
-
-
     },
 
     getCustomer() {
@@ -120,7 +137,7 @@ export default {
           },
         })
         .then((response) => {
-         // console.log(response.data);
+          // console.log(response.data);
           this.loading = false;
           this.product = response.data;
         });
@@ -129,25 +146,28 @@ export default {
     sendData() {
       const data = {
         customer_id: this.customer_id, // Ensure the correct data is sent
-        product_id : this.product_id,
+        product_id: this.product_id,
         date: this.date,
-        status : this.status,
-        quantity : this.quantity,
-        g_total : this.g_total,
-        p_amount : this.p_amount,
-        d_amount: this.d_amount
+        status: this.status,
+        quantity: this.quantity,
+        g_total: this.g_total,
+        p_amount: this.p_amount,
+        d_amount: this.d_amount,
       };
 
       const token = this.$store.state.token;
 
-
       axios
-        .post(`https://appinventory.shuvobhowmik.xyz/api/update-sales/${this.$route.params.id}`, data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          `https://appinventory.shuvobhowmik.xyz/api/update-sales/${this.$route.params.id}`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           console.log(response.data);
 
@@ -178,6 +198,20 @@ export default {
           });
         });
     },
+
+    calculateGrandTotal() {
+      let amount_per = parseFloat(this.amount_per) || 0;
+      let quantity = parseFloat(this.quantity) || 0;
+      this.g_total = amount_per * quantity;
+    },
+
+    calculateDueAmount() {
+      let g_total = parseFloat(this.g_total) || 0;
+      let p_amount = parseFloat(this.p_amount) || 0;
+      return g_total - p_amount;
+    }
+
+
   },
 
   destroyed() {
@@ -210,26 +244,25 @@ export default {
             </nav>
           </div>
           <div class="ms-auto">
-            <div class="btn-group">
-             
-            </div>
+            <div class="btn-group"></div>
           </div>
         </div>
         <!--end breadcrumb-->
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-
-          <router-link to="/sales"
-          ><h6 class="mb-0 text-uppercase">Sales History</h6></router-link
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          "
         >
+          <router-link to="/sales"
+            ><h6 class="mb-0 text-uppercase">Sales History</h6></router-link
+          >
 
           <router-link to="/sales">
-                <button type="button" class="btn btn-primary">
-                  Go Sales
-                </button>
-              </router-link>
-
+            <button type="button" class="btn btn-primary">Go Sales</button>
+          </router-link>
         </div>
-       
 
         <hr />
         <div class="card">
@@ -238,7 +271,10 @@ export default {
 
             <form class="row g-3" @submit.prevent="sendData">
               <div class="col-md-6">
-                <label for="single-select-field" class="form-label" id="supplier"
+                <label
+                  for="single-select-field"
+                  class="form-label"
+                  id="supplier"
                   >Product Name</label
                 >
 
@@ -248,9 +284,13 @@ export default {
                   ref="selectElement"
                   v-model="product_id"
                 >
-
-                  <option v-for="(item, index) in product" :key="index" :value="item.id">{{ item.name }}</option>
-                 
+                  <option
+                    v-for="(item, index) in product"
+                    :key="index"
+                    :value="item.id"
+                  >
+                    {{ item.name }}
+                  </option>
                 </select>
               </div>
 
@@ -263,9 +303,15 @@ export default {
                   class="form-select custom-select"
                   id="single-select-field"
                   ref="selectElement1"
-                  v-model = "customer_id"
+                  v-model="customer_id"
                 >
-                <option v-for="(item, index) in customer" :key="index" :value="item.id">{{ item.name }}</option>
+                  <option
+                    v-for="(item, index) in customer"
+                    :key="index"
+                    :value="item.id"
+                  >
+                    {{ item.name }}
+                  </option>
                 </select>
               </div>
 
@@ -276,7 +322,7 @@ export default {
                   class="form-control"
                   id="input6"
                   placeholder="Date of Birth"
-                  v-model = 'date'
+                  v-model="date"
                 />
               </div>
 
@@ -288,7 +334,41 @@ export default {
                     class="form-control"
                     id="input14"
                     placeholder="Enter quantity"
-                    v-model="quantity" 
+                    v-model="quantity"
+                  />
+                  <span class="position-absolute top-50 translate-middle-y"
+                    ><i class="bx bx-user"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="input14" class="form-label">Return Quantity</label>
+                <div class="position-relative input-icon">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="input14"
+                    placeholder="Enter quantity"
+                    v-model="return_qty"
+                    disabled 
+                  />
+                  <span class="position-absolute top-50 translate-middle-y"
+                    ><i class="bx bx-user"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="input14" class="form-label">Product Price</label>
+                <div class="position-relative input-icon">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="input14"
+                    placeholder="Enter quantity"
+                    v-model="product_price"
+                    disabled 
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -303,7 +383,7 @@ export default {
                     type="number"
                     class="form-control"
                     id="input14"
-                    v-model = 'g_total'
+                    v-model="g_total"
                     placeholder="Enter Grand total"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
@@ -336,7 +416,7 @@ export default {
                     class="form-control"
                     id="input14"
                     placeholder="Enter due amount"
-                    v-model = "d_amount"
+                    v-model="d_amount"
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -344,24 +424,14 @@ export default {
                 </div>
               </div>
 
-
               <div class="col-md-6">
                 <label for="status" class="form-label">Status</label>
                 <select id="status" v-model="status" class="form-select">
-                 
                   <option value="Paid">Paid</option>
                   <option value="UnPaid">UnPaid</option>
-                  <option value="Return">Return</option>
+                 
                 </select>
               </div>
-
-              
-
-              
-
-             
-
-              
 
               <div class="col-md-12">
                 <div class="d-md-flex d-grid align-items-center gap-3">
@@ -371,8 +441,6 @@ export default {
                 </div>
               </div>
             </form>
-
-
           </div>
         </div>
       </div>

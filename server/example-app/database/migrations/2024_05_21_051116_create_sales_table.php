@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('p_amount');
             $table->string('d_amount');
             $table->string('status');
+            $table->integer('return_qty');
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

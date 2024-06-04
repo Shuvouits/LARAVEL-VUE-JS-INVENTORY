@@ -46,6 +46,7 @@ import PurchaseReport from '../pages/report/PurchaseReport.vue';
 import ExpenseReport from '../pages/report/ExpenseReport.vue';
 import ProfitLoss from '../pages/report/ProfitLoss.vue';
 import ReturnPurchase from '../pages/purchase/ReturnPurchase.vue'
+import ReturnSales from '../pages/sale/ReturnSales.vue'
 
 
 
@@ -150,6 +151,14 @@ const routes = [
     component: EditSales,
     meta: { requiresAuth: true }
   },
+
+  {
+    path: '/sales/return/:id',
+    component: ReturnSales,
+    meta: { requiresAuth: true }
+  },
+
+
 
   {
     path: '/sales-return',
