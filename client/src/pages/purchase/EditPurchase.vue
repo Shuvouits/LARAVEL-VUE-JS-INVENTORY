@@ -20,18 +20,41 @@ export default {
       status : "Ordered",
       qty : "",
       g_total : "",
-      p_amount : ""
+      p_amount : "",
+      amount_per : "",
+    
 
     };
   },
 
-  computed: {
-    d_amount() {
-      // Calculate the due amount based on the grand total and paid amount
-      let g_total = parseFloat(this.g_total) || 0;
-      let p_amount = parseFloat(this.p_amount) || 0;
-      return g_total - p_amount;
+  watch: {
+
+    qty() {
+      this.calculateGrandTotal();
     },
+
+    amount_per(val) {
+      this.calculateGrandTotal();
+    },
+
+    g_total(val) {
+      this.calculateGrandTotal();
+    },
+    p_amount(val) {
+      this.calculateDueAmount();
+    },
+
+  
+
+  },
+
+  computed: {
+
+    d_amount() {
+      return this.calculateDueAmount();
+    },
+
+
   },
 
   mounted() {
@@ -78,6 +101,8 @@ export default {
           this.qty = response.data.qty
           this.g_total = response.data.g_total
           this.p_amount = response.data.p_amount
+          this.amount_per = response.data.amount_per
+        
           
           
         });
@@ -135,7 +160,8 @@ export default {
         qty : this.qty,
         g_total : this.g_total,
         p_amount : this.p_amount,
-        d_amount: this.d_amount
+        d_amount: this.d_amount,
+        amount_per: this.amount_per
       };
 
       const token = this.$store.state.token;
@@ -179,6 +205,20 @@ export default {
           });
         });
     },
+
+    calculateGrandTotal() {
+      let amount_per = parseFloat(this.amount_per) || 0;
+      let qty = parseFloat(this.qty) || 0;
+      this.g_total = amount_per * qty;
+    },
+
+    calculateDueAmount() {
+      let g_total = parseFloat(this.g_total) || 0;
+      let p_amount = parseFloat(this.p_amount) || 0;
+      return g_total - p_amount;
+    }
+
+
   },
 
   destroyed() {
@@ -299,6 +339,23 @@ export default {
                     id="input14"
                     placeholder="Enter quantity"
                     v-model="qty" 
+                  />
+                  <span class="position-absolute top-50 translate-middle-y"
+                    ><i class="bx bx-user"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="input14" class="form-label">Amount / Per Piece</label>
+                <div class="position-relative input-icon">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="input14"
+                    placeholder="Enter quantity"
+                    v-model="amount_per"
+                    required 
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
