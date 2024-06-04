@@ -278,20 +278,37 @@ export default {
                           padding-bottom: 20px;
                         "
                       >
+
+                    
+
                         <router-link
                           :to="'/purchase/edit/' + item.id"
                           type="button"
-                          class="btn btn-primary px-5"
+                          class="btn btn-primary"
                         >
                           <i class="bx bx-pencil mr-1"></i>Edit
                         </router-link>
+
+                       
+
+
                         <button
                           type="button"
-                          class="btn btn-danger px-5"
+                          class="btn btn-danger"
                           @click="purchaseDelete(item.id)"
                         >
                           <i class="bx bx-trash mr-1"></i>trash
                         </button>
+
+                        <router-link
+                          :to="'/purchase/return/' + item.id"
+                          type="button"
+                          class="btn btn-success"
+                        >
+                          <i class="bx bx-pencil mr-1"></i>Return
+                        </router-link>
+
+                        
                       </td>
                     </tr>
                   </tbody>

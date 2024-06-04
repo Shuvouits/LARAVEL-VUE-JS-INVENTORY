@@ -246,11 +246,11 @@ export default {
                         <span
                           class="badge bg-warning"
                           style="font-size: 13px"
-                          >{{ item.status }}</span
+                          >Return</span
                         >
                       </td>
 
-                      <td>{{ item.qty }}</td>
+                      <td>{{ item.return_qty }}</td>
 
                       <td>{{ item.g_total }}</td>
                       <td>{{ item.p_amount }}</td>
@@ -274,13 +274,10 @@ export default {
                         >
                           <i class="bx bx-pencil mr-1"></i>Edit
                         </router-link>
-                        <button
-                          type="button"
-                          class="btn btn-danger px-5"
-                          @click="purchaseDelete(item.id)"
-                        >
-                          <i class="bx bx-trash mr-1"></i>trash
-                        </button>
+
+                  
+
+
                       </td>
                     </tr>
                   </tbody>

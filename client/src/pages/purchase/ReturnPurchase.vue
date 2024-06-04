@@ -17,47 +17,19 @@ export default {
       supplier_id : "",
       product_id : "",
       date : "",
-      status : "Ordered",
+      status : "Return",
       qty : "",
       g_total : "",
       p_amount : "",
       amount_per : "",
-      return_qty : "",
     
 
     };
   },
 
-  watch: {
-
-    qty() {
-      this.calculateGrandTotal();
-    },
-
-    amount_per(val) {
-      this.calculateGrandTotal();
-    },
-
-    g_total(val) {
-      this.calculateGrandTotal();
-    },
-    p_amount(val) {
-      this.calculateDueAmount();
-    },
-
   
 
-  },
-
-  computed: {
-
-    d_amount() {
-      return this.calculateDueAmount();
-    },
-
-
-  },
-
+  
   mounted() {
 
     this.getPurchase(this.$route.params.id);
@@ -98,12 +70,10 @@ export default {
           this.supplier_id = response.data.supplier_id
           this.product_id = response.data.product_id
           this.date = response.data.date
-          this.status = response.data.status
           this.qty = response.data.qty
           this.g_total = response.data.g_total
           this.p_amount = response.data.p_amount
           this.amount_per = response.data.amount_per
-          this.return_qty = response.data.return_qty
         
           
           
@@ -171,7 +141,7 @@ export default {
       console.log(this.expense_id);
 
       axios
-        .post(`https://appinventory.shuvobhowmik.xyz/api/update-purchase/${this.$route.params.id}`, data, {
+        .post(`https://appinventory.shuvobhowmik.xyz/api/update-return/${this.$route.params.id}`, data, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -208,18 +178,7 @@ export default {
         });
     },
 
-    calculateGrandTotal() {
-      let amount_per = parseFloat(this.amount_per) || 0;
-      let qty = parseFloat(this.qty) || 0;
-      this.g_total = amount_per * qty;
-    },
-
-    calculateDueAmount() {
-      let g_total = parseFloat(this.g_total) || 0;
-      let p_amount = parseFloat(this.p_amount) || 0;
-      return g_total - p_amount;
-    }
-
+ 
 
   },
 
@@ -262,7 +221,7 @@ export default {
         <div style="display: flex; align-items: center; justify-content: space-between;">
 
           <router-link to="/sales"
-          ><h6 class="mb-0 text-uppercase">Purchased History</h6></router-link
+          ><h6 class="mb-0 text-uppercase">Purchased Return</h6></router-link
         >
 
           <router-link to="/add-purchased">
@@ -276,7 +235,7 @@ export default {
         <hr />
         <div class="card">
           <div class="card-body p-4">
-            <h5 class="mb-4">Add Purchased</h5>
+            <h5 class="mb-4">Return Purchased Product</h5>
 
             <form class="row g-3" @submit.prevent="sendData">
               <div class="col-md-6">
@@ -289,6 +248,7 @@ export default {
                   id="supplier"
                   ref="selectElement"
                   v-model="supplier_id"
+                  disabled
                 >
 
                   <option v-for="(item, index) in supplier" :key="index" :value="item.id">{{ item.name }}</option>
@@ -306,6 +266,7 @@ export default {
                   id="single-select-field"
                   ref="selectElement1"
                   v-model = "product_id"
+                  disabled
                 >
                 <option v-for="(item, index) in product" :key="index" :value="item.id">{{ item.name }}</option>
                 </select>
@@ -326,9 +287,8 @@ export default {
                 <label for="input7" class="form-label">Status</label>
                 <select id="input7" v-model="status" class="form-select">
                  
-                  <option value="Received">Received</option>
-                  <option value="Ordered">Ordered</option>
-                
+                 
+                  <option value="Return">Return</option>
                 </select>
               </div>
 
@@ -349,23 +309,6 @@ export default {
               </div>
 
               <div class="col-md-6">
-                <label for="input14" class="form-label">Return Quantity</label>
-                <div class="position-relative input-icon">
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="input14"
-                    placeholder="Enter quantity"
-                    v-model="return_qty"
-                    disabled 
-                  />
-                  <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
-                  ></span>
-                </div>
-              </div>
-
-              <div class="col-md-6">
                 <label for="input14" class="form-label">Amount / Per Piece</label>
                 <div class="position-relative input-icon">
                   <input
@@ -375,6 +318,7 @@ export default {
                     placeholder="Enter quantity"
                     v-model="amount_per"
                     required 
+                    disabled
                   />
                   <span class="position-absolute top-50 translate-middle-y"
                     ><i class="bx bx-user"></i
@@ -382,53 +326,11 @@ export default {
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <label for="input14" class="form-label">Grand Total</label>
-                <div class="position-relative input-icon">
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="input14"
-                    v-model = 'g_total'
-                    placeholder="Enter Grand total"
-                  />
-                  <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
-                  ></span>
-                </div>
-              </div>
+            
 
-              <div class="col-md-6">
-                <label for="input14" class="form-label">Paid Amount</label>
-                <div class="position-relative input-icon">
-                  <input
-                    type="price"
-                    class="form-control"
-                    id="input14"
-                    placeholder="Enter paid amount"
-                    v-model="p_amount"
-                  />
-                  <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
-                  ></span>
-                </div>
-              </div>
+              
 
-              <div class="col-md-6">
-                <label for="input14" class="form-label">Due Amount</label>
-                <div class="position-relative input-icon">
-                  <input
-                    type="price"
-                    class="form-control"
-                    id="input14"
-                    placeholder="Enter due amount"
-                    v-model = "d_amount"
-                  />
-                  <span class="position-absolute top-50 translate-middle-y"
-                    ><i class="bx bx-user"></i
-                  ></span>
-                </div>
-              </div>
+            
 
               <div class="col-md-12">
                 <div class="d-md-flex d-grid align-items-center gap-3">

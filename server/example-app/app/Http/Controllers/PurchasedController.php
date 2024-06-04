@@ -226,7 +226,7 @@ class PurchasedController extends Controller
 
         try {
 
-            $purchase = Purchase::orderBy('id', 'DESC')->where('status', 'Return')->with('supplier', 'product')->get();
+            $purchase = Purchase::orderBy('id', 'DESC')->where('return_qty', '>', 0)->with('supplier', 'product')->get();
 
             return response()->json($purchase);
 
@@ -237,5 +237,45 @@ class PurchasedController extends Controller
 
 
     } 
+
+    public function UpdateReturn(Request $request, $id){
+        try{
+
+            $qty = $request->input('qty');
+
+            $purchase_product = Purchase::where('id', $id)->first();
+
+            $product_id = $purchase_product->product_id;
+
+            if(!$purchase_product){
+                return response()->json(['message' => 'Purchase Product not found'], 401);
+            }
+
+            if($purchase_product->qty < $qty){
+                return response()->json(['message' => 'Product quantity is not appropriate'], 401);
+
+            }
+
+            //update purchase
+
+            $purchase_product->qty = $purchase_product->qty - $qty;
+            $purchase_product->return_qty = $qty;
+            $purchase_product->save();
+
+            //Update Product
+
+            $product = Product::where('id', $product_id)->first();
+            $product->quantity = $product->quantity - $qty;
+            $product->save();
+
+            return response()->json(['message' => 'Product return successfully'], 201);
+
+
+            
+        }catch(\Exception $error){
+            dd($error->getMessage());
+
+        }
+    }
 
 }

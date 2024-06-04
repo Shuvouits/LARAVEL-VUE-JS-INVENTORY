@@ -103,6 +103,7 @@ Route::middleware(['credential', 'cors'])->group(function () {
     Route::get('/all-purchased', [PurchasedController::class, 'AllPurchased']);
     Route::get('/purchase/edit/{id}', [PurchasedController::class, 'EditPurchased']);
     Route::post('/update-purchase/{id}', [PurchasedController::class, 'UpdatePurchased']);
+    Route::post('/update-return/{id}', [PurchasedController::class, 'UpdateReturn']);
     Route::get('/delete-purchase/{id}', [PurchasedController::class, 'DeletePurchased']);
 
     Route::get('/purchased-order', [PurchasedController::class, 'PurchasedOrder']);
