@@ -80,12 +80,16 @@ export default {
       const token = this.$store.state.token;
 
       axios
-        .post("https://appinventory.shuvobhowmik.xyz/api/sales-report-date", data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          "https://appinventory.shuvobhowmik.xyz/api/sales-report-date",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           console.log(response.data.sale);
           this.sale_report = response.data.sale;
@@ -159,12 +163,15 @@ export default {
           const token = this.$store.state.token;
 
           axios
-            .get(`https://appinventory.shuvobhowmik.xyz/api/delete-sales/${id}`, {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-            })
+            .get(
+              `https://appinventory.shuvobhowmik.xyz/api/delete-sales/${id}`,
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
             .then((response) => {
               // Handle success response
               console.log(response.data);
@@ -241,7 +248,7 @@ export default {
       <div class="page-wrapper">
         <div class="page-content">
           <!--breadcrumb-->
-          <div class="page-breadcrumb  d-sm-flex align-items-center mb-3">
+          <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Dashboard</div>
             <div class="ps-3">
               <nav aria-label="breadcrumb">
@@ -249,64 +256,78 @@ export default {
                   <li class="breadcrumb-item">
                     <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                   </li>
-                  <li class="breadcrumb-item active" aria-current="page">
-                    Sales Report ||
-                    <span style="font-weight: bold">
-                      <span :style="{ display: visible ? 'none' : '' }">{{
-                        currentDate
-                      }}</span>
-                      <span :style="{ display: !visible ? 'none' : '' }"
-                        >{{ start_date }} to {{ end_date }}</span
-                      >
-                    </span>
-                    <span>
-                      <Button
-                        @click="reset"
-                        class="btn btn-info"
-                        style="width: 300px; margin-left: 15px"
-                        >Reset</Button
-                      >
-                    </span>
-                  </li>
+
+                  <li
+                    class="breadcrumb-item custom-design active"
+                    aria-current="page"
+                  ></li>
                 </ol>
               </nav>
             </div>
-            <div class="ms-auto">
-              <form @submit.prevent="sendData">
-                <div class="btn-group">
-                  <div>
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="startD"
-                      v-model="start_date"
-                      placeholder="Date of Birth"
-                    />
-                  </div>
-
-                  <div style="margin-left: 15px">
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="end"
-                      v-model="end_date"
-                      placeholder="End Date"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    style="margin-left: 30px"
-                  >
-                    Check Filter
-                  </button>
-                </div>
-              </form>
-            </div>
           </div>
           <!--end breadcrumb-->
-          <h6 class="mb-0 text-uppercase">Manage Your Sales</h6>
+         
+
+          <div class="custom-section">
+            <span style="font-weight: bold">
+              Sales Report ||
+              <span :style="{ display: visible ? 'none' : '' }">{{
+                currentDate
+              }}</span>
+              <span :style="{ display: !visible ? 'none' : '' }"
+                >{{ start_date }} to {{ end_date }}</span
+              >
+            </span>
+
+            <span class="reset-btn">
+              <Button
+                @click="reset"
+                class="btn btn-info"
+                style="width: 300px;"
+                >Reset</Button
+              >
+            </span>
+
+            <span class="">
+              <form @submit.prevent="sendData">
+                <div class="custom-date-section">
+
+                  <div class="custom-date">
+                    <div>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="startD"
+                        v-model="start_date"
+                        placeholder="Date of Birth"
+                      />
+                    </div>
+
+                    <div style="margin-left: 15px">
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="end"
+                        v-model="end_date"
+                        placeholder="End Date"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      
+                    >
+                      Check Filter
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+            </span>
+          </div>
 
           <hr />
           <div class="card">
@@ -487,3 +508,52 @@ export default {
     </div>
   </div>
 </template>
+
+<style>
+.custom-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.custom-section .custom-date-section{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 10px;
+  gap: 15px;
+}
+
+.custom-section .custom-date-section .custom-date{
+  display: flex;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+  /* Styles for mobile devices */
+  .custom-section .reset-btn Button {
+    width: 120px !important;
+  }
+
+
+  .custom-section {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .custom-section .custom-date-section{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-left: 0px;
+}
+
+  /* Add more mobile-specific styles here */
+}
+</style>

@@ -34,6 +34,7 @@ class PurchasedController extends Controller
             $purchased->p_amount = $p_amount;
             $purchased->d_amount = $d_amount;
             $purchased->amount_per = $amount_per;
+            $purchased->return_qty = 0;
             $purchased->save();
 
             //update product quantity

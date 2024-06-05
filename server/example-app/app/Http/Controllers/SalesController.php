@@ -36,6 +36,7 @@ class SalesController extends Controller
                 $sale->p_amount = $p_amount;
                 $sale->d_amount = $d_amount;
                 $sale->status = $status;
+                $sale->return_qty = 0;
                 $sale->save();
     
                 //update product quantity
